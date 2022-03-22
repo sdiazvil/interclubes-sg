@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { AuthService } from '../../core/auth.service';
-import { Router, ActivatedRoute } from '@angular/router';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material';
-
+import { ActivatedRoute, Router } from '@angular/router';
+import { AuthService } from '../../core/auth.service';
 @Component({
   selector: 'app-inises',
   templateUrl: './inises.component.html',
@@ -13,18 +12,14 @@ export class InisesComponent implements OnInit {
   formulario: FormGroup;
   datos: any;
   cargando = false;
-
   hide = true;
-
   mensaje: string;
   icono: string;
   clase: string;
-
   formErrores = {
     'email': '',
     'password': '',
   }
-
   mensajesValidacion = {
     'email': {
       'required': 'Email obligatorio',
@@ -32,7 +27,6 @@ export class InisesComponent implements OnInit {
     },
     'password':{}
   }
-
   detectarCambios(data?: any) {
     if (!this.formulario) { return; }
     const form = this.formulario;
@@ -47,12 +41,10 @@ export class InisesComponent implements OnInit {
       }
     }
   }
-
   constructor(public snackBar: MatSnackBar, private formBuilder: FormBuilder,
     private authService: AuthService,
     private router: Router,
     private activatedRouter: ActivatedRoute) { }
-
   ngOnInit() {
     this.formulario = this.formBuilder.group({
       'email': ['', [
@@ -63,53 +55,33 @@ export class InisesComponent implements OnInit {
       'password': ['']
     });
     this.formulario.valueChanges.subscribe(data => this.detectarCambios(data));
-    this.detectarCambios(); // reset validation messages
+    this.detectarCambios();
   }
-
   ingresarGoogle() {
     this.authService.googleLogin();
-    // this.router.navigate(['/perfil'])    
   }
-
   ingresarFacebook() {
     this.authService.facebookLogin();
-    // this.router.navigate(['/perfil'])    
   }
-
   ingresarTwitter() {
     this.authService.twitterLogin();
-    // this.router.navigate(['/perfil'])    
   }
-
   enviar() {
     this.cargando = true;
     this.datos = this.crearJSON();
-    // this.authService.login(this.datos.email, this.datos.password).then(() => {
     this.authService.ingresarEmail(this.datos).then((user: any) => {
       this.snackBar.open('Has iniciado sesión correctamente.', 'CERRAR', {
         duration: 4000
       });
-      // this.mensaje="Has iniciado sesión correctamente.";
-      // this.icono="fa fa-check";
-      // this.clase="alert alert-success";
-      // setTimeout(() => {
-      //   this.router.navigate(['/']);
-      // }, 100);
-
       this.router.navigate(['/']);
-
     })
       .catch((error) => {
         this.snackBar.open('El usuario o contraseña no es correcto.', 'CERRAR', {
           duration: 4000
         });
-        // this.mensaje="El usuario o contraseña no es correcto.";
-        // this.icono="fa fa-exclamation";
-        // this.clase="alert alert-danger";
         this.cargando = false;
       });
   }
-
   crearJSON() {
     const crearJSON = {
       email: this.formulario.get('email').value,
@@ -117,5 +89,4 @@ export class InisesComponent implements OnInit {
     };
     return crearJSON;
   }
-
 }

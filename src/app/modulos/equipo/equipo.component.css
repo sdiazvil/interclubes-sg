@@ -1,50 +1,37 @@
 mat-card {
     margin-bottom: 20px;
 }
-
 .user {
     background-image: url('../../../assets/user.png');
     background-size: cover;
   }
-
   ul {
-    list-style: none; /* Remove list bullets */
+    list-style: none;
 }
-
-
 .nombre{
     font-family: 'Ubuntu';
     font-size: 20px;
-
 }
-
 .cargo{
     font-size: 14px;
 }
-
 .otro{
     font-size: 14px;
 }
-
 .icono{
     font-size:12px;
     padding-top:10px;
     color:grey;
-    
 }
-
 .icono-nombre{
     font-size: 20px;
     vertical-align: middle !important;
     color:grey;
     margin-bottom:4px;
-
 }
-
 .border{
     border: 1px solid #EBEFF2;
 }
-
 .pos-bottom-right{
     position: fixed;
     display: block;

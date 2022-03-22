@@ -1,15 +1,4 @@
-<!-- <div class="row">
-  <div class="col-12 col-md-8 offset-md-2 col-lg-6 offset-lg-3 col-xl-6 offset-xl-3"
-    style="padding-right: 0; padding-left: 0;">
-    <mat-card>
-      <mat-card-content>
-        <app-categorias></app-categorias>
-      </mat-card-content>
-    </mat-card>
-  </div>
-</div> -->
 <div class="container-fluid" *ngIf="this.authService.user | async as user">
-
   <div class="row">
     <div class="col-12">
       <mat-toolbar color="primary">
@@ -18,20 +7,10 @@
     </div>
   </div>
   <br>
-
   <div class="row">
-
     <div class="col-12 col-md-9">
-
       <mat-card style="height: 250px;">
-        <!-- <mat-card-subtitle>
-        <i class="material-icons icono-titulo">search</i> Buscar...
-      </mat-card-subtitle> -->
         <mat-card-content>
-          <!-- <button *ngIf="(authService.user | async)" style="border-radius: 20px;" mat-raised-button color="accent" (click)="open()" style="z-index: 9999;"
-        matTooltip="Agregar Vecindario">
-        <i class="material-icons icono-boton">domain</i> Agregar Vecindario
-      </button> -->
           <div class="row">
             <div class="col-12">
               <div class="example-container">
@@ -41,7 +20,6 @@
                     &nbsp;
                   </span>
                   <input matInput type="text" placeholder="Buscar..." [(ngModel)]="buscar">
-                  <!-- <input matInput type="text" placeholder="Buscar..." (keyup)="buscar($event)" [(ngModel)]="value"> -->
                   <button mat-button *ngIf="buscar" matSuffix mat-icon-button matTooltip="Limpiar"
                     (click)="limpiarBuscar()">
                     <mat-icon>close</mat-icon>
@@ -80,26 +58,6 @@
         </mat-card-content>
       </mat-card>
     </div>
-    <!-- <div class="col-12 col-md-4">
-    <mat-card style="height: 250px;">
-      <mat-card-title>
-        Buscar...
-      </mat-card-title>
-      <mat-card-content>
-        <br>
-        <br>
-        <div class="example-container">
-          <mat-form-field>
-            <input matInput type="text" placeholder="Buscar..." [(ngModel)]="buscar">
-            <button mat-button *ngIf="buscar" matSuffix mat-icon-button matTooltip="Limpiar" (click)="limpiarBuscar()">
-              <mat-icon>close</mat-icon>
-            </button>
-          </mat-form-field>
-        </div>
-        <br>
-      </mat-card-content>
-    </mat-card>
-  </div> -->
     <div class="col-12 col-md-3 text-center" *ngIf="user.admin">
       <mat-card style="height: 250px; padding-top:30px">
         <div *ngIf="usuarios$ | async as usuarios"> 
@@ -113,14 +71,7 @@
         </div>
       </mat-card>
     </div>
-    <!-- <div class="col-12 col-md-3">
-      <mat-card style="height: 250px;">
-        <h1><i class="material-icons">domain</i>100</h1>
-        Comunidades
-      </mat-card>
-    </div> -->
   </div>
-
   <div class="row" *ngIf="vecindarios$ | async as vecindarios">
     <button *ngIf="user.admin" mat-fab color="accent" class="pos-bottom-right" (click)="open()"
       matTooltip="Agregar Comunidad">
@@ -131,17 +82,12 @@
       <div class="ribbon">
         <span>{{vecindario.comuna}}</span>
       </div>
-
       <mat-card>
         <mat-card-title-group>
           <mat-icon *ngIf="checkVecino(vecindario.vecinos, user) || user.admin" style="color:grey; cursor: pointer;" mat-icon-button [matMenuTriggerFor]="menu">
             more_vert</mat-icon>
         </mat-card-title-group>
-
         <mat-menu #menu="matMenu">
-          <!-- <button mat-menu-item>✏️ &nbsp; Editar</button> -->
-          <!-- <button mat-menu-item routerLink="/panel/{{vecindario.id}}">
-          <i class="material-icons icono-boton">edit</i> Editar vecindario</button> -->
           <button *ngIf="checkVecino(vecindario.vecinos, user)" mat-menu-item (click)="salirVecindario(vecindario.id, vecindario.vecinos, vecindario.admin, user)">
             <mat-icon>close</mat-icon>
             Abandonar Comunidad
@@ -151,10 +97,6 @@
             Eliminar
           </button>
         </mat-menu>
-
-        <!-- <img mat-card-image src="../../../assets/vector.png" alt="Vecindario"> -->
-        <!-- <img *ngIf="evento.principal" mat-card-image [src]="evento.principal" [alt]="evento.nombre"> -->
-
         <mat-card-header>
           <mat-card-title>
             <i style="color:grey;" class="material-icons icono-titulo-vecindarios">domain</i> {{vecindario.nombre}}
@@ -171,15 +113,7 @@
           <mat-card-subtitle *ngIf="this.mostrarMas == vecindario.id"><small>
               Descripción: {{vecindario.descripcion}}
             </small></mat-card-subtitle>
-          <!-- <mat-card-subtitle>Creado {{ vecindario.fecha_creacion | amTimeAgo }} ({{ vecindario.fecha_creacion |
-          date:'dd/MM/y H:mm' }}) </mat-card-subtitle> -->
-          <!-- <mat-card-subtitle>{{ vecindario.descripcion }} </mat-card-subtitle> -->
-
         </mat-card-header>
-        <!-- <mat-card-title-group>
-          <mat-icon style="color:#EE6B3C">date_range</mat-icon>
-        </mat-card-title-group> -->
-
         <mat-card-content style="margin-left: -15px;">
           <div class="row">
             <div class="col-4 col-md-6 col-lg-4">
@@ -205,19 +139,8 @@
               </button>
             </div>
           </div>
-          <!-- 
-        <p class="text-center" *ngIf="!mostrarMas" style="padding-top:10px;">
-          <button mat-button (click)="this.mostrarMas=true">Más información</button>
-        </p>
-        <p *ngIf="mostrarMas">
-          <br>
-          {{vecindario.descripcion}}
-        </p> -->
         </mat-card-content>
-
         <mat-card-actions align="end">
-          <!-- <button *ngIf="checkIntegrante(grupo.integrantes,user.uid) mat-raised-button style="background-color: #00285C;color:#fff;margin-right: 3px; border-radius: 10px;">
-          <i class="material-icons icono-boton">login</i> Ingresar</button> -->
           <button *ngIf="!checkVecinoPendiente(vecindario.pendientes, user) && !checkVecino(vecindario.vecinos, user)"
             (click)="solicitarUnirse(vecindario.id, vecindario.pendientes, user)" mat-button color="primary"
             style="margin-right: 10px; border-radius: 10px;">
@@ -237,7 +160,6 @@
       </mat-card>
     </div>
   </div>
-
   <div class="container-fluid" style="padding-bottom:30px;">
     <div class="row" *ngIf="(vecindarios$ | async)?.length > this.maximo">
       <div class="col-12 text-center">
@@ -245,8 +167,6 @@
       </div>
     </div>
   </div>
-
-
   <div *ngIf="(vecindarios$ | async)?.length == 0">
     <div class="row">
       <div class="col">
@@ -254,5 +174,4 @@
       </div>
     </div>
   </div>
-
 </div>

@@ -1,9 +1,4 @@
 export const MENUS = [
-  // {
-  //   nombre: 'Vecindarios',
-  //   ruta: 'vecindarios',
-  //   icono: 'domain'
-  // },
   {
     nombre: 'Plaza',
     ruta: '',
@@ -31,31 +26,6 @@ export const MENUS = [
   },
 
 
-  // {
-  //   nombre: 'Usuarios',
-  //   ruta: 'usuarios',
-  //   icono: 'person'
-  // },
 
-  // {
-  //   nombre: 'Contacto',
-  //   ruta: 'contacto',
-  //   icono: 'message'
-  // },
-  // {
-  //   nombre: 'Moodle',
-  //   ruta: 'moodle',
-  //   icono: 'library_books'
-  // },
-  // {
-  //   nombre: 'Registro',
-  //   ruta: 'registro',
-  //   icono: 'person_add'
-  // },
-  // {
-  //   nombre: 'Ingreso',
-  //   ruta: 'iniciosesion',
-  //   icono: 'person'
-  // },
 
 ]

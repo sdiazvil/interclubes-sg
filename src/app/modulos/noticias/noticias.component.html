@@ -1,30 +1,12 @@
 <div class="container-fluid">
-
-  <!-- <app-modo></app-modo> -->
-  <!-- <mat-toolbar style="background:#06A8F9;color:#fff;border-radius: 10px;">
-    <span>
-      <i class="material-icons icono-titulo">people_alt</i> Plaza</span>
-    <span class="app-toolbar-filler"></span>
-
-    <button *ngIf="(authService.user | async)" matTooltip="Publicar" mat-fab color="primary" (click)="open()">
-      <i class="material-icons icono-boton">edit</i>
-    </button>
-  </mat-toolbar> -->
-
-  <!-- <button *ngIf="(authService.user | async)" mat-fab color="accent" class="pos-top-right" (click)="open()" style="z-index: 9999;"
-    matTooltip="Escribir">
-    <i class="material-icons icono-boton">edit</i>
-  </button> -->
   <div *ngIf="vecindario | async as vecindario">
     <mat-toolbar *ngIf="checkAdminBarrio(vecindario.admin) || this.user.admin">
-      <!-- <i class="material-icons icono-titulo">chat</i> -->
       <div>
         <mat-slide-toggle (click)="toggleOculto(vecindario.comentarios_plaza)"
           [(ngModel)]="vecindario.comentarios_plaza">
           <span *ngIf="vecindario.comentarios_plaza">Comentarios Activados</span><span
             *ngIf="!vecindario.comentarios_plaza">Comentarios Desactivados</span>
         </mat-slide-toggle>
-
       </div>
       <span class="app-toolbar-filler"></span>
       <button color="primary" mat-button><i class="material-icons icono-titulo">add_photo_alternate</i> Subir
@@ -32,11 +14,9 @@
     </mat-toolbar>
   </div>
   <br>
-
   <button mat-fab color="accent" class="pos-bottom-right" (click)="open()" matTooltip="Escribir en la Plaza">
     <i class="material-icons icono-boton">edit</i>
   </button>
-
   <div class="row justify-content-center" *ngIf="vecindario | async as vecindario">
     <div class="col-12 col-md-8 col-lg-6" *ngIf="checkAdminBarrio(vecindario.admin) || this.user.admin">
       <div class="alert alert-primary" role="alert">
@@ -48,17 +28,6 @@
     </div>
   </div>
   <br>
-  <!-- <div class="text-center">
-    <img src="/assets/banner.png" width="600" class="img-fluid" alt="Banner Urbanismo Social">
-  </div> -->
-  <!-- <div *ngIf="(noticias | async)?.length === 0">
-        <div class="row">
-          <div class="col">
-            <p style="margin-left: 20px;">No existen noticias para mostrar aún.</p>
-          </div>
-        </div>
-      </div> -->
-
   <div class="row">
     <div class="col-12 col-md-8 offset-md-2 col-lg-6 offset-lg-3 col-xl-6 offset-xl-3"
       style="padding-right: 0; padding-left: 0;">
@@ -69,8 +38,6 @@
       </mat-card>
     </div>
   </div>
-
-
   <div class="row" *ngIf="cargando">
     <div class="col-12 col-md-8 offset-md-2 col-lg-6 offset-lg-3 col-xl-6 offset-xl-3"
       style="padding-right: 0; padding-left: 0;">
@@ -145,35 +112,11 @@
       </mat-card>
     </div>
   </div>
-
-
   <div class="row" *ngIf="noticias$ | async as noticias" #ventana>
-
-    <!-- <app-agregar-noticia></app-agregar-noticia> -->
-
     <div class="col-12 col-md-8 offset-md-2 col-lg-6 offset-lg-3 col-xl-6 offset-xl-3"
       style="padding-right: 0; padding-left: 0;"
       *ngFor="let noticia of (noticias | slice:0:this.maxNoticias); trackBy: itemTrackBy">
-
       <mat-card *ngIf="!cargando">
-
-        <!-- <mat-card-title-group>
-
-          <mat-card-title>
-            <img mat-card-avatar src="{{(noticia.userRef | doc | async)?.photoURL || '../../assets/user_google.jpg' }}">
-            <span style="color:#00285C;">{{ (noticia.userRef | doc | async)?.displayName }}</span> escribió <br>
-
-          </mat-card-title>
-          <mat-icon *ngIf="(authService.user | async)?.admin" style="color:grey; cursor: pointer;" mat-icon-button
-            [matMenuTriggerFor]="menu">more_vert</mat-icon>
-          <mat-card-subtitle>
-            <i style="color: grey; font-size:12px;" class="material-icons icono-boton">access_time</i>
-            <small style="opacity: 0.87;">Publicado {{ noticia.creado | amTimeAgo }}</small>
-          </mat-card-subtitle>
-          <mat-card-subtitle>
-            <span class="badge badge-primary">{{noticia.categoria}}</span>
-
-        </mat-card-title-group> -->
         <mat-card-header>
           <img mat-card-avatar src="{{(noticia.userRef | doc | async)?.photoURL ||  '../../assets/user_google.jpg' }}">
           <mat-card-title>
@@ -189,29 +132,21 @@
           <mat-icon *ngIf="(authService.user | async)?.admin || (authService.user | async)?.uid == noticia.userId"
             style="color:grey; cursor: pointer;" mat-icon-button [matMenuTriggerFor]="menu">more_vert</mat-icon>
         </mat-card-header>
-
         <mat-menu #menu="matMenu">
-          <!-- <button mat-menu-item>✏️ &nbsp; Editar</button> -->
           <button mat-menu-item (click)="eliminar(noticia)">
             <mat-icon>delete</mat-icon>
             Eliminar
           </button>
-
         </mat-menu>
-
         <br *ngIf="noticia.principal">
-
         <div *ngIf="noticia.principal">
           <img mat-card-image [src]="noticia.principal">
         </div>
-
         <mat-card-content>
           <mostrar-mas *ngIf="noticia.texto" class="text-justify" [texto]="noticia.texto" [largoMax]="250">
           </mostrar-mas>
-
           <div *ngIf="authService.user | async as user;">
             <div class="col-12" *ngIf="!checkMeGusta(noticia.megusta, user.uid)">
-
               <span *ngIf="noticia.megusta.length > 0" style="color: #00285C;">
                 <i class="fa fa-thumbs-up"></i> Le gusta a {{ noticia.megusta.length }} </span>
               <span *ngIf="noticia.megusta.length == 1" style="color: #00285C;">
@@ -235,12 +170,10 @@
             </div>
           </div>
           <br>
-          <!-- <hr> -->
           <div class="row">
             <div class="col-6">
               <button mat-button class="boton" color="primary" routerLink="/iniciosesion"
                 *ngIf="!(authService.user | async);">
-                <!-- <i class="material-icons icono-boton">mood</i> -->
                 <i class="fa fa-thumbs-o-up" aria-hidden="true"></i> Me gusta
               </button>
               <div *ngIf="authService.user | async as user;" class="boton">
@@ -248,7 +181,6 @@
                   (click)="meGusta(noticia.id, noticia.megusta, user.uid)">
                   <i class="fa fa-thumbs-o-up" aria-hidden="true"></i> Me gusta
                   <span class="badge badge-primary">{{noticia.megusta?.length}}</span>
-
                 </button>
                 <button *ngIf="checkMeGusta(noticia.megusta, user.uid)" style="width:100%" mat-raised-button
                   color="primary" (click)="eliminarMeGusta(noticia.id, noticia.megusta, user.uid)">
@@ -268,21 +200,8 @@
                 Comentarios
                 <span class="badge badge-primary">{{ noticia.comentarios?.length }}</span>
               </button>
-
             </div>
-            <!-- <div class="col-4">
-                <button mat-button class="boton" color="primary" routerLink="/iniciosesion" *ngIf="!(authService.user | async);">
-                  <i class="material-icons icono-boton">public</i>
-                  Ver Noticia
-                </button>
-                <button mat-button class="boton" color="primary" routerLink="/noticia/{{noticia.id}}" *ngIf="authService.user | async as user;">
-                  <i class="material-icons icono-boton">public</i>
-                  Ver Noticia
-                </button>
-
-              </div> -->
           </div>
-
           <div *ngIf="comentariosActivos()">
             <div *ngIf="authService.user | async as user">
               <br *ngIf="noticia.comentarios.length > this.revMax">
@@ -290,21 +209,14 @@
                 <button mat-button (click)="cargarComentarios()">💬 Cargar más comentarios...
                   <span class="badge badge-primary">{{ noticia.comentarios?.length - this.revMax }}</span>
                 </button>
-                <!-- <button mat-button (click)="cargarMas()">Cargar más comentarios</button> -->
               </div>
               <br>
-              <!-- <div *ngFor="let comentario of (noticia.comentarios | slice: this.maxCom); let i=index"> -->
-              <!-- <div *ngFor="let comentario of noticia.comentarios  | reverse; let i=index"> -->
-              <!-- <div *ngFor="let comentario of noticia.comentarios.reverse(); let i=index"> -->
               <div class="row"
                 *ngFor="let comentario of (noticia.comentarios | slice: this.maxCom); trackBy: itemTrackBy;">
-                <!-- <div class="row" *ngIf="i<this.maxCom"> -->
                 <div class="col-2 col-md-2">
                   <p class="text-right">
                     <img class="rounded-circle" width="50px" height="50px"
                       src="{{(comentario.userRef | doc | async)?.photoURL || '../../../assets/user_google.jpg'}}">
-                    <!-- <img class="rounded-circle" width="50px" height="50px"
-                      [src]="comentario.photoURL || '../../../assets/user_google.jpg'"> -->
                   </p>
                 </div>
                 <div class="col-8 col-md-8 comentario">
@@ -315,28 +227,10 @@
                     matTooltip="Eliminar" (click)="eliminarComentario(comentario.id, noticia.comentarios, noticia.id)">
                     <i class="material-icons">delete</i>
                   </button>
-                  <!-- <br> -->
-                  <!-- {{comentario.id}} -->
                   <mostrar-mas *ngIf="comentario.comentario" class="text-justify" [texto]="comentario.comentario"
                     [largoMax]="200"></mostrar-mas>
                 </div>
               </div>
-              <!-- <div class="row" *ngIf="authService.user | async as user">
-              <div class="col-2 col-md-2" *ngIf="cargarCom">
-                <p class="text-center">
-                  <img class="rounded-circle" width="50px" height="50px"
-                    [src]="user.photoURL || '../../../assets/user_google.jpg'">
-                </p>
-              </div>
-              <div class="col-9 col-md-9 comentario" style="height: 100px;" *ngIf="cargarCom">
-                <b>{{user.displayName}}</b>
-                <i style="color: grey; font-size:12px;" class="material-icons icono-boton">access_time</i>
-                <small style="opacity: 0.87;">Comentó</small>
-                <div class="loading-overlay">
-                  <mat-spinner [diameter]="24" [strokeWidth]="2.4"></mat-spinner>
-                </div>
-              </div>
-            </div> -->
             </div>
           </div>
           <div *ngIf="comentariosActivos()">
@@ -349,7 +243,6 @@
                 </p>
               </div>
               <div class="col-10 col-md-10">
-                <!-- <form [formGroup]="formulario" (keyup.enter)="comentar(noticia.id, user.uid, noticia.comentarios)" novalidate> -->
                 <form [formGroup]="formulario" (ngSubmit)="comentar(noticia.id, user, noticia.comentarios)" novalidate>
                   <div class="example-container" style="margin-top:-15px;">
                     <mat-form-field floatLabel="never">
@@ -364,103 +257,23 @@
                       </button>
                     </mat-form-field>
                   </div>
-                  <!-- <div class="text-right">
-                    <button mat-raised-button color="primary" type="submit" [disabled]="!formulario.valid">
-                      <i class="material-icons icono-boton">send</i> ENVIAR</button>
-                  </div> -->
                 </form>
               </div>
             </div>
           </div>
-
         </mat-card-content>
-
-
-        <!-- <mat-card-actions align="end" class="mat-actions-top">
-
-            <button mat-button class="boton" color="accent" routerLink="/iniciosesion" *ngIf="!(authService.user | async);">
-              <i class="fa fa-thumbs-o-up" aria-hidden="true"></i> Me gusta
-            </button>
-            <div *ngIf="authService.user | async as user;" class="boton">
-              <button *ngIf="!checkMeGusta(noticia.megusta, user.uid)" style="width:100%" mat-button color="accent" (click)="meGusta(noticia.id, noticia.megusta, user.uid)">
-                <i class="fa fa-thumbs-o-up" aria-hidden="true"></i> Me gusta
-                <span class="badge badge-primary">{{noticia.megusta?.length}}</span>
-
-              </button>
-              <button *ngIf="checkMeGusta(noticia.megusta, user.uid)" style="width:100%" mat-raised-button color="accent" (click)="eliminarMeGusta(noticia.id, noticia.megusta, user.uid)">
-                <i class="fa fa-thumbs-up" aria-hidden="true"></i> Me gusta
-                <span class="badge badge-primary">{{noticia.megusta?.length}}</span>
-              </button>
-            </div>
-
-            <button mat-button class="boton" color="accent" routerLink="/iniciosesion" *ngIf="!(authService.user | async);">
-              <i class="material-icons icono-boton">comment</i>
-              Comentarios
-            </button>
-            <button mat-button class="boton" color="accent" routerLink="/noticia/{{noticia.id}}" *ngIf="authService.user | async as user;">
-              <i class="material-icons icono-boton">comment</i>
-              Comentarios
-              <span class="badge badge-primary">{{ noticia.comentarios?.length }}</span>
-            </button>
-
-          </mat-card-actions> -->
-
-        <!-- <mat-card-footer>
-        <div *ngFor="let megusta of noticia.megusta">
-          {{ megusta.userId }}, Pos: {{ megusta.numero }}
-        </div>
-        <div *ngFor="let comentario of noticia.comentarios">
-          {{ comentario.userId }}, Comentario: {{ comentario.comentario }} Fecha: {{ comentario.fecha }}
-        </div>
-      </mat-card-footer> -->
-
-
-        <!-- <mat-card-actions align="end" *ngIf="(authService.user | async)?.modo_edicion">
-        <div class="row">
-          <div class="col-12">
-            <mat-slide-toggle color="primary" [(ngModel)]="noticia.oculto" (click)="toggleOculto(noticia.oculto, noticia.id)">Oculto</mat-slide-toggle>
-          </div>
-        </div>
-      </mat-card-actions> -->
       </mat-card>
     </div>
   </div>
 </div>
-
-<!-- <div class="search-results" infiniteScroll [infiniteScrollDistance]="2" [infiniteScrollThrottle]="1000" (scrolled)="onScroll()">
-    a
-  </div> -->
-
-<!-- <div class="container-fluid" style="padding-bottom:30px;"  *ngIf="noticias$ | async; let news;" >
-    <div class="row">
-     Largo Noticias: {{news.length}} MaxNoticias: {{maxNoticias}}
-    </div>
-    <div class="row" *ngIf="news.length > this.maxNoticias">
-      <div class="col-12 text-center">
-        <button color="primary" mat-button (click)="cargarMasNoticias()">Cargar más noticias...</button>
-      </div>
-    </div>
-  </div> -->
-
 <div class="container-fluid" style="padding-bottom:30px;" *ngIf="noticias$ | async as noticias">
   <div class="row" *ngIf="noticias?.length > this.maxNoticias">
     <div class="col-12 text-center">
       <button color="primary" mat-button (click)="cargarMasNoticias()">Cargar más publicaciones...</button>
     </div>
-
   </div>
   <div class="col-12 text-center" *ngIf="noticias?.length == 0">
     <br>
     <p>Aún no hay publicaciones en esta comunidad.</p>
   </div>
 </div>
-
-<!-- 
-  <div class="container-fluid">
-    <div class="row">
-      <div class="col-12">
-          <app-loadnoti></app-loadnoti>
-
-      </div>
-    </div>
-  </div> -->

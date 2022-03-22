@@ -1,8 +1,6 @@
 mat-card{
     margin: 5px;
-    /* border-radius: 20px; */
   }
-  
   .pos-bottom-right{
     position: fixed;
     display: block;
@@ -12,21 +10,16 @@ mat-card{
     margin-bottom: 110px;
     z-index: 900;
   }
-
-
   .title-card-right{
     display: inline;
     float: right;
   }
-  
   .title-card-left{
     display: inline;
   }
-
   .card {
     height: 250px;
   }
-
   mat-card-title{
     font-size:18px!important;
   }

@@ -1,62 +1,21 @@
-/* .sombra{
-    z-index: 10 !important;
-    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-  }
-
-nav{
-    z-index: 99 !important;
-    
-  }
-
-  .beta{
-    font-family: "Open Sans";
-    font-size: 10px;
-    color: grey;
-  }
-
-  .titulo{
-    font-family: 'Ubuntu';
-    font-size: 18px;
-  } */
-
   .tool-logo{
     background-color: #00285C;
-    /* background: linear-gradient(135deg,#f2f2f2,#1e88e5); */
     height: 64px;
     z-index:98!important;
   }
-  
-  /* .team-logo{
-    background-color: #f2f2f2;
-    background: linear-gradient(135deg,#f2f2f2,#000);
-    height: 64px;
-    z-index:98!important;
-  } */
-  /* .tool-logo{
-   
-    background-color: #0143a3;
-    background: linear-gradient(135deg,#0273d4,#0143a3);
-  } */
-
-
   .logo{
     padding-top: 20px;
 }
-
 mat-toolbar {
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
-
 .foto-perfil{
-  /* box-shadow: 0 0 0 2px #fff, 0 0 0 2px rgba(0, 0, 0, 0.5); */
   border: double 2px transparent;
   border-radius: 80px;
   background-image: linear-gradient(white, white), radial-gradient(circle at top left, #fff,#f6f6f6);
   background-origin: border-box;
   background-clip: content-box, border-box;  
-
 }
-
 .image-cropper {
   width: 25px;
   height: 25px;

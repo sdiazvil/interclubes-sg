@@ -1,24 +1,12 @@
-   /* button {
-    width:30%;
-  } */
-
-/* mat-card{
-  margin-bottom: 100px;
-} */
-
-
 .ng-valid[required], .ng-valid.required  {
   border-left: 5px solid #42A948;
 }
-
 .ng-invalid:not(form)  {
   border-left: 5px solid #a94442;
 }
-
 .alert{
   margin-top:10px;
 }
-
 #foto {
   position: absolute;
   z-index: 99;
@@ -28,17 +16,8 @@
   right: 0;
   margin: auto;
   max-width:100px;
-
   }
-  
-  /* .foto{
-    border: 2px solid grey;
-    border-radius: 4px;
-  } */
-  
-
 .foto {
-  
   display: inline-block;
     max-width: 100%;
     height: auto;
@@ -51,7 +30,6 @@
     -o-transition: all .2s ease-in-out;
     transition: all .2s ease-in-out;
   }
-
   .ribbon {
     position: absolute;
     z-index: 1;
@@ -60,18 +38,6 @@
     height: 75px;
     text-align: right;
 }
-
-  /* .ribbon {
-    position: absolute;
-    left: 5px;
-    top: -5px;
-    z-index: 1;
-    overflow: hidden;
-    width: 75px;
-    height: 75px;
-    text-align: right;
-} */
-
 .ribbon span {
   font-size: 10px;
   font-weight: bold;
@@ -90,17 +56,14 @@
   top: 19px;
   left: -21px;
 }
-
 .example-headers-align .mat-expansion-panel-header-title, 
 .example-headers-align .mat-expansion-panel-header-description {
   flex-basis: 0;
 }
-
 .example-headers-align .mat-expansion-panel-header-description {
   justify-content: space-between;
   align-items: center;
 }
-
 .image {
   position: relative;
   display: inline-block;
@@ -119,22 +82,16 @@
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
-  /* Default is baseline, this fixes a common alignment issue */
 }
 .image:hover .overlay img {
-  /* All other styling - see example */
   vertical-align: top;
 }
-
-
 .border{
   border: 1px solid #EBEFF2;
 }
-
 .foto-perfil{
   box-shadow: 0 0 0 4px #fff, 0 0 0 5px rgba(0, 0, 0, 0.26);
 }
-
 mat-card{
   border-radius:20px;
 }

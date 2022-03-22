@@ -1,16 +1,15 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { NgbModal, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { VecindariosService } from '../../core/vecindarios.service';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { AuthService } from '../../core/auth.service';
+import { Component, Input, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatSnackBar } from '@angular/material';
+import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { AngularFireStorage } from 'angularfire2/storage';
-import { NoticiasService } from '../../core/noticias.service';
-import { GruposService } from '../../core/grupos.service';
-import { EventosService } from '../../core/eventos.service';
-import { RepositorioService } from '../../core/repositorio.service';
+import { AuthService } from '../../core/auth.service';
 import { EncuestasService } from '../../core/encuestas.service';
-
+import { EventosService } from '../../core/eventos.service';
+import { GruposService } from '../../core/grupos.service';
+import { NoticiasService } from '../../core/noticias.service';
+import { RepositorioService } from '../../core/repositorio.service';
+import { VecindariosService } from '../../core/vecindarios.service';
 @Component({
   selector: 'app-confirmar-eliminar',
   templateUrl: './confirmar-eliminar.component.html',
@@ -28,9 +27,7 @@ export class ConfirmarEliminarComponent implements OnInit {
   eventos: any;
   carpetas: any;
   encuestas: any;
-
   constructor(public ens: EncuestasService, public rs: RepositorioService, public es: EventosService, public gs: GruposService, public ns: NoticiasService, private storage: AngularFireStorage, public snackBar: MatSnackBar, public authService: AuthService, public fb: FormBuilder, public activeModal: NgbActiveModal, public vs: VecindariosService) { }
-
   ngOnInit() {
     this.formulario = this.fb.group({
       'password': [''],
@@ -42,19 +39,13 @@ export class ConfirmarEliminarComponent implements OnInit {
     this.rs.getCarpetasPorVecindario(this.vecindario.id).subscribe(carpetas => this.carpetas = carpetas);
     this.ens.getEncuestasPorVecindario(this.vecindario.id).subscribe(encuestas => this.encuestas = encuestas);
   }
-
   get password() { return this.formulario.get('password') }
-
-
   cerrarModalSF() {
     this.activeModal.close();
   }
-
   verificarPassword() {
     var vecindariosArreglo: any;
-
     if (this.password.value == 'Barbas@260314') {
-      //eliminar plaza
       this.noticias.forEach(noticia => {
         if (noticia.fotos) {
           noticia.fotos.forEach(foto => {
@@ -68,7 +59,6 @@ export class ConfirmarEliminarComponent implements OnInit {
         }
         this.ns.eliminar(noticia.id);
       });
-      //eliminar grupos
       this.grupos.forEach(grupo => {
         if (grupo.fotos) {
           grupo.fotos.forEach(foto => {
@@ -77,7 +67,6 @@ export class ConfirmarEliminarComponent implements OnInit {
         }
         this.gs.eliminar(grupo.id);
       });
-      //eliminar agenda
       this.eventos.forEach(evento => {
         if (evento.fotos) {
           evento.fotos.forEach(foto => {
@@ -91,7 +80,6 @@ export class ConfirmarEliminarComponent implements OnInit {
         }
         this.es.eliminar(evento.id);
       });
-      //eliminar documentos
       this.carpetas.forEach(carpeta => {
         if (carpeta.archivos) {
           carpeta.archivos.forEach(archivo => {
@@ -100,12 +88,9 @@ export class ConfirmarEliminarComponent implements OnInit {
         }
         this.rs.eliminar(carpeta.id);
       });
-      //eliminar links
       this.encuestas.forEach(encuesta => {
         this.ens.eliminar(encuesta.id);
       });
-
-      //eliminar usuarios
       this.users.forEach(user => {
         vecindariosArreglo = user.vecindarios;
         vecindariosArreglo = vecindariosArreglo.filter(item => item.vecindarioId !== this.vecindario.id);
@@ -118,33 +103,22 @@ export class ConfirmarEliminarComponent implements OnInit {
           vecindarios: vecindariosArreglo
         });
       });
-
       if(this.vecindario.path_banner_web){
         this.storage.ref(this.vecindario.path_banner_web).delete();
       }
       if(this.vecindario.path_banner_movil){
         this.storage.ref(this.vecindario.path_banner_movil).delete();
       }
-
       this.vs.eliminar(this.vecindario.id);
       this.activeModal.close();
-
       this.snackBar.open('La comunidad ha sido eliminada correctamente.', 'CERRAR', {
         duration: 4000
       });
-      // this.mensaje = "Contraseña correcta.";
-      // setTimeout(() => {
-      //   this.mensaje = null;
-      // }, 5000);
     } else {
       this.mensaje = "Contraseña incorrecta";
       setTimeout(() => {
         this.mensaje = null;
       }, 5000);
-
     }
   }
-
-
-
 }

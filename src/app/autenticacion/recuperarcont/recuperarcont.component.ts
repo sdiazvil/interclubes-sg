@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { AuthService } from '../../core/auth.service';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material';
-
+import { AuthService } from '../../core/auth.service';
 @Component({
   selector: 'app-recuperarcont',
   templateUrl: './recuperarcont.component.html',
@@ -12,24 +11,19 @@ export class RecuperarcontComponent implements OnInit {
   olvidoForm: FormGroup;
   datos: any;
   cargando = false;
-
   mensaje: string;
   icono: string;
   clase: string;
-
   passReset: boolean = false;
-
   formErrores = {
     'email': ''
   }
-
   mensajesValidacion = {
     'email': {
       'required': 'Email obligatorio',
       'email': 'Introduzca una dirección email correcta'
     }
   }
-
   detectarCambios(data?: any) {
     if (!this.olvidoForm) { return; }
     const form = this.olvidoForm;
@@ -44,10 +38,7 @@ export class RecuperarcontComponent implements OnInit {
       }
     }
   }
-
-
   constructor(public snackBar: MatSnackBar, private authService: AuthService, private formBuilder: FormBuilder, ) { }
-
   ngOnInit() {
     this.olvidoForm = this.formBuilder.group({
       'email': ['', [
@@ -61,7 +52,6 @@ export class RecuperarcontComponent implements OnInit {
     this.olvidoForm.valueChanges.subscribe(data => this.detectarCambios(data));
     this.detectarCambios();
   }
-
   enviar() {
     this.cargando = true;
     this.datos = this.crearJSON();
@@ -69,28 +59,19 @@ export class RecuperarcontComponent implements OnInit {
       this.snackBar.open('Se ha enviado un correo con instrucciones para reestablecer su contraseña.', 'CERRAR', {
         duration: 4000
       });
-      // this.mensaje = "Se ha enviado un correo con instrucciones para reestablecer su contraseña.";
-      // this.icono = "fa fa-exclamation";
-      // this.clase = "alert alert-warning";
       this.cargando = false;      
     })
       .catch((error) => {
         this.snackBar.open('El correo electrónico no se encuentra registrado.', 'CERRAR', {
           duration: 4000
         });
-        // this.mensaje = "El correo electrónico no se encuentra registrado.";
-        // this.icono = "fa fa-exclamation";
-        // this.clase = "alert alert-danger";
         this.cargando = false;
       });
   }
-
   crearJSON() {
     const crearJSON = {
       email: this.olvidoForm.get('email').value,
     };
     return crearJSON;
   }
-
-
 }

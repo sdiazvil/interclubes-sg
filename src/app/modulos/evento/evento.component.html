@@ -1,54 +1,31 @@
-<!-- <mat-toolbar style="background:#06A8F9;color:#fff;border-radius: 10px;">
-  <button mat-raised-button color="primary" (click)="this._location.back();">
-    <i class="material-icons icono-boton">keyboard_arrow_left</i> Volver</button>
-  <span class="app-toolbar-filler"></span>
-  <span class="titulo">
-    <i class="material-icons icono-titulo">date_range</i> Eventos</span>
-  <span class="app-toolbar-filler"></span>
-</mat-toolbar> -->
-
 <button mat-button color="primary" (click)="this._location.back();">
   <i class="material-icons icono-boton">keyboard_arrow_left</i> Volver</button>
 <br>
 <br>
-
 <div class="row justify-content-center">
   <div class="col-12 col-md-8">
-
     <mat-card>
       <mat-card-title-group>
         <mat-card-subtitle>
           <i style="color: grey; font-size:12px;" class="material-icons icono-boton">access_time</i>
           <small style="opacity: 0.87;">Publicado {{ evento.creado | amTimeAgo }}</small>
         </mat-card-subtitle>
-        <!-- <mat-card-title>
-          <i class="material-icons icono-boton">public</i> {{evento.nombre}}
-        </mat-card-title> -->
         <mat-card-title *ngIf="evento.tipo == 'Actividad'">
-          <!-- <i class="material-icons icono-titulo">date_range</i>  -->
           {{evento.nombre}} 
           <span class="badge badge-warning">Actividad</span>
         </mat-card-title>
         <mat-card-title *ngIf="evento.tipo == 'Reunión'">
-          <!-- <i class="material-icons icono-titulo">groups</i>  -->
           {{evento.nombre}} <span class="badge badge-success">Reunión</span>
         </mat-card-title>
         <mat-card-title *ngIf="evento.tipo == 'Información'">
-          <!-- <i class="material-icons icono-titulo">info</i>  -->
           {{evento.nombre}} <span class="badge badge-primary">Información</span>
         </mat-card-title>
-
       </mat-card-title-group>
-
       <ngb-carousel *ngIf="evento.fotos">
         <ng-template ngbSlide *ngFor="let foto of evento.fotos">
           <img class="img-fluid" [src]="foto.photoURL" [alt]="evento.nombre">
-          <!-- <div *ngIf="foto.bajada" class="carousel-caption" style="background: rgb(0, 0, 0, 0.5);border-radius: 25px;"> 
-                    <h6>{{foto.bajada}}</h6>
-                  </div> -->
         </ng-template>
       </ngb-carousel>
-
       <mat-card-content>
         <br>
         <div class="row">
@@ -91,10 +68,6 @@
             <mat-list>
               <mat-list-item *ngFor="let archivo of evento.archivos">
                 <mat-icon mat-list-icon>note</mat-icon>
-                <!-- <a [href]="archivo.url" target="_blank" [download]="archivo.nombre">
-                  <mat-icon class="md-list-icon" matTooltip="Descargar" md-list-icon>cloud_download</mat-icon>
-                </a> -->
-
                 <a (click)="mostrar(archivo.url)">
                   <mat-icon class="md-list-icon" matTooltip="Mostrar Archivo" md-list-icon>visibility
                   </mat-icon>
@@ -110,7 +83,6 @@
           <br *ngIf="mostrarArchivo">
           <iframe *ngIf="mostrarArchivo" [src]="mostrarArchivo | safe" width="100%" height="900" frameborder="0"
             marginheight="0" marginwidth="0">Cargando...</iframe>
-
           <div class="col-12" *ngIf="(authService.user | async)?.admin">
             <br>
             <mat-toolbar style="height: 50px;">
@@ -146,7 +118,6 @@
                     </mat-menu>
                   </div>
                 </div>
-
               </div>
               <div class="col-2 rounded" style="width:75px; height:75px;" *ngIf="cargando">
                 <div style="margin-top:25px;margin-left:25px;">
@@ -154,12 +125,9 @@
                 </div>
               </div>
             </div>
-
           </div>
         </div>
       </mat-card-content>
-
     </mat-card>
-
   </div>
 </div>

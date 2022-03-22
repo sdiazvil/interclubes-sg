@@ -1,19 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../core/auth.service';
-
 @Component({
   selector: 'app-modo',
   templateUrl: './modo.component.html',
   styleUrls: ['./modo.component.css']
 })
 export class ModoComponent implements OnInit {
-
   constructor(public authService: AuthService) { }
-
   ngOnInit() {
-
   }
-
   checkBarra(variable) {
     if (variable) {
       return true;
@@ -21,9 +16,7 @@ export class ModoComponent implements OnInit {
       return false;
     }
   }
-
   toggleModo(modo: boolean, userId: string) {
-    // console.log(modo);
     if (modo) {
       this.authService.updateUsuario(userId,
         {
@@ -38,8 +31,4 @@ export class ModoComponent implements OnInit {
       );
     }
   }
-
-
 }
-
-

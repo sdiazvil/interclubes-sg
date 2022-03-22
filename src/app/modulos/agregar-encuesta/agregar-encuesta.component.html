@@ -1,10 +1,5 @@
-<!-- <div *ngIf="(authService.user | async) || {} as user"> -->
-
-
-
 <div *ngIf="authService.user | async as user">
   <form [formGroup]="formulario" (ngSubmit)="agregar()" novalidate>
-
     <div class="modal-header" style="background:#06A8F9;color:#fff;">
       <span class="modal-title">
         <i class="material-icons icono-titulo">date_range</i>&nbsp; Agregar </span>
@@ -12,100 +7,34 @@
         <span aria-hidden="true">&times;</span>
       </button>
     </div>
-
-    <!-- <div class="modal-body">
-      <div class="container-fluid">
-
-        <div class="form-row">
-          <div class="col-md-12 form-group">
-            <label for="nombre">Nombre </label>&nbsp;
-            <i class="fa fa-info-circle text-danger" *ngIf="formErrores.nombre"></i>
-            <input type="text" class="form-control" formControlName="nombre" id="nombre" placeholder="Ej: Encuesta 1" required>
-            <p class="alert alert-danger" *ngIf="formErrores.nombre" role="alert">
-              {{ formErrores.nombre }}
-            </p>
-          </div>
-        </div>
-
-        <div class="form-row">
-          <div class="col-md-12 form-group">
-            <label for="descripcion">Descripcion</label>
-            &nbsp;
-            <i class="fa fa-info-circle text-danger" *ngIf="formErrores.descripcion"></i>
-            <textarea rows="3" type="text" class="form-control" formControlName="descripcion" id="descripcion" required></textarea>
-            <p class="alert alert-danger" *ngIf="formErrores.descripcion" role="alert">
-              {{ formErrores.descripcion }}
-            </p>
-          </div>
-        </div>
-
-        <div class="form-row">
-          <div class="col-md-12 form-group">
-            <label for="url">URL Encuesta</label>
-            &nbsp;
-            <i class="fa fa-info-circle text-danger" *ngIf="formErrores.url"></i>
-            <textarea rows="2" type="text" class="form-control" formControlName="url" id="url" required></textarea>
-            <p class="alert alert-danger" *ngIf="formErrores.url" role="alert">
-              {{ formErrores.url }}
-            </p>
-          </div>
-        </div>
-
-        <div class="form-row">
-          <div class="col-md-6 form-group" style="padding-top:6px;">
-            <label for="password">Contraseña </label>&nbsp;
-            <i class="fa fa-info-circle text-danger" *ngIf="formErrores.password"></i>
-            <input type="text" class="form-control" formControlName="password" id="password">
-          </div>
-        </div>
-
-      </div>
-    </div> -->
-
     <div class="modal-body">
       <div class="container-fluid">
         <div class="row">
           <div class="col-12">
             <div class="example-container">
-
               <mat-form-field>
                 <input matInput placeholder="Ingrese el título" type="text" formControlName="nombre" required autofocus>
                 <mat-error *ngIf="formErrores.nombre">{{formErrores.nombre}}</mat-error>
               </mat-form-field>
-
               <mat-form-field>
                 <textarea formControlName="descripcion" minlenght="1" matInput #descripcion placeholder="Escribe la descripcion..." matTextareaAutosize
                   matAutosizeMinRows="3" matAutosizeMaxRows="10" required></textarea>
                 <mat-hint *ngIf="descripcion.value.length > 3000" align="end">{{descripcion.value.length}} / 3000</mat-hint>
               </mat-form-field>
-
               <mat-form-field>
                 <input matInput placeholder="Dirección URL" value="https://" formControlName="url" required>
                 <mat-error *ngIf="formErrores.url">{{formErrores.url}}</mat-error>
               </mat-form-field>
-<!-- 
-            <mat-form-field>
-              <input matInput placeholder="Contraseña" [type]="hide ? 'password' : 'text'" formControlName="password">
-              <i class="material-icons" matSuffix (click)="hide=!hide">{{ hide ? 'visibility' : 'visibility_off' }}</i>
-            </mat-form-field> -->
-
-
             </div>
           </div>
         </div>
       </div>
     </div>
-
-
     <div class="modal-footer">
       <button mat-raised-button *ngIf="!cargando" color="accent" type="submit" [disabled]="!formulario.valid">
-        <!-- <i class="material-icons icono-boton">edit</i> -->
         <i class='material-icons'>mode_edit</i> Publicar</button>
       <button mat-raised-button disabled *ngIf="cargando" type="submit" disabled>
         <i class='fa fa-circle-o-notch fa-spin'></i> Publicando...</button>
-      <!-- <button type="button" class="btn btn-outline-dark" (click)="activeModal.close('Close click')">Close</button> -->
     </div>
-
   </form>
-
 </div>

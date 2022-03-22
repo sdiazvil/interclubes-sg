@@ -1,13 +1,6 @@
 export const environment = {
   production: true,
   firebase: {
-    // apiKey: "AIzaSyB2j9Jm-Z7avIdIhEETGG2kG4SNEtvjRuA",
-    // authDomain: "vecindiario-ebe10.firebaseapp.com",
-    // projectId: "vecindiario-ebe10",
-    // storageBucket: "vecindiario-ebe10.appspot.com",
-    // messagingSenderId: "12885770999",
-    // appId: "1:12885770999:web:7da54409cbea193f7c89f2",
-    // measurementId: "G-CBMEL1W3VB"
     apiKey: "AIzaSyBghgGT-v5SulmVsLmqM4hKo33DxE4r_gs",
     authDomain: "vecindiario-v2.firebaseapp.com",
     projectId: "vecindiario-v2",

@@ -1,50 +1,32 @@
 .espacio-top{
   margin-bottom: 65px;
 }
-  
 .espacio80{
     margin-bottom: 80px;
   }
-
 .espacioside{
     margin-bottom: 57px;
   }
-  
-
   .tool-footer{
     border-top:1px solid rgba(0, 0, 0, 0.12);
   }
-
-
-  /*SIDENAV*/
   .active {
     color: #06A8F9 !important;
     font-weight: bolder;
     border-right: solid 4px #06A8F9;
     background: #F3F8FB;
 }
-  /* .active {
-    background: #00B2FF !important;
-    color: #f9f9f9 !important;
-} */
-
 .itemmenu{
     color:#00285C;
-    /*text-decoration:none;*/
     border-top:1px solid rgba(0, 0, 0, 0.12);
-    /* border-radius: 10px; */
-
   }
-  
   .itemmenu:hover{
     color: #06A8F9;
     background: #F3F8FB;
   }
-  
   .iconomenu{
     margin-top: 12px;
   }
-  
   .footer-side{
     position: fixed; 
     bottom: 0px; 
@@ -54,21 +36,12 @@
     background-color: #fff;
     border-top:1px solid rgba(0, 0, 0, 0.12);
 }
-
 .footer{
-  /* position: fixed; 
-  bottom: 0px; 
-  height: 60px; 
-  line-height: 60px;  */
-
-
   }
-
   mat-sidenav {
     width: 280px;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   }
-
   .menu-titulo{
     background: #00285C;
     color: #fff;
@@ -77,14 +50,12 @@
     font-size: 12px;
     text-align: center;
   }
-
   .loading-overlay {
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
   }
-
   .foto-perfil{
     border: double 4px transparent;
     border-radius: 80px;
@@ -92,14 +63,12 @@
     background-origin: border-box;
     background-clip: content-box, border-box;  
   }
-
   .nombre{
     color: grey;
     font-size: 14px;
     font-weight: bold;
     text-transform: uppercase;
   }
-  
   .image-cropper {
     width: 100px;
     height: 100px;

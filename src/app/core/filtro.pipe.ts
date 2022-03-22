@@ -1,11 +1,9 @@
 import { Pipe, PipeTransform } from '@angular/core';
-
 @Pipe({
   name: 'filtro',
   pure: false
 })
 export class FiltroPipe implements PipeTransform {
-
   transform(vecindarios: Array<any>, userId:string): Array<any> {
     var arreglo: Array<any> = [];
     vecindarios.forEach(vecindario => {
@@ -20,5 +18,4 @@ export class FiltroPipe implements PipeTransform {
     });
     return arreglo;
   }
-
 }

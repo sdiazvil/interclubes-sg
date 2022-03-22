@@ -1,7 +1,5 @@
 <div *ngIf="authService.user | async as user">
     <div *ngIf="vecindario | async as vecindario">
-
-
         <div class="row justify-content-center">
             <div class="col-12 col-md-10">
                 <mat-card *ngIf="checkAdminBarrio(vecindario.admin, user) || user.admin">
@@ -12,17 +10,13 @@
             </div>
         </div>
         <br>
-
         <div class="row justify-content-center" *ngIf="this.rs.progreso">
             <div class="col-12 col-md-10" style="padding-top:10px;padding-bottom:20px;">
                 <p class="text-center">{{ this.rs.progreso | number: '1.0-0' }}%</p>
                 <mat-progress-bar mode="determinate" [value]="this.rs.progreso"></mat-progress-bar>
-
             </div>
         </div>
-
         <div class="row justify-content-center">
-
             <div class="col-12 col-md-10">
                 <h6>Carpetas</h6>
             </div>
@@ -34,9 +28,7 @@
                             &nbsp;
                             <small style="color:grey; position:relative;top:3px;">Creado {{ carpeta.creado | amTimeAgo
                                 }}</small>
-
                         </mat-expansion-panel-header>
-
                         <ng-template matExpansionPanelContent>
                             <mat-toolbar style="height: 50px;"
                                 *ngIf="checkAdminBarrio(vecindario.admin, user) || user.admin">
@@ -55,7 +47,6 @@
                                         <mat-icon>delete</mat-icon>
                                     </button>
                                 </span>
-
                             </mat-toolbar>
                             <mat-list>
                                 <mat-list-item *ngFor="let archivo of carpeta.archivos">
@@ -74,15 +65,12 @@
                                     <p mat-line> {{archivo.creado | date}} </p>
                                 </mat-list-item>
                             </mat-list>
-
                             <span style="color:grey;" *ngIf="carpeta.archivos.length==0">
                                 Esta carpeta no contiene documentos.
                             </span>
-
                         </ng-template>
                     </mat-expansion-panel>
                 </mat-accordion>
-
                 <br>
                 <div class="text-right" #target>
                     <button mat-fab *ngIf="mostrarArchivo && cerrar" color="accent"
@@ -95,7 +83,6 @@
                 </div>
             </div>
         </div>
-
         <div class="row justify-content-center" *ngIf="(carpetas | async)?.length==0">
             <div class="col-12 col-md-10">
                 <div class="alert alert-secondary" role="alert">
@@ -103,6 +90,5 @@
                 </div>
             </div>
         </div>
-
     </div>
 </div>

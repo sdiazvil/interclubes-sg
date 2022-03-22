@@ -1,5 +1,4 @@
-import { Component, Input, ElementRef, OnChanges } from '@angular/core';
-
+import { Component, ElementRef, Input, OnChanges } from '@angular/core';
 @Component({
   selector: 'mostrar-mas',
   templateUrl: './mostrar-mas.component.html',
@@ -10,17 +9,13 @@ export class MostrarMasComponent implements OnChanges {
   @Input() largoMax: number = 100;
   textoActual: string;
   ocultar: boolean = true;
-
   public colapsado: boolean = true;
-
   constructor(private elementRef: ElementRef) {
-
   }
   mostrar() {
       this.colapsado = !this.colapsado;
       this.determinarLargo();
   }
-
   determinarLargo() {
       if (this.texto.length <= this.largoMax) {
           this.textoActual = this.texto;
@@ -34,12 +29,8 @@ export class MostrarMasComponent implements OnChanges {
       } else if (this.colapsado == false) {
           this.textoActual = this.texto;
       }
-
   }
-
   ngOnChanges() {
       this.determinarLargo();
   }
-
-
 }

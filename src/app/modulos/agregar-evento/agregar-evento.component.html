@@ -1,10 +1,5 @@
-<!-- <div *ngIf="(authService.user | async) || {} as user"> -->
-
-
-
 <div *ngIf="authService.user | async as user">
   <form [formGroup]="formulario" (ngSubmit)="agregar()" novalidate>
-
     <div class="modal-header" style="background:#06A8F9;color:#fff;">
       <span class="modal-title">
         <i class="material-icons icono-boton">date_range</i>&nbsp; Agregar </span>
@@ -13,51 +8,21 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-
       <div *ngIf="!eventoActual">
         <button type="button" class="close" aria-label="Close" (click)="cerrarModalSF()">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-
     </div>
-
-    <!-- <div *ngIf="!eventoActual" class="col-12 rounded" style="background: #f2f2f2; height: 150px;">
-        <p class="text-center" style="padding-top:50px;" *ngIf="!loading">
-          <label class="file-label">
-            <input class="file-input" type="file" access=".png,.jpg,.jpeg,.JPG,.JPEG,.PNG" (change)="cargaMultiple($event.target.files)"
-              hidden="true">
-            <a mat-icon-button color="accent">
-              <i class="material-icons">add_a_photo</i>
-            </a>
-          </label>
-        </p>
-        <div style="padding-top:50px;" *ngIf="loading">
-          <mat-spinner style="margin:0 auto;" [diameter]="24" [strokeWidth]="2.4"></mat-spinner>
-        </div>
-      </div>
-  
-      <div *ngIf="eventoActual | async as evento">
-        <img class="card-img-top" [src]="evento.photoURL || 'http://gifimage.net/wp-content/uploads/2017/08/spinner-gif-5.gif'" alt="Subir imagen">
-      </div> -->
-
     <div class="modal-body">
       <div class="container-fluid">
-
         <div class="row">
-
           <div class="col-12">
             <div class="example-container">
               <mat-form-field>
                 <input matInput placeholder="Ingrese el nombre" type="text" formControlName="nombre" required autofocus>
                 <mat-error *ngIf="formErrores.nombre">{{formErrores.nombre}}</mat-error>
               </mat-form-field>
-              <!-- 
-              <mat-form-field>
-                <input matInput placeholder="Ingrese la fecha" type="date" formControlName="fecha" required>
-                <mat-error *ngIf="formErrores.fecha">{{formErrores.fecha}}</mat-error>
-              </mat-form-field> -->
-
               <mat-form-field>
                 <mat-select placeholder="Tipo" formControlName="tipo" required>
                   <mat-option value="Reunión">
@@ -72,50 +37,30 @@
                 </mat-select>
                 <mat-error *ngIf="formErrores.tipo">{{formErrores.tipo}}</mat-error>
               </mat-form-field>
-
-
               <mat-form-field>
                 <input matInput placeholder="Ingrese el lugar" type="text" formControlName="lugar">
                 <mat-error *ngIf="formErrores.lugar">{{formErrores.lugar}}</mat-error>
               </mat-form-field>
-
-
             </div>
-
           </div>
-
           <div class="col-12 col-md-8">
-
             <div style="padding-top:30px;">
-
               <mat-form-field>
                 <input matInput required [matDatepicker]="picker" placeholder="Fecha y hora" formControlName="fecha">
                 <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                 <mat-datepicker #picker></mat-datepicker>
                 <mat-error *ngIf="formErrores.fecha">{{formErrores.fecha}}</mat-error>
               </mat-form-field>
-
-
             </div>
           </div>
-
           <div class="col-12 col-md-4 form-group">
-            <!-- <label for="hora">Hora</label>
-                      &nbsp;
-                      <i class="fa fa-info-circle text-danger" *ngIf="formErrores.hora"></i> -->
             <ngb-timepicker required [(ngModel)]="time" formControlName="hora"></ngb-timepicker>
-            <!-- <input type="email" class="form-control" formControlName="email" id="correo" placeholder="Ej: nombre@dominio.cl" required> -->
             <p class="alert alert-danger" *ngIf="formErrores.hora" role="alert">
               {{ formErrores.hora }}
             </p>
           </div>
-
-
           <div class="col-12">
             <div class="example-container">
-
-
-
               <mat-form-field>
                 <textarea formControlName="descripcion" minlenght="1" matInput #descripcion placeholder="Escribe la descripcion..." matTextareaAutosize
                   matAutosizeMinRows="3" matAutosizeMaxRows="10" required></textarea>
@@ -140,11 +85,8 @@
               <br>
             </div>
           </div>
-
         </div>
-
         <div class="row" *ngIf="eventoActual | async as evento">
-
           <div class="col-2" *ngFor="let foto of evento.fotos">
             <div class="foto">
               <img class="rounded" height="75px;" width="75px;" [src]="foto.photoURL" />
@@ -163,7 +105,6 @@
                 </mat-menu>
               </div>
             </div>
-
           </div>
           <div class="col-2 rounded" style="width:75px; height:75px;" *ngIf="loading">
             <div style="margin-top:25px;margin-left:25px;">
@@ -171,21 +112,13 @@
             </div>
           </div>
         </div>
-
-
       </div>
     </div>
-
-
     <div class="modal-footer">
       <button mat-raised-button *ngIf="!cargando" color="accent" type="submit" [disabled]="!formulario.valid">
-        <!-- <i class="material-icons icono-boton">edit</i> -->
         <i class='material-icons icono-boton'>mode_edit</i> Publicar</button>
       <button mat-raised-button disabled *ngIf="cargando" type="submit" disabled>
         <i class='fa fa-circle-o-notch fa-spin'></i> Publicando...</button>
-      <!-- <button type="button" class="btn btn-outline-dark" (click)="activeModal.close('Close click')">Close</button> -->
     </div>
-
   </form>
-
 </div>

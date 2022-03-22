@@ -1,28 +1,3 @@
-<!-- <div class="row">
-  <div class="col-md-12" style="padding-top:20px;">
-    <h3>Editar Perfil</h3>
-  </div>
-</div>
-
-<div class="row justify-content-center" *ngIf="authService.user | async as user;">
-
-  <div class="col-md-8">
-    <mat-card>
-      <img [src]="user.photoURL || 'https://image.freepik.com/free-icon/male-user-close-up-shape-for-facebook_318-37635.jpg'" width="150px"
-        class="rounded-circle">
-      <br>
-      <br>
-      <h4>ID: {{ user.uid }} </h4>
-      <br>
-      <h4>Nombre: {{ user.displayName || 'Sin nombre asignado' }}</h4>
-      <br>
-      <h4>Email: {{ user.email }} </h4>
-      <br>
-    </mat-card>
-  </div>
-
-</div> -->
-
 <div class="row">
   <div class="col-12">
     <mat-toolbar color="primary">
@@ -31,17 +6,9 @@
   </div>
 </div>
 <br>
-
 <div class="row justify-content-around" *ngIf="authService.user | async as user;">
-
   <div class="col-md-10">
     <mat-card>
-      <!-- <mat-card-title>
-        <i class="material-icons">person</i> Editar Perfil
-
-      </mat-card-title> -->
-      <!-- <hr> -->
-
       <mat-card-content>
         <div class="text-center">
           <div class="image">
@@ -52,9 +19,6 @@
               [src]="user.photoURL || '../../assets/user_google.jpg'" *ngIf="!loading">
             <div class="overlay rounded">
               <div class="text-right">
-                <!-- <a mat-icon-button color="accent">
-                <i class="material-icons icono-boton">photo_camera</i>
-              </a> -->
                 <label class="file-label">
                   <input class="file-input" type="file" access=".png,.jpg,.jpeg,.JPG,.JPEG,.PNG"
                     (change)="cargaMultiple($event.target.files, user)" hidden="true">
@@ -65,12 +29,9 @@
               </div>
             </div>
           </div>
-          <!-- <img class="img-responsive img-fluid rounded-circle" [src]="user.photoURL || 'https://image.freepik.com/free-icon/male-user-close-up-shape-for-facebook_318-37635.jpg'"
-          width="150px"> -->
         </div>
         <br>
         <form [formGroup]="formulario" novalidate (ngSubmit)="actualizarUser(user)">
-
           <div class="form-group row">
             <label for="nombre" class="col-sm-3 col-form-label">Nombre Completo</label>
             <div class="col-sm-9">
@@ -78,26 +39,12 @@
                 [(ngModel)]="user.displayName">
             </div>
           </div>
-
           <div class="form-group row">
             <label for="email" class="col-sm-3 col-form-label">Email</label>
             <div class="col-sm-9">
               <input type="text" readonly class="form-control" id="email" formControlName="email" [(ngModel)]="user.email">
             </div>
           </div>
-
-          <!-- <div class="form-group row">
-            <label for="genero" class="col-sm-3 col-form-label">Fecha de Nacimiento</label>
-            <div class="col-sm-9">
-              <div class="example-container">
-                <mat-form-field>
-                  <input [(ngModel)]="user.fecha_nac" formControlName="fecha_nac" matInput [matDatepicker]="picker">
-                  <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                  <mat-datepicker #picker></mat-datepicker>
-                </mat-form-field>
-              </div>
-            </div>
-          </div> -->
           <div class="form-group row">
             <label for="genero" class="col-sm-3 col-form-label">Fecha de Nacimiento</label>
             <div class="col-sm-9">
@@ -105,7 +52,6 @@
                 id="example-date-input">
             </div>
           </div>
-
           <div class="form-group row">
             <label for="genero" class="col-sm-3 col-form-label">Género</label>
             <div class="col-sm-9">
@@ -117,8 +63,6 @@
               </select>
             </div>
           </div>
-
-
           <div class="form-group row">
             <label for="region" class="col-sm-3 col-form-label">Región</label>
             <div class="col-sm-9">
@@ -127,7 +71,6 @@
               </select>
             </div>
           </div>
-
           <div class="form-group row" *ngIf="comunas">
             <label for="ciudad" class="col-sm-3 col-form-label">Ciudad</label>
             <div class="col-sm-9">
@@ -136,15 +79,6 @@
               </select>
             </div>
           </div>
-
-          <!-- <div class="form-group row">
-            <label for="fechanac" class="col-sm-3 col-form-label">Fecha de Nacimiento</label>
-            <div class="col-sm-9">
-              <input type="date" class="form-control" id="fechanac" formControlName="fecha_nac" [(ngModel)]="user.fecha_nac">
-            </div>
-          </div> -->
-
-
           <div class="form-group row">
             <label for="ocupacion" class="col-sm-3 col-form-label">Ocupación</label>
             <div class="col-sm-9">
@@ -153,13 +87,6 @@
                 <option value="Técnico Nivel Superior">Técnico Nivel Superior</option>
                 <option value="Universitario">Universitario</option>
                 <option value="Post-Grado">Post-Grado</option>
-                <!-- <option disabled>Docente</option>
-                <option value="Docente de aula">Docente de aula</option>
-                <option value="Funciones en la planta técnico pedagógica">Funciones en la planta técnico pedagógica</option>
-                <option value="Inspector/Orientador">Inspector/Orientador</option>
-                <option value="Funciones en la planta directiva">Funciones en la planta directiva</option>
-                <option value="Otras funciones (Convivencia escolar, PIE, etc.)">Otras funciones (Convivencia escolar, PIE, etc.)</option>
-                <option disabled>Otros</option> -->
                 <option value="Dentro del sistema público">Dentro del sistema público</option>
                 <option value="Dentro del sector privado">Dentro del sector privado</option>
                 <option value="Labores domésticas">Labores domésticas</option>
@@ -168,7 +95,6 @@
               </select>
             </div>
           </div>
-
           <div class="form-group row" *ngIf="mostrar_otro">
             <label for="ocupacion_otro" class="col-sm-3 col-form-label">Indique cual</label>
             <div class="col-sm-9">
@@ -176,16 +102,7 @@
                 [(ngModel)]="user.ocupacion_otro">
             </div>
           </div>
-          <!-- 
-        <br *ngIf="mensaje">
-        <p [class]="this.clase" role="alert" *ngIf="mensaje">
-          <span [class]="this.icono" aria-hidden="true"></span>
-          {{this.mensaje}}
-        </p> -->
-
           <div class="text-right">
-            <!-- <a mat-button color="primary" routerLink="/">
-              <i class="material-icons icono-boton">dashboard</i> Inicio</a> -->
             <button mat-raised-button color="accent" *ngIf="!cargando" type="submit" [disabled]="!formulario.valid">
               <i class="material-icons icono-boton">person</i> Actualizar Perfil</button>
             <button mat-raised-button color="accent" *ngIf="cargando" type="submit" disabled>
@@ -193,10 +110,6 @@
           </div>
         </form>
       </mat-card-content>
-
     </mat-card>
-
-
   </div>
-
 </div>

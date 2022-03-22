@@ -27,7 +27,7 @@ export class UsuariosComponent implements AfterViewInit, OnInit{
   }
 
   agregarAdmin(userId: string, variable:boolean){
-    // console.log(userId)
+    // 
     if(variable){
       this.authService.updateUsuario(userId,
         {
@@ -63,7 +63,7 @@ export class UsuariosComponent implements AfterViewInit, OnInit{
     const users: UserData[] = [];
 
     setTimeout(() => {
-      // console.log(this.authService.itemsArray)
+      // 
       for (let i = 0; i < this.authService.usuariosArreglo.length; i++) {
         users.push(createNewUser(i+1, this.authService.usuariosArreglo[i].displayName, this.authService.usuariosArreglo[i].vecindarios, this.authService.usuariosArreglo[i].fecha_registro,this.authService.usuariosArreglo[i].admin,this.authService.usuariosArreglo[i].uid));
       }

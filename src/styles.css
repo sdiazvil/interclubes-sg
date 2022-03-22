@@ -1,160 +1,79 @@
-/* You can add global styles to this file, and also import other style files */
-
-/* @import '~https://fonts.googleapis.com/css?family=Open+Sans';
-@import '~https://fonts.googleapis.com/css?family=Ubuntu';
-@import '~https://fonts.googleapis.com/css?family=Roboto:300,400,500'; */
-/* @import '~https://fonts.googleapis.com/css?family=Oswald';
-@import '~https://fonts.googleapis.com/css?family=Montserrat';
-@import '~https://fonts.googleapis.com/css?family=Nunito';
-@import '~https://fonts.googleapis.com/css?family=Titillium+Web'; */
-/* @import '~https://fonts.googleapis.com/icon?family=Material+Icons'; */
-/* @import '~https://afeld.github.io/emoji-css/emoji.css'; */
-/* @import '~https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css'; */
-/* @import '~https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/2.3.1/css/flag-icon.min.css'; */
-/* @import '~https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css'; */
-
 *{
-    /* font-family: 'Titillium Web', sans-serif; */
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     font-family: 'Roboto, monospace',
   }
-
-  /* body, html{
-    font-family: 'Titillium Web', sans-serif;
-  } */
-
-/* 
-  .icon-14 {
-    font-size: 14px;
-  }
-  
-  .icon-12 {
-    font-size: 12px;
-  }
-  
-  .icon-17 {
-    font-size: 17px;
-  }
-  .icon-30 {
-    font-size: 30px;
-    margin-top: 25px;
-  }
-   */
-  /* .padding{
-    padding-top:80px;
-  }
-  
-  .padding-60{
-    padding-top:60px;
-  }
-  
-  .padding-40{
-    padding-top:40px;
-  } */
-
   .icono-boton{
     font-size:24px;
     margin-bottom:3px;
   }
-
   .icono-titulo{
     font-size:25px;
     vertical-align: middle;
-    padding: 0; /* try to use !important if doesn't work */
+    padding: 0;
   }
-
   .icono-titulo-vecindarios{
     font-size:18px;
     vertical-align: middle;
-    padding: 0; /* try to use !important if doesn't work */
+    padding: 0;
   }
-
-
   button, button:hover, button:active   
   {   
    outline:0!important;
   }
-  
   a, a:active, a:hover{
     text-decoration: none!important;
     outline:0!important;
   }
-
-
 .beta{
   font-family: "Open Sans"!important;
   font-size: 10px;
   color: white;
   font-weight: bold;
-
 }
-
 .titulo{
   font-family: 'Ubuntu'!important;
   font-size: 18px;
 }
-
 .ais-search-box{
   max-width: 100%!important;
 }
-
 em {
   color: red;
   font-style: normal;
   text-decoration: underline;
 }
-
 .ais-SearchBox-reset, .ais-SearchBox-submit{
 display: none;
 }
-
 .app-toolbar-filler {
   flex: 1 1 auto !important;
 }
-
 .example-container {
   display: flex;
   flex-direction: column;
 }
-
 .example-container > * {
   width: 100%;
 }
-
 .categorias-container > * {
   width: 50%;
 }
-
-/* .custom-class {
-  position: relative;
-  top: 50%;
-  transform: translateY(-50%);
-} */
-
-
-/* Padding-Top de la ventana modal */
 .modal-dialog {
   padding-top: 100px!important;
 }
-
-/* Mat-Select por Sobre Modal Bootstrap */
 .cdk-global-overlay-wrapper, .cdk-overlay-container {
   z-index: 99999 !important;
 }
-
 .titulo-seccion{
   color:fff;
 }
-
-
 .vecindiario{
   font-family: 'Ubuntu'!important;
   font-size: 15px;
   color: #f2f2f2;
   padding-top:5px;
 }
-
 .lateral{
   background: rgba(255,255,255,1);
 background: -moz-linear-gradient(top, rgba(255,255,255,1) 0%, rgba(255,255,255,1) 49%, rgba(210,239,254,1) 100%);
@@ -165,21 +84,16 @@ background: -ms-linear-gradient(top, rgba(255,255,255,1) 0%, rgba(255,255,255,1)
 background: linear-gradient(to bottom, rgba(255,255,255,1) 0%, rgba(255,255,255,1) 49%, rgba(210,239,254,1) 100%);
 filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#d2effe', GradientType=0 );
 }
-
 .politicas{
   color:grey;
   font-size:10px;
 }
-
 .icono-politicas{
   vertical-align: middle;
   padding-bottom:4px;
   font-size: 24px;
   cursor: pointer;
 }
-
-
 .mat-card-header-text{
   width: 100% !important;
 }
-

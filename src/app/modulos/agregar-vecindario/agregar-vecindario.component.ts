@@ -1,61 +1,48 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from '../../core/auth.service';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { Observable } from 'rxjs/Observable';
-import { Router } from '@angular/router';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material';
-// import * as firebase from 'firebase';
-import { NgbModal, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { Router } from '@angular/router';
+import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { AuthService } from '../../core/auth.service';
 import { VecindariosService } from '../../core/vecindarios.service';
-import { CIUDADES } from '../../interfaces/ciudades'
-
+import { CIUDADES } from '../../interfaces/ciudades';
 @Component({
   selector: 'app-agregar-vecindario',
   templateUrl: './agregar-vecindario.component.html',
   styleUrls: ['./agregar-vecindario.component.css']
 })
 export class AgregarVecindarioComponent implements OnInit {
-
   formulario: FormGroup;
-
   cargando = false;
   iconoCat;
-
   formErrores = {
     'nombre': '',
     'descripcion': '',
     'region': '',
     'comuna': '',
   }
-
   mensajeError = false;
-
   mensajesValidacion = {
     'nombre': {
       'required': 'Requerido',
       'maxlength': 'Máximo 100 caracteres.',
     },
-
     'descripcion': {
       'required': 'Requerido',
       'maxlength': 'Máximo 300 caracteres.',
     },
     'region': {
       'required': 'Requerido',
-
     },
     'comuna': {
       'required': 'Requerido',
     }
   }
-
   ciudades = CIUDADES;
   comunas: any;
   constructor(private vs: VecindariosService, public activeModal: NgbActiveModal, public snackBar: MatSnackBar, private router: Router, public authService: AuthService, public fb: FormBuilder) {
   }
-
   ngOnInit() {
-
     this.formulario = this.fb.group({
       'nombre': ['', [Validators.required, Validators.maxLength(20)]],
       'descripcion': ['', [Validators.required, Validators.maxLength(300)]],
@@ -66,7 +53,6 @@ export class AgregarVecindarioComponent implements OnInit {
     this.detectarCambios();
     this.getComunas();
   }
-
   getComunas() {
     this.formulario.get('region').valueChanges.subscribe(value => {
       this.ciudades.forEach(ciudad => {
@@ -76,7 +62,6 @@ export class AgregarVecindarioComponent implements OnInit {
       });
     });
   }
-
   detectarCambios(data?: any) {
     if (!this.formulario) { return; }
     const form = this.formulario;
@@ -91,23 +76,17 @@ export class AgregarVecindarioComponent implements OnInit {
       }
     }
   }
-
   get nombre() { return this.formulario.get('nombre') }
   get descripcion() { return this.formulario.get('descripcion') }
   get region() { return this.formulario.get('region') }
   get comuna() { return this.formulario.get('comuna') }
-
-
   agregar() {
     this.cargando = true;
     var descripcion_con_espacio = this.descripcion.value.replace(new RegExp('\n', 'g'), "<br>");
-    // var nombre = this.nombre.value
-    // var nombre_minuscula = nombre.toLowerCase();
     this.vs.agregar(
       {
         fecha_creacion: this.vs.timestamp,
         nombre: this.nombre.value,
-        // nombre: nombre_minuscula,
         descripcion: descripcion_con_espacio || null,
         region: this.region.value,
         comuna: this.comuna.value,
@@ -119,17 +98,12 @@ export class AgregarVecindarioComponent implements OnInit {
         cat_grupos: [{nombre: 'General'}],
       }
     );
-
     this.snackBar.open('El vecindario ha sido agregado correctamente.', 'CERRAR', {
       duration: 4000
     });
     this.activeModal.close('Publicar y Cerrar');
   }
-
   cerrarModalSF() {
     this.activeModal.close();
   }
-
-
-
 }

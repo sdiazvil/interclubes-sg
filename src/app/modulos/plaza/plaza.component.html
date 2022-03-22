@@ -1,7 +1,5 @@
 <mat-sidenav-container fullscreen *ngIf="authService.user | async as user">
-
   <div class="container-fluid" style="margin-top:75px;" *ngIf="vecindario | async as vecindario">
-
     <div class="row" style="padding-bottom:10px" *ngIf="checkAdminBarrio(vecindario.admin, user.uid) || user.admin">
       <mat-toolbar>
         <div>
@@ -12,20 +10,9 @@
           </mat-slide-toggle>
         </div>
         <span class="app-toolbar-filler"></span>
-        <!-- <button color="primary" mat-button><i class="material-icons icono-titulo">add_photo_alternate</i> Subir
-          banner</button> -->
         <button mat-button color="primary" [matMenuTriggerFor]="menudos">
           <mat-icon>settings</mat-icon> Configuración
         </button>
-        <!-- <p class="mb-0 text-center">
-          <label class="file-label">
-            <input class="file-input" type="file" access=".png,.jpg,.jpeg,.JPG,.JPEG,.PNG"
-              (change)="subirBanner($event.target.files, vecindario)" hidden="true">
-            <a mat-button color="accent">
-              <i class="material-icons icono-boton">photo_camera</i> Subir banner
-            </a>
-          </label>
-        </p> -->
       </mat-toolbar>
       <mat-menu #menudos="matMenu">
         <button mat-menu-item>
@@ -37,7 +24,6 @@
               Subir Banner Móvil
             </a>
           </label>
-
         </button>
         <button mat-menu-item>
           <label class="file-label">
@@ -48,7 +34,6 @@
               Subir Banner Web
             </a>
           </label>
-
         </button>
         <div mat-menu-item>
           <mat-slide-toggle (click)="toggleOculto(vecindario.comentarios_plaza)"
@@ -66,12 +51,6 @@
         </div>
       </mat-menu>
     </div>
-    <!-- 
-  <button mat-fab color="accent" class="pos-bottom-right" (click)="open()" matTooltip="Escribir en la Plaza">
-    <i class="material-icons icono-boton">edit</i>
-  </button> -->
-
-    <!-- BANNER -->
     <div class="row justify-content-center" style="margin-bottom:-15px;"
       *ngIf="!vecindario.banner_movil && isScreenSmall() && !cargando_movil">
       <div class="col-12 col-md-8 col-lg-6">
@@ -81,23 +60,19 @@
         </div>
       </div>
     </div>
-
     <div class="row justify" style="padding-bottom:10px;" *ngIf="!cargando_movil && isScreenSmall()">
       <div class="col-12 text-center">
         <img *ngIf="vecindario.banner_movil" class="img-fluid" [src]="vecindario.banner_movil">
       </div>
     </div>
-
     <div class="row justify" style="padding-bottom:30px; padding-top:20px;" *ngIf="cargando_movil">
       <div class="col-12">
         <mat-progress-bar mode="buffer"></mat-progress-bar>
       </div>
     </div>
-
     <div *ngIf="vecindario.publicaciones_plaza" class="row" style="padding-left: 0;padding-right: 0;">
       <div style="padding-left: 0;padding-right: 0;"
         class="col-12 col-md-8 offset-md-2 col-lg-6 offset-lg-3 col-xl-8 offset-xl-2">
-        <!-- style="padding-right: 0; padding-left: 0;" -->
         <mat-card>
           <mat-card-title-group>
             <mat-card-title style="color:grey;margin-left:10px;margin-bottom:2px;font-size: 21px;">
@@ -110,24 +85,10 @@
         </mat-card>
       </div>
     </div>
-    <!-- 
-    <div style="padding-right: 0; padding-left: 0;" class="row">
-      <div class="col-12 col-md-8 offset-md-2 col-lg-6 offset-lg-3 col-xl-6 offset-xl-3"
-        style="padding-right: 0; padding-left: 0;">
-        <mat-card>
-          <mat-card-content>
-            <app-categorias></app-categorias>
-          </mat-card-content>
-        </mat-card>
-      </div>
-    </div> -->
-
     <app-categorias></app-categorias>
-
     <div class="row" style="padding-left: 0;padding-right: 0;" *ngIf="cargando">
       <div style="padding-left: 0;padding-right: 0;"
         class="col-12 col-md-8 offset-md-2 col-lg-6 offset-lg-3 col-xl-8 offset-xl-2">
-        <!-- style="padding-right: 0; padding-left: 0;" -->
         <mat-card>
           <div class="timeline-wrapper" style="z-index: 999;">
             <div class="timeline-item" style="z-index: 999;">
@@ -152,8 +113,6 @@
       </div>
       <div style="padding-left: 0;padding-right: 0;"
         class="col-12 col-md-8 offset-md-2 col-lg-6 offset-lg-3 col-xl-8 offset-xl-2">
-        <!-- style="padding-right: 0; padding-left: 0;" -->
-
         <mat-card>
           <div class="timeline-wrapper" style="z-index: 999;">
             <div class="timeline-item" style="z-index: 999;">
@@ -178,7 +137,6 @@
       </div>
       <div style="padding-left: 0;padding-right: 0;"
         class="col-12 col-md-8 offset-md-2 col-lg-6 offset-lg-3 col-xl-8 offset-xl-2">
-        <!-- style="padding-right: 0; padding-left: 0;" -->
         <mat-card>
           <div class="timeline-wrapper" style="z-index: 999;">
             <div class="timeline-item" style="z-index: 999;">
@@ -202,19 +160,10 @@
         </mat-card>
       </div>
     </div>
-
-
     <div class="row" style="padding-left: 0px;padding-right: 0px;" *ngIf="noticias$ | async as noticias">
-
-      <!-- 
-    <div class="col-12 col-md-6" style="padding-right: 0; padding-left: 0;"
-      *ngFor="let noticia of (noticias | slice:0:this.maxNoticias); trackBy: itemTrackBy"> -->
-
       <div style="padding-left: 0px;padding-right: 0px;"
         class="col-12 col-sm-12 col-md-8 offset-md-2 col-lg-6 offset-lg-3 col-xl-8 offset-xl-2"
         *ngFor="let noticia of (noticias | slice:0:this.maxNoticias); trackBy: itemTrackBy">
-        <!-- style="padding-right: 0; padding-left: 0;" -->
-
         <mat-card *ngIf="!cargando">
           <mat-card-header>
             <img mat-card-avatar
@@ -232,34 +181,26 @@
             <mat-icon *ngIf="checkAdminBarrio(vecindario.admin, user.uid) || user.uid == noticia.userId || user.admin"
               style="color:grey; cursor: pointer;" mat-icon-button [matMenuTriggerFor]="menu">more_vert</mat-icon>
           </mat-card-header>
-
           <mat-menu #menu="matMenu">
             <button mat-menu-item (click)="eliminar(noticia)">
               <mat-icon>delete</mat-icon>
               Eliminar
             </button>
-
           </mat-menu>
-
           <mostrar-mas *ngIf="noticia.texto" class="text-justify" [texto]="noticia.texto" [largoMax]="250">
           </mostrar-mas>
-
           <p *ngIf="noticia.url"><i style="color:#0D2A50;" class="material-icons icono-titulo">public</i>
             <a href="{{noticia.url}}" target="_blank">{{noticia.url}}</a>
           </p>
-
           <br *ngIf="noticia.principal">
-
           <div *ngIf="noticia.principal">
             <img mat-card-image [src]="noticia.principal || '/assets/fondomin.jpg'">
           </div>
-
           <div *ngIf="noticia.videos" style="margin-top:30px;">
             <video mat-card-image *ngIf="noticia.videos.length>0" controls>
               <source [src]="noticia.videos[0].videoURL">
             </video>
           </div>
-
           <mat-card-content style="margin-bottom: -20px;">
             <div class="row" style="margin-bottom:10px;">
               <div class="col-6">
@@ -323,7 +264,6 @@
                       [largoMax]="200"></mostrar-mas>
                   </div>
                 </div>
-
               </div>
             </div>
             <div *ngIf="comentariosActivos()">
@@ -344,7 +284,6 @@
                           matInput #texto placeholder="Escribe un comentario..." matTextareaAutosize
                           matAutosizeMinRows="1" matAutosizeMaxRows="5"></textarea>
                         <mat-hint *ngIf="texto.value.length > 500" align="end">{{texto.value.length}} / 500</mat-hint>
-                        <!-- <mat-hint *ngIf="texto.value.length < 1">Ingresa el comentario y presiona enviar.</mat-hint> -->
                         <button mat-mini-fab matSuffix style="margin-left:5px;" *ngIf="texto.value.length > 0" color="primary"
                           type="submit" [disabled]="!formulario.valid" matTooltip="Enviar">
                           <i class="material-icons icono-boton">send</i>
@@ -355,13 +294,11 @@
                 </div>
               </div>
             </div>
-
           </mat-card-content>
         </mat-card>
       </div>
     </div>
   </div>
-
   <div class="container-fluid" style="padding-bottom:70px;" *ngIf="noticias$ | async as noticias">
     <div class="row" style="padding-right: 0; padding-left: 0;" *ngIf="noticias?.length > this.maxNoticias">
       <div class="col-12 text-center">
@@ -375,13 +312,11 @@
       </div>
     </div>
   </div>
-
   <mat-sidenav position="end" #sidenav [opened]="!isScreenSmall()" [mode]="isScreenSmall() ? 'over' : 'side'">
     <div style="padding-top:90px!important; padding:10px; min-height: 100%!important;" class="text-center"
       *ngIf="vecindar | async as vecindar">
       <div class="alert alert-primary alerta-lateral" role="alert" *ngIf="!vecindar.banner_web && !cargando_web">
         <h4 class="alert-heading" style="margin-top:30vh">Banner en tu Comunidad!</h4>
-
         <p>En este espacio podemos agregar un banner publicitario de 200x800 pixeles para tu comunidad.</p>
       </div>
       <div *ngIf="vecindar.banner_web && !cargando_web">
@@ -392,5 +327,4 @@
       </div>
     </div>
   </mat-sidenav>
-
 </mat-sidenav-container>

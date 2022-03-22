@@ -2,18 +2,6 @@
   <div class="row justify-content-center" style="padding-top: 120px; margin-bottom: 250px;">
     <div class="col-xs-10 col-sm-10 col-md-12 col-lg-6 col-xl-6">
       <div class="card">
-        <!-- <div class="container">
-        <button class="btn boton-facebook" (click)="ingresarFacebook()">
-          <i class="fa fa-facebook"></i>&nbsp; Ingresar con Facebook</button>
-        <button class="btn btn-danger boton" (click)="ingresarGoogle()">
-          <i class="fa fa-google"></i>&nbsp; Ingresar con Google</button>
-        <button class="btn boton-twitter" (click)="ingresarTwitter()">
-          <i class="fa fa-twitter"></i>&nbsp; Ingresar con Twitter</button>
-        <hr>
-      </div> -->
-        <!-- <div class="card-header" style="background:#06A8F9;color:#fff;">
-        <i class="material-icons icono-titulo">person_add</i> Registro de Usuario
-      </div> -->
         <form [formGroup]="formulario" (ngSubmit)="enviar()" novalidate>
           <div class="card-body">
             <div class="text-center">
@@ -24,8 +12,6 @@
             <div class="example-container">
               <mat-form-field>
                 <input matInput placeholder="Nombre Completo" type="text" formControlName="nombre" required autofocus>
-                <!-- <span matPrefix><i class="material-icons">person_add</i>&nbsp;</span> -->
-                <!-- <span matSuffix>.00</span> -->
                 <mat-icon matSuffix>person</mat-icon>
                 <mat-error *ngIf="formErrores.nombre">{{formErrores.nombre}}</mat-error>
               </mat-form-field>
@@ -34,12 +20,6 @@
                   <div class="example-container">
                     <mat-form-field>
                       <input formControlName="fecha_nac" required matInput placeholder="Fecha de Nacimiento (DD-MM-AAAA)">
-                      <!-- <input (input)="agregarGuion($event.target.value)"  formControlName="fecha_nac" required matInput placeholder="Fecha de Nacimiento"> -->
-                      <!-- <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                    <mat-datepicker #picker></mat-datepicker> -->
-                      <!-- <input  formControlName="fecha_nac" required matInput [matDatepicker]="picker" placeholder="Fecha de Nacimiento">
-                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                    <mat-datepicker #picker></mat-datepicker> -->
                       <mat-error *ngIf="formErrores.fecha_nac">{{formErrores.fecha_nac}}</mat-error>
                     </mat-form-field>
                   </div>
@@ -63,8 +43,6 @@
               </div>
               <mat-form-field>
                 <input matInput placeholder="Correo Electrónico" type="email" formControlName="email" required>
-                <!-- <span matPrefix><i class="material-icons">email</i> &nbsp;</span> -->
-                <!-- <span matSuffix>.00</span> -->
                 <mat-icon matSuffix>mail</mat-icon>
                 <mat-error *ngIf="formErrores.email">{{formErrores.email}}</mat-error>
               </mat-form-field>
@@ -73,7 +51,6 @@
                   formControlName="contrasena" required>
                 <i class="material-icons" matSuffix (click)="hide=!hide">{{ hide ? 'visibility' : 'visibility_off'
                   }}</i>
-                <!-- <span matPrefix><i class="material-icons">lock</i> &nbsp;</span> -->
                 <mat-error *ngIf="formErrores.contrasena">{{formErrores.contrasena}}</mat-error>
               </mat-form-field>
               <mat-form-field>
@@ -81,7 +58,6 @@
                   [type]="oculto ? 'password' : 'text'" formControlName="confirmar" required>
                 <i class="material-icons" matSuffix (click)="oculto=!oculto">{{ oculto ? 'visibility' : 'visibility_off'
                   }}</i>
-                <!-- <span matPrefix><i class="material-icons">lock</i> &nbsp;</span> -->
                 <mat-error *ngIf="formulario.controls.confirmar.errors?.verificarContrasena">Las contraseñas no son
                   iguales.</mat-error>
               </mat-form-field>
@@ -92,50 +68,14 @@
                 </mat-option>
                 <mat-error *ngIf="formErrores.vecindario">{{formErrores.vecindario}}</mat-error>
               </mat-select>
-                <!-- <input matInput placeholder="Vecindario" aria-label="Vecindario" [matAutocomplete]="auto" [formControl]="stateCtrl"> -->
-               
               </mat-form-field>
-              <!-- <input matInput placeholder="Unirse a una Comunidad" aria-label="Vecindario" [matAutocomplete]="auto"
-                  formControlName="vecindario">
-                <mat-icon matSuffix>group</mat-icon>
-                <mat-autocomplete #auto="matAutocomplete">
-                  <mat-option (click)="agregarId(vecindario.id,vecindario)"
-                    *ngFor="let vecindario of filteredVecindarios | async" [value]="vecindario.nombre">
-                    <span>{{ vecindario.nombre }}</span>
-                  </mat-option>
-                </mat-autocomplete> -->
             </div>
-
             <button class="boton" type="submit" mat-raised-button color="accent" *ngIf="!cargando"
               [disabled]="!formulario.valid">
               <i class="material-icons icono-boton">person_add</i> Crear Cuenta</button>
             <button class="boton" type="submit" mat-raised-button color="accent" disabled *ngIf="cargando">
               <i class='fa fa-circle-o-notch fa-spin'></i> Registrando usuario...</button>
             <hr>
-
-            <!-- <div class="text-center">
-            <small align="center"> o Inicia sesión con tus Redes Sociales</small>
-          </div>
-
-          <div class="d-flex justify-content-around">
-            <div class="p-2">
-              <button mat-icon-button class="boton-facebook" (click)="ingresarFacebook()">
-                <i class="fa fa-facebook"></i>
-              </button>
-            </div>
-            <div class="p-2">
-              <button mat-icon-button class="boton-google" (click)="ingresarGoogle()">
-                <i class="fa fa-google"></i>
-              </button>
-            </div>
-            <div class="p-2">
-              <button mat-icon-button class="boton-twitter" (click)="ingresarTwitter()">
-                <i class="fa fa-twitter"></i>
-              </button>
-            </div>
-          </div>
-          <hr> -->
-
             <p [class]="this.clase" role="alert" *ngIf="mensaje">
               <span [class]="this.icono" aria-hidden="true"></span>
               {{this.mensaje}}

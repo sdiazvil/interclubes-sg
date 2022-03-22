@@ -1,15 +1,10 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { AuthService } from '../../core/auth.service';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { Observable } from 'rxjs/Observable';
-
-import { EncuestasService } from '../../core/encuestas.service';
-import { Router } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material';
-
-import { NgbModal, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-
-
+import { Router } from '@angular/router';
+import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { AuthService } from '../../core/auth.service';
+import { EncuestasService } from '../../core/encuestas.service';
 @Component({
   selector: 'app-agregar-encuesta',
   templateUrl: './agregar-encuesta.component.html',
@@ -17,17 +12,13 @@ import { NgbModal, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 })
 export class AgregarEncuestaComponent implements OnInit {
   hide = true;
-
   cargando = false;
-
   formulario: FormGroup;
-
   formErrores = {
     'nombre': '',
     'descripcion': '',
     'url': '',
   }
-
   mensajesValidacion = {
     'nombre': {
       'required': 'Requerido',
@@ -41,26 +32,18 @@ export class AgregarEncuestaComponent implements OnInit {
       'pattern': 'Ingrese una URL válida.',
     }
   }
-
   private regExHyperlink = /(https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|www\.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9]+\.[^\s]{2,}|www\.[a-zA-Z0-9]+\.[^\s]{2,})/gi;
-
   constructor(private es: EncuestasService, public activeModal: NgbActiveModal, public snackBar: MatSnackBar, private router: Router, public authService: AuthService, public fb: FormBuilder) { }
-
   ngOnInit() {
-
     this.formulario = this.fb.group({
-
       'nombre': ['', [Validators.required, Validators.maxLength(300)]],
       'descripcion': ['', [Validators.maxLength(3000)]],
       'url': ['', [Validators.required, Validators.pattern(this.regExHyperlink)]],
       'password': [''],
-
     });
     this.formulario.valueChanges.subscribe(data => this.detectarCambios(data));
     this.detectarCambios();
-
   }
-
   detectarCambios(data?: any) {
     if (!this.formulario) { return; }
     const form = this.formulario;
@@ -75,13 +58,10 @@ export class AgregarEncuestaComponent implements OnInit {
       }
     }
   }
-
   get nombre() { return this.formulario.get('nombre') }
   get descripcion() { return this.formulario.get('descripcion') }
   get url() { return this.formulario.get('url') }
   get password() { return this.formulario.get('password') }
-
-
   agregar() {
     this.cargando = true;
     var descripcion_con_espacio = this.descripcion.value.replace(new RegExp('\n', 'g'), "<br>");
@@ -95,17 +75,12 @@ export class AgregarEncuestaComponent implements OnInit {
         oculto: false,
         vecindarioId: this.authService.vecindarioId
       });
-
     this.snackBar.open('La encuesta sido agregada correctamente.', 'CERRAR', {
       duration: 4000
     });
     this.activeModal.close('Publicar y Cerrar');
   }
-
-
   cerrarModal(publicacionId: string) {
     this.activeModal.close();
   }
-
-
 }
