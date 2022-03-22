@@ -1,0 +1,22 @@
+.mat-list-icon {
+    color: rgba(0, 0, 0, 0.54);
+  }
+  
+  mat-list-item{
+    background: #f6f6f6;
+    height: 50px!important;
+    margin-bottom:3px!important;
+  }
+
+  .md-list-icon {
+    color: rgba(0, 0, 0, 0.54)!important;
+    cursor: pointer;
+  }
+  
+  .eliminar-carpeta {
+    color: rgba(0, 0, 0, 0.54)!important;
+    cursor: pointer;
+  }
+  mat-card{
+    border-radius:20px;
+  }

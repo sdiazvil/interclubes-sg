@@ -1,0 +1,101 @@
+/* 
+.ng-valid[required], .ng-valid.required  {
+    border-left: 5px solid #42A948;
+  } 
+
+  .ng-invalid:not(form)  {
+    border-left: 5px solid #a94442;
+  }  */
+
+    
+  .alert{
+    margin-top:10px;
+  }
+
+  .image {
+    position: relative;
+    display: inline-block;
+  }
+  .overlay {
+    display: none;
+  }
+  .image:hover .overlay {
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, .5);
+    position: absolute;
+    margin: auto;
+    top: 0; left: 0; bottom: 0; right: 0;
+    display: inline-block;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    /* Default is baseline, this fixes a common alignment issue */
+  }
+  .image:hover .overlay img {
+    /* All other styling - see example */
+    vertical-align: top;
+  }
+
+  /* mat-form-field.mat-form-field {
+    font-size: 10px;
+  } */
+
+  .foto {
+    position: relative;
+    display: inline-block;
+  }
+  
+  .foto:hover .borrar {
+    display: block;
+  }
+  
+  .borrar {
+    padding-top: 7px;	
+    padding-right: 7px;
+    position: absolute;
+    right: 0;
+    top: 0;
+    display: none;
+  }
+  
+  .borrar i {
+    color: #fff;
+    cursor: pointer;
+   }
+
+  
+  .foto .destacado {
+    display: block;
+  }
+  
+  .destacado {
+    padding-bottom: 2px;	
+    padding-left: 2px;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    display: none;
+  }
+  
+  .destacado i {
+    color: #ffc600;
+  }
+
+  input:-internal-autofill-selected {
+    background-color: #fff!important;
+}
+
+/* textarea{
+  background: #f2f2f2;
+  padding:10px;
+} */
+
+.escribir{
+  background: #f2f2f2;
+  border-radius: 10px;
+}
+
+::ng-deep .area .mat-form-field-underline {
+  display: none;
+}

@@ -1,0 +1,56 @@
+<div class="container-fluid">
+  <div class="row justify-content-center" style="padding-top: 120px;">
+    <div class="col-xs-10 col-sm-10 col-md-10 col-lg-5 col-xl-5">
+      <div class="card">
+        <div class="card-body">
+          <div class="text-center">
+            <img src="/assets/logo-vert.png" width="250" alt="Vecindiario">
+          </div>
+          <div class="text-center que">
+            <h3>
+              <i class="icon material-icons">fingerprint</i> Reestablecer Contraseña
+            </h3>
+            <span class="text-center">Enviaremos el link de recuperación a tu correo electrónico</span>
+          </div>
+          <form [formGroup]="olvidoForm" (ngSubmit)="enviar()">
+            <div class="input-group">
+              <div class="input-group-prepend">
+                <span class="input-group-text" id="basic-addon1">
+                  <i class="fa fa-envelope"></i>
+                </span>
+              </div>
+              <input placeholder="Correo Electrónico" class="form-control" type="email" formControlName="email"
+                autofocus required />
+            </div>
+            <p class="alert alert-danger" *ngIf="formErrores.email">
+              {{ formErrores.email }}
+            </p>
+            <button class="boton" type="submit" mat-raised-button color="accent" [disabled]="!olvidoForm.valid"
+              *ngIf="!cargando">
+              <i class="icon material-icons">fingerprint</i> Reestablecer contraseña</button>
+            <button class="boton" type="submit" mat-raised-button color="accent" disabled *ngIf="cargando">
+              <i class='fa fa-circle-o-notch fa-spin'></i> Enviando Email...</button>
+            <hr>
+            <p [class]="this.clase" role="alert" *ngIf="mensaje">
+              <span [class]="this.icono" aria-hidden="true"></span>
+              {{this.mensaje}}
+            </p>
+            <div class="row">
+              <div class="col">
+                <p align="center">
+                  <a mat-button color="primary" routerLink="/registro">
+                    <i class="icon material-icons">person_add</i> Crear una cuenta</a>
+                </p>
+              </div>
+              <div class="col">
+                <p align="center">
+                  <a mat-button color="warn" routerLink="/iniciosesion">
+                    <i class="icon material-icons">person</i>Iniciar Sesión</a>
+                </p>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>

@@ -1,0 +1,108 @@
+<div *ngIf="authService.user | async as user">
+    <div *ngIf="vecindario | async as vecindario">
+
+
+        <div class="row justify-content-center">
+            <div class="col-12 col-md-10">
+                <mat-card *ngIf="checkAdminBarrio(vecindario.admin, user) || user.admin">
+                    <mat-card-content>
+                        <app-agregar-carpeta></app-agregar-carpeta>
+                    </mat-card-content>
+                </mat-card>
+            </div>
+        </div>
+        <br>
+
+        <div class="row justify-content-center" *ngIf="this.rs.progreso">
+            <div class="col-12 col-md-10" style="padding-top:10px;padding-bottom:20px;">
+                <p class="text-center">{{ this.rs.progreso | number: '1.0-0' }}%</p>
+                <mat-progress-bar mode="determinate" [value]="this.rs.progreso"></mat-progress-bar>
+
+            </div>
+        </div>
+
+        <div class="row justify-content-center">
+
+            <div class="col-12 col-md-10">
+                <h6>Carpetas</h6>
+            </div>
+            <div class="col-12 col-md-10">
+                <mat-accordion>
+                    <mat-expansion-panel *ngFor="let carpeta of carpetas | async;">
+                        <mat-expansion-panel-header>
+                            <i class="material-icons icono-boton mat-list-icon">folder</i> &nbsp; {{carpeta.nombre}}
+                            &nbsp;
+                            <small style="color:grey; position:relative;top:3px;">Creado {{ carpeta.creado | amTimeAgo
+                                }}</small>
+
+                        </mat-expansion-panel-header>
+
+                        <ng-template matExpansionPanelContent>
+                            <mat-toolbar style="height: 50px;"
+                                *ngIf="checkAdminBarrio(vecindario.admin, user) || user.admin">
+                                <label class="file-label" matTooltip="Subir Archivos">
+                                    <input class="file-input" type="file"
+                                        (change)="cargar($event.target.files,carpeta.archivos, carpeta.id)"
+                                        hidden="true" multiple>
+                                    <a mat-icon-button color="primary">
+                                        <i class="material-icons">cloud_upload</i>
+                                    </a>
+                                </label>
+                                <span class="app-toolbar-filler"></span>
+                                <span>
+                                    <button color="warn" mat-icon-button matTooltip="Eliminar Carpeta"
+                                        (click)="eliminarCarpeta(carpeta)">
+                                        <mat-icon>delete</mat-icon>
+                                    </button>
+                                </span>
+
+                            </mat-toolbar>
+                            <mat-list>
+                                <mat-list-item *ngFor="let archivo of carpeta.archivos">
+                                    <mat-icon mat-list-icon>note</mat-icon>
+                                    <a (click)="mostrar(archivo.url, target)">
+                                        <mat-icon class="md-list-icon" matTooltip="Mostrar Archivo"
+                                            style="padding-top:5px;" md-list-icon>visibility
+                                        </mat-icon>
+                                    </a> &nbsp;
+                                    <mat-icon *ngIf="checkAdminBarrio(vecindario.admin, user) || user.admin"
+                                        class="md-list-icon" style="cursor:pointer" matTooltip="Eliminar Archivo"
+                                        md-list-icon
+                                        (click)="eliminarArchivo(carpeta.archivos, archivo.path, carpeta.id)">delete
+                                    </mat-icon>
+                                    <p mat-line> <a style="color:blue;cursor: pointer;" (click)="mostrar(archivo.url, target)">{{ archivo.nombre }}</a>  </p>
+                                    <p mat-line> {{archivo.creado | date}} </p>
+                                </mat-list-item>
+                            </mat-list>
+
+                            <span style="color:grey;" *ngIf="carpeta.archivos.length==0">
+                                Esta carpeta no contiene documentos.
+                            </span>
+
+                        </ng-template>
+                    </mat-expansion-panel>
+                </mat-accordion>
+
+                <br>
+                <div class="text-right" #target>
+                    <button mat-fab *ngIf="mostrarArchivo && cerrar" color="accent"
+                        style="margin-top:100px;margin-right: 20px;" (click)="this.cerrar=false;" matTooltip="Cerrar">
+                        <i class="material-icons icono-boton">close</i>
+                    </button>
+                    <iframe *ngIf="mostrarArchivo && cerrar" [src]="mostrarArchivo | safe" width="100%"
+                        style="margin-top:-100px;" height="900" frameborder="0" marginheight="0"
+                        marginwidth="0">Cargando...</iframe>
+                </div>
+            </div>
+        </div>
+
+        <div class="row justify-content-center" *ngIf="(carpetas | async)?.length==0">
+            <div class="col-12 col-md-10">
+                <div class="alert alert-secondary" role="alert">
+                    No existen carpetas en esta sección
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

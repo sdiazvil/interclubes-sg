@@ -1,0 +1,81 @@
+<div class="container-fluid" style="padding-left: 0;padding-right: 0;" *ngIf="!this.ns.mostrarFormulario">
+  <div class="row" style="padding-left: 0;padding-right: 0;" *ngIf="authService.user | async as user">
+    <div style="padding-left: 0;padding-right: 0;" *ngIf="vecindario | async as vecindario"
+      class="col-12 col-md-8 offset-md-2 col-lg-6 offset-lg-3 col-xl-8 offset-xl-2">
+      <mat-card *ngIf="checkAdminBarrio(vecindario.admin, user) || user.admin">
+        <mat-card-content>
+          <div class="demo-chip-list" *ngIf="categorias$ | async as arreglo">
+            <mat-form-field class="demo-chip-list">
+              <mat-chip-list #chipList>
+                <mat-chip (click)="filtrar(null)"
+                  [ngStyle]="{'background': '#06A8F9', 'color':'#fff', 'cursor': 'pointer'}">
+                  Todas
+                  las categorias</mat-chip>
+                <mat-chip *ngFor="let categoria of arreglo.cat_noticias; trackBy: itemTrackBy" [selectable]="selectable"
+                  (click)="filtrar(categoria.nombre)" [removable]="removable"
+                  (removed)="eliminar(arreglo.cat_noticias, categoria.nombre)"
+                  [ngStyle]="{'background': '#06A8F9', 'color':'#fff', 'cursor': 'pointer'}">
+                  {{categoria.nombre}}
+                  <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+                </mat-chip>
+                <input placeholder="Ingresa la categoría y presiona 'Enter'" [matChipInputFor]="chipList"
+                  [matChipInputSeparatorKeyCodes]="separatorKeysCodes" [matChipInputAddOnBlur]="addOnBlur"
+                  (matChipInputTokenEnd)="agregar(arreglo.cat_noticias, $event)" />
+              </mat-chip-list>
+            </mat-form-field>
+          </div>
+          <div class="row">
+            <div class="col-12">
+              <div *ngIf="nomCat">
+                <h6>
+                  <i class="material-icons"
+                    style="font-size:24px;top:5px; color: #00285C;position: relative;">public</i>
+                  Categoría:
+                  {{ nomCat }}
+                </h6>
+              </div>
+              <div *ngIf="!nomCat">
+                <h6>
+                  <i class="material-icons"
+                    style="font-size:24px;top:5px; color: #00285C;position: relative;">public</i>
+                  Todas
+                  las
+                  Categorías
+                </h6>
+              </div>
+
+            </div>
+            <!-- <div class="col-6 text-right">
+        <button *ngIf="(authService.user | async)" style="border-radius: 20px;" mat-raised-button color="accent"
+          (click)="this.nc.open()" style="z-index: 9999;" matTooltip="Escribir">
+          <i class="material-icons icono-boton">edit</i> Escribir
+        </button>
+      </div> -->
+          </div>
+        </mat-card-content>
+      </mat-card>
+      <div *ngIf="!checkAdminBarrio(vecindario.admin, user)">
+        <div style="margin-top:10px;margin-left:10px;" class="categorias-container" *ngIf="!user.admin">
+          <mat-form-field *ngIf="categorias | async as categorias">
+            <mat-select [(value)]="selected" placeholder="¿Que categoría quieres ver?">
+              <mat-option (click)="filtrar(null)" value="Todas">
+                Todas las categorías
+              </mat-option>
+              <mat-option (click)="filtrar(categoria.nombre)" value="Todas"
+                *ngFor="let categoria of categorias.cat_noticias;">
+                {{categoria.nombre}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+<!-- <div class="row" style="margin-top:10px;" *ngIf="authService.user | async as user;">
+  <div *ngIf="vecindario | async as vecindario"
+    class="col-12 col-md-8 offset-md-2 col-lg-6 offset-lg-3 col-xl-8 offset-xl-2">
+
+  </div>
+</div> -->

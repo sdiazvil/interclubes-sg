@@ -1,0 +1,85 @@
+<div *ngIf="authService.user | async as user">
+  <form [formGroup]="formulario" (ngSubmit)="agregar()" novalidate>
+
+    <div class="modal-header" style="background:#06A8F9;color:#fff;">
+      <span class="modal-title">
+        <i class="material-icons icono-titulo">domain</i>&nbsp; Agregar Vecindario</span>
+      <div *ngIf="eventoActual | async as evento">
+        <button type="button" class="close" aria-label="Close" (click)="cerrarModal(evento.fotos)">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+
+      <div *ngIf="!eventoActual">
+        <button type="button" class="close" aria-label="Close" (click)="cerrarModalSF()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+
+    </div>
+
+    <div class="modal-body">
+      <div class="container-fluid">
+
+        <div class="row">
+
+
+          <div class="col-12">
+            <div class="example-container">
+              <mat-form-field>
+                <input matInput placeholder="Ingrese el nombre" type="text" formControlName="nombre" required>
+                <mat-error *ngIf="formErrores.nombre">{{formErrores.nombre}}</mat-error>
+              </mat-form-field>
+
+              <mat-form-field>
+                <mat-select placeholder="Región" formControlName="region" required>
+                  <mat-option *ngFor="let ciudad of ciudades" [value]="ciudad.nombre">
+                    {{ciudad.nombre}}
+                  </mat-option>
+                </mat-select>
+                <mat-error *ngIf="formErrores.region">{{formErrores.region}}</mat-error>
+              </mat-form-field>
+              <mat-form-field *ngIf="comunas">
+                <mat-select placeholder="Comuna" formControlName="comuna" required>
+                  <mat-option *ngFor="let comuna of comunas" [value]="comuna">
+                    {{comuna}}
+                  </mat-option>
+                </mat-select>
+                <mat-error *ngIf="formErrores.comuna">{{formErrores.comuna}}</mat-error>
+              </mat-form-field>
+            </div>
+
+          </div>
+
+          <div class="col-12">
+            <div class="example-container">
+              <mat-form-field>
+                <textarea formControlName="descripcion" minlenght="1" matInput #descripcion
+                  placeholder="Escribe la descripcion..." matTextareaAutosize matAutosizeMinRows="3"
+                  matAutosizeMaxRows="10" required></textarea>
+                <mat-hint *ngIf="descripcion.value.length > 300" align="end">{{descripcion.value.length}} / 3000
+                </mat-hint>
+                <mat-error *ngIf="formErrores.descripcion">{{formErrores.descripcion}}</mat-error>
+              </mat-form-field>
+              <!-- <br> -->
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+
+    <div class="modal-footer">
+      <button mat-raised-button *ngIf="!cargando" color="accent" type="submit" [disabled]="!formulario.valid">
+        <!-- <i class="material-icons icono-boton">edit</i> -->
+        <i class='material-icons icono-boton'>domain</i> Agregar
+      </button>
+      <button mat-raised-button disabled *ngIf="cargando" type="submit" disabled>
+        <i class='fa fa-circle-o-notch fa-spin'></i> Agregando...</button>
+      <!-- <button type="button" class="btn btn-outline-dark" (click)="activeModal.close('Close click')">Close</button> -->
+    </div>
+
+  </form>
+
+</div>

@@ -1,0 +1,15 @@
+<div class="row" *ngIf="this.authService.user | async as user">
+  <div class="col-12">
+    <div class="jumbotron">
+      <h1 class="display-4" *ngIf="user.vecindarios.length>0"><i class="material-icons">person</i> Ya has sido aceptado en una comunidad!</h1>
+      <h1 class="display-4" *ngIf="user.vecindarios.length==0"><i class="material-icons">person_add</i> Pronto podrás acceder a tu Comunidad</h1>
+      <p *ngIf="user.vecindarios.length==0" class="lead">Debes esperar que un administrador te acepte como miembro de su comunidad.</p>
+      <hr class="my-4">
+      <p class="lead">
+        <a *ngIf="user.vecindarios.length>0" class="btn btn-primary btn-lg" routerLink="/" role="button"><i class="material-icons icono-titulo">domain</i> Ingresar</a>
+      </p>
+    </div>
+  </div>
+</div>
+
+<!-- user.vecindarios.length==0 -->

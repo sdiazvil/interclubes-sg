@@ -1,0 +1,94 @@
+.icono {
+    color: rgba(0, 0, 0, 0.54);
+  }
+
+  .fecha{
+    color:red;
+    text-align: center;
+    margin-top: -10px;
+    font-weight: 500;
+  }
+
+  .hora{
+    text-align: center;
+
+  }
+
+  .dia{
+    font-size:40px;
+    text-align: center;
+    margin-top: -10px;
+
+  }
+
+  ul {
+    list-style: none; /* Remove list bullets */
+    padding: 0;
+    margin: 0;
+}
+
+.icono-hora{
+  margin-bottom:3px;
+  color: grey; 
+  font-size:12px
+}
+
+.mat-list-icon {
+  color: rgba(0, 0, 0, 0.54);
+}
+
+mat-list-item{
+  background: #f6f6f6;
+  height: 50px!important;
+  margin-bottom:3px!important;
+}
+
+.md-list-icon {
+  color: rgba(0, 0, 0, 0.54)!important;
+  cursor: pointer;
+}
+
+.foto {
+  position: relative;
+  display: inline-block;
+}
+
+.foto:hover .borrar {
+  display: block;
+}
+
+.borrar {
+  padding-top: 7px;	
+  padding-right: 7px;
+  position: absolute;
+  right: 0;
+  top: 0;
+  display: none;
+}
+
+.borrar i {
+  color: #fff;
+  cursor: pointer;
+ }
+
+
+.foto .destacado {
+  display: block;
+}
+
+.destacado {
+  padding-bottom: 2px;	
+  padding-left: 2px;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  display: none;
+}
+
+.destacado i {
+  color: #ffc600;
+}
+
+mat-card{
+  border-radius:20px;
+}

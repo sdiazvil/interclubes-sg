@@ -1,0 +1,248 @@
+<!-- <mat-toolbar style="background:#06A8F9;color:#fff;border-radius: 10px;">
+  <span class="titulo" *ngIf="(authService.user | async)?.admin">
+    <i class="material-icons icono-titulo">message</i> Solicitudes de Contacto</span>
+  <span class="titulo" *ngIf="!(authService.user | async)?.admin">
+    <i class="material-icons icono-titulo">message</i> Formulario de Contacto</span>
+  <span class="app-toolbar-filler"></span>
+</mat-toolbar> -->
+
+<div *ngIf="(authService.user | async)?.admin">
+  <div class="row">
+    <div class="col-12 text-center">
+      <br>
+      <mat-button-toggle (click)="toggleLeidos(false)"> <i class="material-icons">mail</i> Mensajes No leídos
+      </mat-button-toggle>&nbsp;
+      <mat-button-toggle (click)="toggleLeidos(true)"> <i class="material-icons">drafts</i> Mensajes Leidos
+      </mat-button-toggle>
+    </div>
+  </div>
+  <br>
+
+  <div *ngIf="(contactos | async)?.length == 0">
+    <div class="row">
+      <div class="col">
+        <p style="margin-left: 20px;">No existen contactos para mostrar.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="row" *ngIf="contactos | async as contactos">
+
+    <div class="col-12 col-md-6" *ngFor="let contacto of (contactos | slice:0:this.maximo)">
+      <mat-card>
+        <mat-card-title-group>
+          <mat-card-title>
+            <h5>{{contacto.nombre}}</h5>
+          </mat-card-title>
+          <mat-card-subtitle>{{ contacto.fecha | amTimeAgo }} ({{ contacto.fecha | date:'dd/MM/y H:mm' }})
+          </mat-card-subtitle>
+          <mat-icon matTooltip="Eliminar Contacto" *ngIf="(authService.user | async)?.admin"
+            (click)="eliminar(contacto.id)" style="color:grey; cursor: pointer;">delete</mat-icon>
+        </mat-card-title-group>
+
+        <mat-card-content>
+          <div class="row">
+            <div class="col-12">
+              <mat-list>
+                <mat-divider></mat-divider>
+                <mat-list-item>
+                  <mat-icon mat-list-icon>phone</mat-icon>
+                  <h4 mat-line color="primary">+{{contacto.fono}}</h4>
+                  <p mat-line>FONO</p>
+                </mat-list-item>
+                <mat-divider></mat-divider>
+                <mat-list-item>
+                  <mat-icon mat-list-icon>mail</mat-icon>
+                  <h4 mat-line>{{contacto.email}}</h4>
+                  <p mat-line> E-MAIL </p>
+                </mat-list-item>
+                <mat-divider></mat-divider>
+                <mat-list-item>
+                  <mat-icon mat-list-icon>home</mat-icon>
+                  <h4 mat-line>{{contacto.referencia}}</h4>
+                  <p mat-line>DIRECCIÓN / REFERENCIA </p>
+                </mat-list-item>
+                <mat-divider></mat-divider>
+              </mat-list>
+              <br>
+              <h5>Mensaje:</h5>
+              <mostrar-mas class="text-justify" [texto]="contacto.mensaje" [largoMax]="200"></mostrar-mas>
+            </div>
+          </div>
+        </mat-card-content>
+        <mat-card-actions align="end">
+          <div class="row">
+            <div class="col-12">
+              <mat-slide-toggle *ngIf="(authService.user | async)?.admin" [(ngModel)]="contacto.leido"
+                (click)="toogleLeido(contacto.leido, contacto.id)"> <i class="material-icons icono-boton">drafts</i> Leido</mat-slide-toggle>
+              <a href="mailto:{{contacto.email}}" mat-button>ENVIAR EMAIL</a>
+            </div>
+          </div>
+        </mat-card-actions>
+      </mat-card>
+    </div>
+  </div>
+  <div class="container-fluid" style="padding-bottom:30px;" *ngIf="contactos | async as contactos">
+    <div class="row" *ngIf="contactos?.length > this.maximo">
+      <div class="col-12 text-center">
+        <button color="primary" mat-button (click)="cargarMas()">Cargar más contactos...</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="!(authService.user | async)?.admin">
+  <div class="row justify-content-around">
+    <div class="col-12 col-md-12 col-lg-10 col-xl-10">
+      <mat-card>
+        <!-- <mat-card *ngIf="auth.user | async as user;"> -->
+        <form [formGroup]="formulario" (ngSubmit)="guardar()" novalidate>
+          <!-- <div>{{user.email}}</div> -->
+          <div class="container-fluid">
+
+            <div class="form-row">
+              <div class="col-md-6 form-group">
+                <label for="nombre">Nombre </label>&nbsp;
+                <i class="fa fa-info-circle text-danger" *ngIf="formErrores.nombre"></i>
+                <input type="text" class="form-control" formControlName="nombre" id="nombre"
+                  placeholder="Ej: Daniel Pérez Torres" required>
+                <p class="alert alert-danger" *ngIf="formErrores.nombre" role="alert">
+                  {{ formErrores.nombre }}
+                </p>
+              </div>
+
+              <div class="col-md-6 form-group">
+                <label for="correo">Correo Electrónico</label>
+                &nbsp;
+                <i class="fa fa-info-circle text-danger" *ngIf="formErrores.email"></i>
+                <input type="email" class="form-control" formControlName="email" id="correo"
+                  placeholder="Ej: nombre@dominio.cl" required>
+                <p class="alert alert-danger" *ngIf="formErrores.email" role="alert">
+                  {{ formErrores.email }}
+                </p>
+              </div>
+            </div>
+
+            <!-- <div class="form-row">
+              <div class="col-md-6 form-group">
+                <label for="fechanac">Región</label>
+                &nbsp;
+                <i class="fa fa-info-circle text-danger" *ngIf="formErrores.region"></i>
+                <select class="form-control" formControlName="region" id="region" required>
+                  <option *ngFor="let ciudad of ciudades" [value]="ciudad.nombre"> {{ciudad.nombre}} </option>
+                </select>
+              </div>
+              <div class="col-md-6 form-group">
+                <label for="pais">Ciudad</label>
+                &nbsp;
+                <i class="fa fa-info-circle text-danger" *ngIf="formErrores.pais"></i>
+                <select class="form-control" id="ciudad" formControlName="ciudad" required>
+                  <option *ngFor="let comuna of comunas" [value]="comuna"> {{comuna}} </option>
+                </select>
+              </div>
+            </div> -->
+
+            <div class="form-row">
+              <div class="col-md-6 form-group">
+                <label for="fono">Teléfono de Contacto</label>
+                &nbsp;
+                <i class="fa fa-info-circle text-danger" *ngIf="formErrores.fono"></i>
+                <input type="number" class="form-control" formControlName="fono" id="fono" placeholder="Ej: 56912345678">
+              </div>
+              <!-- <div class="col-md-6 form-group">
+                <label for="genero">Sexo</label>
+                &nbsp;
+                <i class="fa fa-info-circle text-danger" *ngIf="formErrores.genero"></i>
+                <select class="form-control" formControlName="genero" id="genero" required>
+                  <option value="Masculino">Masculino</option>
+                  <option value="Femenino">Femenino</option>
+                </select>
+              </div> -->
+              <div class="col-md-6 form-group">
+                <label for="correo">Dirección/Referencia</label>
+                &nbsp;
+                <i class="fa fa-info-circle text-danger" *ngIf="formErrores.referencia"></i>
+                <input type="text" class="form-control" formControlName="referencia" id="referencia"
+                  placeholder="Dirección / Referencia">
+                <p class="alert alert-danger" *ngIf="formErrores.referencia" role="alert">
+                  {{ formErrores.referencia }}
+                </p>
+              </div>
+            </div>
+            <!-- <div class="form-row">
+              <div class="col-md-6 form-group">
+                <label for="ocupacion">Ocupación</label>
+                &nbsp;
+                <i class="fa fa-info-circle text-danger" *ngIf="formErrores.ocupacion"></i>
+                <select class="form-control" id="ocupacion" formControlName="ocupacion" required>
+                  <option disabled>Estudiante</option>
+                  <option value="Enseñanza Básica">Enseñanza Básica</option>
+                  <option value="Enseñanza Media">Enseñanza Media</option>
+                  <option value="Técnico Nivel Superior">Técnico Nivel Superior</option>
+                  <option value="Universitario">Universitario</option>
+                  <option value="Post-Grado">Post-Grado</option>
+                  <option disabled>Docente</option>
+                  <option value="Docente de aula">Docente de aula</option>
+                  <option value="Funciones en la planta técnico pedagógica">Funciones en la planta técnico pedagógica</option>
+                  <option value="Inspector/Orientador">Inspector/Orientador</option>
+                  <option value="Funciones en la planta directiva">Funciones en la planta directiva</option>
+                  <option value="Otras funciones (Convivencia escolar, PIE, etc.)">Otras funciones (Convivencia escolar, PIE, etc.)</option>
+                  <option disabled>Otros</option>
+                  <option value="Dentro del sistema público">Dentro del sistema público</option>
+                  <option value="Dentro del sector privado">Dentro del sector privado</option>
+                  <option value="Labores domésticas">Labores domésticas</option>
+                  <option value="Trabajador(a) independiente">Trabajador(a) independiente</option>
+                  <option value="Otro">Otro (Indíque)</option>
+                </select>
+              </div>
+
+              <div class="col-md-6 form-group" *ngIf="mostrar_otro">
+                <label for="ocupacion_otro">Indique cual</label>
+                &nbsp;
+                <i class="fa fa-info-circle text-danger" *ngIf="formErrores.ocupacion_otro"></i>
+                <input type="text" class="form-control" id="ocupacion_otro" formControlName="ocupacion_otro">
+              </div>
+            </div> -->
+
+            <div class="form-row">
+              <div class="col-md-12 form-group">
+                <label for="mensaje">Mensaje</label>
+                &nbsp;
+                <i class="fa fa-info-circle text-danger" *ngIf="formErrores.mensaje"></i>
+                <textarea rows="3" type="text" class="form-control" formControlName="mensaje" id="mensaje"
+                  required></textarea>
+                <p class="alert alert-danger" *ngIf="formErrores.mensaje" role="alert">
+                  {{ formErrores.mensaje }}
+                </p>
+              </div>
+            </div>
+            <hr>
+            <p class="text-right">
+              <!-- <button class="btn btn-primary" routerLink="/paginados" type="submit">Siguiente
+              </button> -->
+              <button mat-raised-button color="primary" *ngIf="!cargando" [disabled]="!formulario.valid"
+                type="submit">Enviar
+                <i class="icon fa fa-chevron-right"></i>
+              </button>
+
+              <button mat-raised-button color="primary" *ngIf="cargando" type="submit" disabled>
+                <i class='fa fa-circle-o-notch fa-spin'></i> Enviando Datos...</button>
+
+            </p>
+          </div>
+        </form>
+      </mat-card>
+    </div>
+
+  </div>
+  <br>
+
+  <!-- <agm-map [scrollwheel]="false" mapTypeId="hybrid" [latitude]="lat" [longitude]="lng" [zoom]="zoom">
+    <agm-marker [latitude]="lat" [longitude]="lng">
+      <agm-info-window>
+        <i class="fa fa-map-marker"></i> Observatorio de Educación para la Innovación</agm-info-window>
+    </agm-marker>
+  </agm-map> -->
+
+
+</div>

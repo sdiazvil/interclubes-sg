@@ -1,0 +1,31 @@
+@import '~@angular/material/theming';
+
+@include mat-core();
+
+// $primary: mat-palette($mat-blue, 700);
+$primary: mat-palette($mat-indigo);
+$accent: mat-palette($mat-light-blue, 500);
+// $accent: mat-palette($mat-lime, A200);
+$warn: mat-palette($mat-red);
+// $warn: mat-palette($mat-grey, 900);
+
+$theme: mat-light-theme($primary, $accent, $warn);
+
+@include angular-material-theme($theme);
+
+.dark-theme {
+  $dark-p: mat-palette($mat-pink, 700);
+  $dark-a: mat-palette($mat-blue-grey);
+
+  $dark-t: mat-dark-theme($dark-p, $dark-a);
+
+  @include angular-material-theme($dark-t);
+}
+
+// Define a custom typography config that overrides the font-family as well as the
+// `headlines` and `body-1` levels.
+$custom-typography: mat-typography-config(
+  $font-family: 'Roboto, monospace',
+  $headline: mat-typography-level(32px, 48px, 700),
+  $body-1: mat-typography-level(16px, 24px, 500)
+);

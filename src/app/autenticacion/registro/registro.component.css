@@ -1,0 +1,57 @@
+
+  .boton{
+    width:100%;
+    margin-top:10px;
+  }
+  .boton-twitter{
+    background:#1997F0!important;
+    color: #fff;
+  }
+  .boton-facebook{
+    background:#395CA9!important;
+    color: #fff;
+  }
+  .boton-google{
+    background:#D63B30!important;
+    color: #fff;
+  }
+
+  .input-group{
+    margin-top: 10px;
+  }
+
+  .alert{
+    margin-top:10px;
+  }
+
+  /* label{
+    margin-top:10px;
+  } */
+
+
+  .que{
+    padding-top:50px;
+    padding-bottom:50px;
+    font-family: 'Ubuntu';
+    color:#00285C;
+
+  }
+
+  .card{
+    border-radius:20px!important;
+    background: linear-gradient(#D2EFFE,#f2f2f2,#f2f2f2);
+    margin-bottom:50px!important;
+  }
+
+  
+.container-fluid{
+  background-image: url('../../../assets/fondo_vecindiario.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  height:120vh;
+  /* padding-top: 36px; */
+  margin-left: 0!important;
+  margin-right: 0!important;
+  padding-right: 0!important;
+  padding-left: 0!important;
+}

@@ -1,0 +1,258 @@
+<!-- <div class="row">
+  <div class="col-12 col-md-8 offset-md-2 col-lg-6 offset-lg-3 col-xl-6 offset-xl-3"
+    style="padding-right: 0; padding-left: 0;">
+    <mat-card>
+      <mat-card-content>
+        <app-categorias></app-categorias>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div> -->
+<div class="container-fluid" *ngIf="this.authService.user | async as user">
+
+  <div class="row">
+    <div class="col-12">
+      <mat-toolbar color="primary">
+        <mat-icon>domain</mat-icon> &nbsp; Explorar Comunidades
+      </mat-toolbar>
+    </div>
+  </div>
+  <br>
+
+  <div class="row">
+
+    <div class="col-12 col-md-9">
+
+      <mat-card style="height: 250px;">
+        <!-- <mat-card-subtitle>
+        <i class="material-icons icono-titulo">search</i> Buscar...
+      </mat-card-subtitle> -->
+        <mat-card-content>
+          <!-- <button *ngIf="(authService.user | async)" style="border-radius: 20px;" mat-raised-button color="accent" (click)="open()" style="z-index: 9999;"
+        matTooltip="Agregar Vecindario">
+        <i class="material-icons icono-boton">domain</i> Agregar Vecindario
+      </button> -->
+          <div class="row">
+            <div class="col-12">
+              <div class="example-container">
+                <mat-form-field>
+                  <span matPrefix>
+                    <mat-icon>search</mat-icon>
+                    &nbsp;
+                  </span>
+                  <input matInput type="text" placeholder="Buscar..." [(ngModel)]="buscar">
+                  <!-- <input matInput type="text" placeholder="Buscar..." (keyup)="buscar($event)" [(ngModel)]="value"> -->
+                  <button mat-button *ngIf="buscar" matSuffix mat-icon-button matTooltip="Limpiar"
+                    (click)="limpiarBuscar()">
+                    <mat-icon>close</mat-icon>
+                  </button>
+                </mat-form-field>
+              </div>
+              <form [formGroup]="formulario" novalidate>
+                <div class="example-container">
+                  <mat-form-field>
+                    <mat-select placeholder="Región" formControlName="region">
+                      <mat-option disabled>
+                        Filtrar por región...</mat-option>
+                      <mat-option *ngFor="let ciudad of ciudades" [value]="ciudad.nombre"
+                        (click)="cambiarRegion(ciudad.nombre)">
+                        {{ciudad.nombre}}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                  <mat-form-field>
+                    <mat-select placeholder="Comuna" formControlName="comuna">
+                      <mat-option disabled>
+                        Filtrar por comuna...</mat-option>
+                      <mat-option *ngFor="let comuna of comunas" [value]="comuna" (click)="cambiarComuna(comuna)">
+                        {{comuna}}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+              </form>
+              <div class="text-right">
+                <button mat-button (click)="limpiar()"><i class="material-icons icono-boton">clear</i> Limpiar
+                  Filtros</button>
+              </div>
+            </div>
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </div>
+    <!-- <div class="col-12 col-md-4">
+    <mat-card style="height: 250px;">
+      <mat-card-title>
+        Buscar...
+      </mat-card-title>
+      <mat-card-content>
+        <br>
+        <br>
+        <div class="example-container">
+          <mat-form-field>
+            <input matInput type="text" placeholder="Buscar..." [(ngModel)]="buscar">
+            <button mat-button *ngIf="buscar" matSuffix mat-icon-button matTooltip="Limpiar" (click)="limpiarBuscar()">
+              <mat-icon>close</mat-icon>
+            </button>
+          </mat-form-field>
+        </div>
+        <br>
+      </mat-card-content>
+    </mat-card>
+  </div> -->
+    <div class="col-12 col-md-3 text-center" *ngIf="user.admin">
+      <mat-card style="height: 250px; padding-top:30px">
+        <div *ngIf="usuarios$ | async as usuarios"> 
+          Vecinos registrados
+          <h1 style="color:#03295A;"><i class="material-icons">person</i> {{usuarios.length}}</h1>
+        </div>
+        <br>
+        <div *ngIf="vecindarios$ | async as vecindarios">
+          Comunidades
+        <h1 style="color:#03295A;"><i class="material-icons">domain</i> {{vecindarios.length}}</h1>
+        </div>
+      </mat-card>
+    </div>
+    <!-- <div class="col-12 col-md-3">
+      <mat-card style="height: 250px;">
+        <h1><i class="material-icons">domain</i>100</h1>
+        Comunidades
+      </mat-card>
+    </div> -->
+  </div>
+
+  <div class="row" *ngIf="vecindarios$ | async as vecindarios">
+    <button *ngIf="user.admin" mat-fab color="accent" class="pos-bottom-right" (click)="open()"
+      matTooltip="Agregar Comunidad">
+      <i class="material-icons icono-boton">domain</i>
+    </button>
+    <div class="col-12 col-md-4"
+      *ngFor="let vecindario of (vecindarios | slice:0:this.maximo | filter:'nombre,region,comuna':buscar); trackBy: itemTrackBy;">
+      <div class="ribbon">
+        <span>{{vecindario.comuna}}</span>
+      </div>
+
+      <mat-card>
+        <mat-card-title-group>
+          <mat-icon *ngIf="checkVecino(vecindario.vecinos, user) || user.admin" style="color:grey; cursor: pointer;" mat-icon-button [matMenuTriggerFor]="menu">
+            more_vert</mat-icon>
+        </mat-card-title-group>
+
+        <mat-menu #menu="matMenu">
+          <!-- <button mat-menu-item>✏️ &nbsp; Editar</button> -->
+          <!-- <button mat-menu-item routerLink="/panel/{{vecindario.id}}">
+          <i class="material-icons icono-boton">edit</i> Editar vecindario</button> -->
+          <button *ngIf="checkVecino(vecindario.vecinos, user)" mat-menu-item (click)="salirVecindario(vecindario.id, vecindario.vecinos, vecindario.admin, user)">
+            <mat-icon>close</mat-icon>
+            Abandonar Comunidad
+          </button>
+          <button *ngIf="user.admin" mat-menu-item (click)="confirmarEliminar(vecindario)">
+            <mat-icon>delete</mat-icon>
+            Eliminar
+          </button>
+        </mat-menu>
+
+        <!-- <img mat-card-image src="../../../assets/vector.png" alt="Vecindario"> -->
+        <!-- <img *ngIf="evento.principal" mat-card-image [src]="evento.principal" [alt]="evento.nombre"> -->
+
+        <mat-card-header>
+          <mat-card-title>
+            <i style="color:grey;" class="material-icons icono-titulo-vecindarios">domain</i> {{vecindario.nombre}}
+            <button style="color:grey;margin-left:-10px;" mat-icon-button matTooltip="Ver Descripción"
+              (click)="mostrarDescripcion(vecindario.id)">
+              <i class="material-icons icono-boton">info</i>
+            </button>
+          </mat-card-title>
+          <mat-card-subtitle style="margin-top:-20px;"><small>🕚 Creado {{ vecindario.fecha_creacion | amTimeAgo
+              }}</small></mat-card-subtitle>
+          <mat-card-subtitle style="margin-left:-5px;"><small><i class="material-icons icono-titulo">place</i>
+              {{vecindario.comuna}} -
+              {{vecindario.region}}</small></mat-card-subtitle>
+          <mat-card-subtitle *ngIf="this.mostrarMas == vecindario.id"><small>
+              Descripción: {{vecindario.descripcion}}
+            </small></mat-card-subtitle>
+          <!-- <mat-card-subtitle>Creado {{ vecindario.fecha_creacion | amTimeAgo }} ({{ vecindario.fecha_creacion |
+          date:'dd/MM/y H:mm' }}) </mat-card-subtitle> -->
+          <!-- <mat-card-subtitle>{{ vecindario.descripcion }} </mat-card-subtitle> -->
+
+        </mat-card-header>
+        <!-- <mat-card-title-group>
+          <mat-icon style="color:#EE6B3C">date_range</mat-icon>
+        </mat-card-title-group> -->
+
+        <mat-card-content style="margin-left: -15px;">
+          <div class="row">
+            <div class="col-4 col-md-6 col-lg-4">
+              <button
+                (click)="verUsuarios(vecindario.pendientes,vecindario.vecinos,vecindario.admin,'Administradores',vecindario.id,vecindario.nombre)"
+                mat-button style="color:green;"><i class="material-icons icono-titulo">local_police</i>
+                {{vecindario.admin.length}}
+                Admin</button>
+            </div>
+            <div class="col-4 col-md-6 col-lg-4">
+              <button mat-button style="color:#00285C;"
+                (click)="verUsuarios(vecindario.pendientes,vecindario.vecinos,vecindario.admin,'de la Comunidad',vecindario.id,vecindario.nombre)">
+                <i class="material-icons icono-titulo">person</i>{{vecindario.vecinos.length}} Vecinos
+              </button>
+            </div>
+            <div class="col-4 col-md-6 col-lg-4"
+              *ngIf="checkAdminBarrio(vecindario.admin, user) || user.admin">
+              <button
+                (click)="verUsuarios(vecindario.pendientes,vecindario.vecinos,vecindario.admin,'en espera de Aprobación',vecindario.id,vecindario.nombre)"
+                mat-button style="color:#00285C;"><i
+                  class="material-icons icono-titulo">person_outline</i>{{vecindario.pendientes.length}}
+                Espera
+              </button>
+            </div>
+          </div>
+          <!-- 
+        <p class="text-center" *ngIf="!mostrarMas" style="padding-top:10px;">
+          <button mat-button (click)="this.mostrarMas=true">Más información</button>
+        </p>
+        <p *ngIf="mostrarMas">
+          <br>
+          {{vecindario.descripcion}}
+        </p> -->
+        </mat-card-content>
+
+        <mat-card-actions align="end">
+          <!-- <button *ngIf="checkIntegrante(grupo.integrantes,user.uid) mat-raised-button style="background-color: #00285C;color:#fff;margin-right: 3px; border-radius: 10px;">
+          <i class="material-icons icono-boton">login</i> Ingresar</button> -->
+          <button *ngIf="!checkVecinoPendiente(vecindario.pendientes, user) && !checkVecino(vecindario.vecinos, user)"
+            (click)="solicitarUnirse(vecindario.id, vecindario.pendientes, user)" mat-button color="primary"
+            style="margin-right: 10px; border-radius: 10px;">
+            <i class="material-icons icono-boton">add_circle_outline</i>
+            Unirse</button>
+          <button *ngIf="checkVecinoPendiente(vecindario.pendientes, user)"
+            (click)="cancelarSolicitud(vecindario.id, vecindario.pendientes, user)" mat-button
+            style="color:gold;margin-right: 10px; border-radius: 10px;">
+            <i class="material-icons icono-boton">close</i>
+            Cancelar</button>
+          <button *ngIf="checkVecino(vecindario.vecinos, user)"
+           routerLink="/" mat-button color="primary"
+            style="margin-right: 10px; border-radius: 10px;">
+            <i class="material-icons icono-boton">home</i>
+            Ir a la Plaza</button>
+        </mat-card-actions>
+      </mat-card>
+    </div>
+  </div>
+
+  <div class="container-fluid" style="padding-bottom:30px;">
+    <div class="row" *ngIf="(vecindarios$ | async)?.length > this.maximo">
+      <div class="col-12 text-center">
+        <button color="primary" mat-button (click)="cargarMas()">Cargar más vecindarios...</button>
+      </div>
+    </div>
+  </div>
+
+
+  <div *ngIf="(vecindarios$ | async)?.length == 0">
+    <div class="row">
+      <div class="col">
+        <p style="margin-left: 20px;">No existen vecindarios para mostrar.</p>
+      </div>
+    </div>
+  </div>
+
+</div>

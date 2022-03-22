@@ -1,0 +1,314 @@
+.icono {
+    color: rgba(0, 0, 0, 0.54);
+  }
+
+mat-card{
+  margin-bottom: 20px;
+  border-radius:20px!important;
+}
+
+.mat-actions-top{
+  border-top:1px solid rgba(0, 0, 0, 0.12);
+}
+
+.comentario{
+  background: #f2f2f2;
+  padding: 10px;
+  -moz-box-sizing: border-box; 
+  box-sizing: border-box;
+  margin-left:15px;
+  /* margin-right:10px; */
+  border-radius: 10px;
+  margin-bottom: 10px;
+}
+
+.comentar{
+  background: f2f2f2;
+  padding: 10px;
+  -moz-box-sizing: border-box; 
+  box-sizing: border-box;
+  border-radius: 15px;
+  margin-top: 5px;
+}
+
+.boton{
+  width:100%;
+}
+
+mat-sidenav {
+  width: 320px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.fecha{
+  color:red;
+  text-align: center;
+  font-weight: 500;
+  font-size: 14px;
+}
+
+.hora{
+  font-size: 12px;
+  margin-top: -5px;
+  text-align:center!important;
+
+}
+
+.dia{
+  font-size:25px; 
+
+
+}
+
+ul {
+  list-style: none; /* Remove list bullets */
+  padding: 0;
+  margin: 0;
+}
+
+.icono-hora{
+color: grey; 
+font-size:12px;
+margin-top:5px!important;
+
+}
+
+.nombreev{
+  font-size: 18px;
+
+}
+
+.lugarev{
+  font-size: 12px;
+  color: grey;
+}
+
+.icono-evento{
+  margin-bottom:3px;
+  color: red; 
+  font-size:14px;
+}
+
+.linea{
+  padding-top:10px;  
+  padding-bottom:10px;  
+  border-bottom:1px solid rgba(0, 0, 0, 0.12);
+}
+
+.espacio{
+  margin-bottom: 63px;
+}
+
+.linea{
+  padding-top:10px;  
+  padding-bottom:10px;  
+  border-bottom:1px solid rgba(0, 0, 0, 0.12);
+}
+
+agm-map {
+  height: 300px;
+}
+
+.loading-overlay {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.contenedor {
+  overflow-y: scroll!important;
+}
+
+.search-results {
+  height: 200px;
+  overflow: scroll;
+}
+
+.pos-bottom-right{
+  position: fixed;
+  display: block;
+  right: 0;
+  bottom: 0;
+  margin-right: 40px;
+  margin-bottom: 110px;
+  z-index: 900;
+}
+
+.pos-top-right{
+  position: fixed;
+  display: block;
+  right: 0;
+  top: 0;
+  margin-right: 40px;
+  margin-top: 320px;
+  z-index: 900;
+}
+
+mat-card-avatar {
+  width: 50px!important;
+}
+
+.ribbon {
+  position: absolute;
+  z-index: 1;
+  overflow: hidden;
+  width: 75px;
+  height: 75px;
+  text-align: right;
+}
+
+.ribbon span {
+font-size: 10px;
+font-weight: bold;
+color: #ffffff;
+text-transform: uppercase;
+text-align: center;
+line-height: 20px;
+transform: rotate(-45deg);
+-webkit-transform: rotate(-45deg);
+width: 100px;
+display: block;
+box-shadow: 0 0px 8px 0 rgba(0, 0, 0, 0.06), 0 1px 0px 0 rgba(0, 0, 0, 0.02);
+background: #79A70A;
+background: linear-gradient(red 0%, red 100%);
+position: absolute;
+top: 19px;
+left: -21px;
+}
+
+/* Placeholder */
+.background-masker {
+  background: #fff;
+  position: absolute;
+}
+
+/* Every thing below this is just positioning */
+
+.background-masker.header-top,
+.background-masker.header-bottom,
+.background-masker.subheader-bottom {
+  top: 0;
+  left: 40px;
+  right: 0;
+  height: 10px;
+}
+
+.background-masker.header-left,
+.background-masker.subheader-left,
+.background-masker.header-right,
+.background-masker.subheader-right {
+  top: 10px;
+  left: 40px;
+  height: 8px;
+  width: 10px;
+}
+
+.background-masker.header-bottom {
+  top: 18px;
+  height: 6px;
+}
+
+.background-masker.subheader-left,
+.background-masker.subheader-right {
+  top: 24px;
+  height: 6px;
+}
+
+
+.background-masker.header-right,
+.background-masker.subheader-right {
+  width: auto;
+  left: 300px;
+  right: 0;
+}
+
+.background-masker.subheader-right {
+  left: 230px;
+}
+
+.background-masker.subheader-bottom {
+  top: 30px;
+  height: 10px;
+}
+
+.background-masker.content-top,
+.background-masker.content-second-line,
+.background-masker.content-third-line,
+.background-masker.content-second-end,
+.background-masker.content-third-end,
+.background-masker.content-first-end {
+  top: 40px;
+  left: 0;
+  right: 0;
+  height: 6px;
+}
+
+.background-masker.content-top {
+  height:20px;
+}
+
+.background-masker.content-first-end,
+.background-masker.content-second-end,
+.background-masker.content-third-end{
+  width: auto;
+  left: 380px;
+  right: 0;
+  top: 60px;
+  height: 8px;
+}
+
+.background-masker.content-second-line  {
+  top: 68px;
+}
+
+.background-masker.content-second-end {
+  left: 420px;
+  top: 74px;
+}
+
+.background-masker.content-third-line {
+  top: 82px;
+}
+
+.background-masker.content-third-end {
+  left: 300px;
+  top: 88px;
+}
+
+@keyframes placeHolderShimmer{
+  0%{
+      background-position: -468px 0
+  }
+  100%{
+      background-position: 468px 0
+  }
+}
+
+.animated-background {
+  animation-duration: 1s;
+  animation-fill-mode: forwards;
+  animation-iteration-count: infinite;
+  animation-name: placeHolderShimmer;
+  animation-timing-function: linear;
+  background: #f6f7f8;
+  background: linear-gradient(to right, #eeeeee 8%, #dddddd 18%, #eeeeee 33%);
+  background-size: 800px 104px;
+  height: 96px;
+  position: relative;
+}
+
+.image-cropper {
+  width: 100px;
+  height: 100px;
+  position: relative;
+  overflow: hidden;
+  border-radius: 50%;
+}
+.profile-pic {
+display: inline;
+margin: 0 auto;
+margin-left: -25%;
+height: 100%;
+width: auto;
+}

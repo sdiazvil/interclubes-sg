@@ -1,0 +1,80 @@
+<!-- <mat-toolbar style="background:#06A8F9;color:#fff;border-radius: 10px;">
+  <button mat-button routerLink="/encuestas" color="primary">
+    <i class="material-icons icono-boton" >keyboard_arrow_left</i> Volver</button>
+  <span class="app-toolbar-filler"></span>
+  <span class="titulo">
+    <i class="material-icons icono-titulo">edit</i> Encuestas</span>
+<span class="app-toolbar-filler"></span>
+</mat-toolbar> -->
+<mat-toolbar>
+  <button mat-button routerLink="/links" color="primary">
+    <i class="material-icons icono-boton" >keyboard_arrow_left</i> Volver</button>
+</mat-toolbar>
+<br>
+<!-- <div *ngFor="let encuesta of encuestas">
+  {{ encuesta | json }}
+</div> -->
+<div class="loading-overlay" *ngIf="cargando">
+  <mat-spinner [diameter]="48" [strokeWidth]="4.8"></mat-spinner>
+</div>
+
+<mat-card *ngIf="!cargando">
+    <mat-card-header>
+    <mat-card-title style="font-size:20px;">
+      <span> {{encuesta.nombre}} </span>
+      <i class="material-icons icono-boton" style="color:#FF2907;" *ngIf="encuesta.password">lock</i>
+    </mat-card-title>
+    <mat-card-subtitle>
+      <i style="color: grey; font-size:12px;" class="material-icons icono-boton">access_time</i> Publicado {{ encuesta.fecha | amTimeAgo }}
+    </mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-content>
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-12">
+          <p align="justify">{{encuesta.descripcion}}</p>
+        </div>
+
+        <div class="col-6" *ngIf="correcto">
+          <div class="alert alert-success" role="alert">
+            <i class="material-icons icono-boton">check</i> {{correcto}}
+          </div>
+        </div>
+<!-- 
+        <div *ngIf="encuesta.password">
+          <col-6 *ngIf="!mostrar">
+            <form [formGroup]="formulario" (ngSubmit)="verificarPassword(encuesta.password)" novalidate>
+              <div class="input-group input-group-sm mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text" id="inputGroup-sizing-sm">Contraseña</span>
+                </div>
+                <input type="password" class="form-control" formControlName="password" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
+                <div class="input-group-append">
+                  <button class="btn btn-outline-secondary" type="submit">Aceptar</button>
+                </div>
+              </div>
+            </form>
+            <div class="alert alert-danger" role="alert" *ngIf="mensaje">
+              <i class="material-icons icono-boton">warning</i> {{mensaje}}
+            </div>
+          </col-6>
+        </div> -->
+      </div>
+    </div>
+    <!-- <div *ngIf="encuesta.password">
+      <div class="alert alert-warning" role="alert" *ngIf="!mostrar">
+        <i class="material-icons icono-boton">warning</i> Esta encuesta se encuentra protegida por contraseña.
+      </div>
+    </div> -->
+    <div *ngIf="mostrar || !encuesta.password">
+      <iframe [src]="encuesta.url | safe" width="100%" height="900" frameborder="0" marginheight="0" marginwidth="0">Loading...</iframe>
+    </div>
+  </mat-card-content>
+  <!-- <mat-card-actions align="end">
+        <button mat-button (click)="onAction1">Action1</button>
+        
+    </mat-card-actions>
+    <mat-card-footer>
+        Footer
+    </mat-card-footer> -->
+</mat-card>

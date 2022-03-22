@@ -1,0 +1,18 @@
+<div *ngIf="(authService.user | async) || {} as user">
+
+  <div *ngIf="user.equipo">
+
+    <!-- <mat-toolbar [color]="checkBarra(user.modo_edicion) ? 'warn' : 'primary'"> -->
+    <mat-toolbar [ngStyle]="{'background': checkBarra(user.modo_edicion) ? '#000' :'#1e88e5'}">
+      <span *ngIf="!user.modo_edicion" class="titulo">
+        <i class="material-icons icono-titulo">person</i> &nbsp; Modo Usuario</span>
+      <span *ngIf="user.modo_edicion" class="titulo">
+        <i class="material-icons icono-titulo">group</i> &nbsp; Modo Edición</span>
+      &nbsp; &nbsp; &nbsp; &nbsp;
+      <span class="app-toolbar-filler"></span>
+      <mat-slide-toggle [(ngModel)]="user.modo_edicion" (change)="toggleModo(user.modo_edicion, user.uid)" color="primary"></mat-slide-toggle>
+      <!-- <mat-slide-toggle color="primary" [(ngModel)]="encuesta.oculto" (click)="toggleOculto(encuesta.oculto, encuesta.id)">Oculto</mat-slide-toggle> -->
+    </mat-toolbar>
+  </div>
+
+</div>

@@ -1,0 +1,17 @@
+{ "result": 
+{ "fLength": 11, "fType": "ARRAY", "fTimestamp": 1516132436149, "fArray": [ 
+    { "fStr": "y", "fHeader": true, "fType": "TEXT" }, 
+    { "fStr": "total", "fHeader": true, "fType": "TEXT" }, 
+    { "fStr": "2006", "fType": "TEXT" }, 
+    { "fNum": 3748234, "fType": "NUMBER", "fFormat": { "fPattern": "#,###", "fLocale": "en-US" }, "fDisplayFormat": { "fPattern": "#,###", "fLocale": "es", "fLang": "es" } }, 
+    { "fStr": "2007", "fType": "TEXT" }, { "fNum": 3707706, "fType": "NUMBER", "fFormat": { "fPattern": "#,###", "fLocale": "en-US" }, "fDisplayFormat": { "fPattern": "#,###", "fLocale": "es", "fLang": "es" } }, 
+    { "fStr": "2008", "fType": "TEXT" }, { "fNum": 3683273, "fType": "NUMBER", "fFormat": { "fPattern": "#,###", "fLocale": "en-US" }, "fDisplayFormat": { "fPattern": "#,###", "fLocale": "es", "fLang": "es" } }, 
+    { "fStr": "2009", "fType": "TEXT" }, { "fNum": 3698577, "fType": "NUMBER", "fFormat": { "fPattern": "#,###", "fLocale": "en-US" }, "fDisplayFormat": { "fPattern": "#,###", "fLocale": "es", "fLang": "es" } }, 
+    { "fStr": "2010", "fType": "TEXT" }, { "fNum": 3647607, "fType": "NUMBER", "fFormat": { "fPattern": "#,###", "fLocale": "en-US" }, "fDisplayFormat": { "fPattern": "#,###", "fLocale": "es", "fLang": "es" } }, 
+    { "fStr": "2011", "fType": "TEXT" }, { "fNum": 3603002, "fType": "NUMBER", "fFormat": { "fPattern": "#,###", "fLocale": "en-US" }, "fDisplayFormat": { "fPattern": "#,###", "fLocale": "es", "fLang": "es" } }, 
+    { "fStr": "2012", "fType": "TEXT" }, { "fNum": 3549148, "fType": "NUMBER", "fFormat": { "fPattern": "#,###", "fLocale": "en-US" }, "fDisplayFormat": { "fPattern": "#,###", "fLocale": "es", "fLang": "es" } }, 
+    { "fStr": "2013", "fType": "TEXT" }, { "fNum": 3537087, "fType": "NUMBER", "fFormat": { "fPattern": "#,###", "fLocale": "en-US" }, "fDisplayFormat": { "fPattern": "#,###", "fLocale": "es", "fLang": "es" } }, 
+    { "fStr": "2014", "fType": "TEXT" }, { "fNum": 3541319, "fType": "NUMBER", "fFormat": { "fPattern": "#,###", "fLocale": "en-US" }, "fDisplayFormat": { "fPattern": "#,###", "fLocale": "es", "fLang": "es" } }, 
+    { "fStr": "2015", "fType": "TEXT" }, { "fNum": 3548845, "fType": "NUMBER", "fFormat": { "fPattern": "#,###", "fLocale": "en-US" }, "fDisplayFormat": { "fPattern": "#,###", "fLocale": "es", "fLang": "es" } } ], 
+    
+    "fRows": 11, "fCols": 2 }, "description": "Datos disponibles desde 2007 hasta 2015 con el total de alumnos matriculados", "parameters": [], "tags": [], "timestamp": null, "created_at": "2016-03-30T13:55:12Z", "title": "Total de Estudiantes Matriculados por Año", "modified_at": "2016-12-15T15:57:32Z", "category_id": 40458, "sources": [], "frequency": "yearly", "link": null, "user": "mineduc", "guid": "TOTAL-DE-ESTUD-MATRI-POR", "category_name": "Matrículas" }

@@ -1,0 +1,137 @@
+.icono {
+    color: rgba(0, 0, 0, 0.54);
+  }
+
+  .fecha{
+    color:red;
+    text-align: center;
+    margin-top: -10px;
+    font-weight: 500;
+  }
+
+  .hora{
+    text-align: center;
+    font-size: 20px;
+  }
+
+  .dia{
+    font-size:40px;
+    text-align: center;
+    margin-top: -10px;
+
+  }
+
+  ul {
+    list-style: none; /* Remove list bullets */
+    padding: 0;
+    margin: 0;
+}
+
+.icono-hora{
+  margin-bottom:3px;
+  color: grey; 
+  font-size:12px
+}
+
+mat-card{
+  margin-bottom: 20px;
+  
+}
+
+.pos-bottom-right{
+  position: fixed;
+  display: block;
+  right: 0;
+  bottom: 0;
+  margin-right: 40px;
+  margin-bottom: 110px;
+  z-index: 900;
+}
+
+mat-card{
+  border-radius:20px;
+}
+
+.ribbon {
+  position: absolute;
+  z-index: 1;
+  overflow: hidden;
+  width: 75px;
+  height: 75px;
+  text-align: right;
+}
+
+.ribbon span {
+font-size: 10px;
+font-weight: bold;
+color: #ffffff;
+text-transform: uppercase;
+text-align: center;
+line-height: 20px;
+transform: rotate(-45deg);
+-webkit-transform: rotate(-45deg);
+width: 100px;
+display: block;
+box-shadow: 0 0px 8px 0 rgba(0, 0, 0, 0.06), 0 1px 0px 0 rgba(0, 0, 0, 0.02);
+background: #00A1FA;
+/* background: linear-gradient(red 0%, red 100%); */
+position: absolute;
+top: 19px;
+left: -21px;
+}
+
+.ribbon-red {
+  position: absolute;
+  z-index: 1;
+  overflow: hidden;
+  width: 75px;
+  height: 75px;
+  text-align: right;
+}
+
+.ribbon-red span {
+font-size: 10px;
+font-weight: bold;
+color: #ffffff;
+text-transform: uppercase;
+text-align: center;
+line-height: 20px;
+transform: rotate(-45deg);
+-webkit-transform: rotate(-45deg);
+width: 100px;
+display: block;
+box-shadow: 0 0px 8px 0 rgba(0, 0, 0, 0.06), 0 1px 0px 0 rgba(0, 0, 0, 0.02);
+background: red;
+/* background: linear-gradient(red 0%, red 100%); */
+position: absolute;
+top: 19px;
+left: -21px;
+}
+
+.ribbon-green {
+  position: absolute;
+  z-index: 1;
+  overflow: hidden;
+  width: 75px;
+  height: 75px;
+  text-align: right;
+}
+
+.ribbon-green span {
+font-size: 10px;
+font-weight: bold;
+color: #ffffff;
+text-transform: uppercase;
+text-align: center;
+line-height: 20px;
+transform: rotate(-45deg);
+-webkit-transform: rotate(-45deg);
+width: 100px;
+display: block;
+box-shadow: 0 0px 8px 0 rgba(0, 0, 0, 0.06), 0 1px 0px 0 rgba(0, 0, 0, 0.02);
+background: green;
+/* background: linear-gradient(red 0%, red 100%); */
+position: absolute;
+top: 19px;
+left: -21px;
+}

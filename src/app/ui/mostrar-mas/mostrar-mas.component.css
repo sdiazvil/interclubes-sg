@@ -1,0 +1,12 @@
+div.collapsed {
+    overflow: hidden;
+}
+
+a {
+    color: #0275d8!important;
+}
+
+a:hover {
+    cursor: pointer!important;
+    text-decoration: underline!important;
+}

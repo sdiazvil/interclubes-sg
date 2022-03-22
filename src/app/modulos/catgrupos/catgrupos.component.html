@@ -1,0 +1,39 @@
+<div class="row" *ngIf="authService.user | async as user">
+  <div class="col-12" *ngIf="vecindario | async as vecindario">
+    <div class="demo-chip-list" *ngIf="categorias$ | async as arreglo">
+      <mat-form-field class="demo-chip-list">
+        <mat-chip-list #chipList>
+          <mat-chip (click)="filtrar(null)" [ngStyle]="{'background': '#00285c', 'color':'#fff', 'cursor': 'pointer'}">
+            Todos los grupos</mat-chip>
+          <mat-chip *ngFor="let categoria of arreglo.cat_grupos; trackBy: itemTrackBy" [selectable]="selectable"
+            (click)="filtrar(categoria.nombre)" [removable]="removable"
+            (removed)="eliminar(arreglo.cat_grupos, categoria.nombre)"
+            [ngStyle]="{'background': '#00285c', 'color':'#fff', 'cursor': 'pointer'}">
+            {{categoria.nombre}}
+            <mat-icon [ngStyle]="{'color': '#fff'}" matChipRemove
+              *ngIf="removable && checkAdminBarrio(vecindario.admin, user)">
+              cancel</mat-icon>
+          </mat-chip>
+          <input *ngIf="checkAdminBarrio(vecindario.admin, user) || user.admin" placeholder="Ingresa la categoría y presiona 'Enter'"
+            [matChipInputFor]="chipList" [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+            [matChipInputAddOnBlur]="addOnBlur" (matChipInputTokenEnd)="agregar(arreglo.cat_grupos, $event)" />
+        </mat-chip-list>
+      </mat-form-field>
+    </div>
+
+    <div *ngIf="nomCat">
+      <h4>
+        <i class="material-icons" style="font-size:24px;top:5px; color: #00285C;position: relative;">groups</i>
+        Categoría:
+        {{ nomCat }}
+      </h4>
+    </div>
+    <div *ngIf="!nomCat">
+      <h4>
+        <i class="material-icons" style="font-size:24px;top:5px; color: #00285C;position: relative;">groups</i> Todos
+        los
+        Grupos
+      </h4>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,227 @@
+<!-- <div *ngIf="(authService.user | async) || {} as user"> -->
+
+
+
+  <div *ngIf="authService.user | async as user">
+    <form [formGroup]="formulario" (ngSubmit)="agregar(user)" novalidate>
+  
+      <div class="modal-header" style="background:#06A8F9;color:#fff;">
+        <span class="modal-title">
+          <i class="material-icons icono-titulo">groups</i>&nbsp; Agregar Grupo </span>
+  
+        <div *ngIf="grupoActual | async as grupo">
+          <button type="button" class="close" aria-label="Close" (click)="cerrarModal(grupo.fotos)">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+  
+        <div *ngIf="!grupoActual">
+          <button type="button" class="close" aria-label="Close" (click)="cerrarModalSF()">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+  
+      </div>
+  
+      <!-- <div *ngIf="!noticiaActual" class="col-12 rounded" style="background: #f2f2f2; height: 150px;">
+        <p class="text-center" style="padding-top:50px;" *ngIf="!loading">
+          <label class="file-label">
+            <input class="file-input" type="file" access=".png,.jpg,.jpeg,.JPG,.JPEG,.PNG" (change)="cargaMultiple($event.target.files)"
+              hidden="true">
+            <a mat-icon-button color="accent">
+              <i class="material-icons">add_a_photo</i>
+            </a>
+          </label>
+        </p>
+        <div style="padding-top:50px;" *ngIf="loading">
+          <mat-spinner style="margin:0 auto;" [diameter]="24" [strokeWidth]="2.4"></mat-spinner>
+        </div>
+      </div>
+  
+      <div *ngIf="noticiaActual | async as noticia">
+        <img class="card-img-top" [src]="noticia.photoURL || 'http://gifimage.net/wp-content/uploads/2017/08/spinner-gif-5.gif'"
+          [alt]="noticia.nombre">
+      </div> -->
+  
+      <div class="modal-body">
+        <div class="container-fluid">
+  
+          <div class="example-container">
+            <mat-form-field>
+              <input matInput placeholder="Ingrese el nombre" type="text" formControlName="nombre" required autofocus>
+              <mat-error *ngIf="formErrores.nombre">{{formErrores.nombre}}</mat-error>
+            </mat-form-field>
+  
+            <!-- <mat-form-field>
+              <textarea formControlName="bajada" minlenght="1" matInput #bajada placeholder="Ingrese la bajada" matTextareaAutosize matAutosizeMinRows="2"
+                matAutosizeMaxRows="5" required></textarea>
+              <mat-hint *ngIf="bajada.value.length > 200" align="end">{{bajada.value.length}} / 200</mat-hint>
+              <mat-error *ngIf="formErrores.bajada">{{formErrores.bajada}}</mat-error>
+            </mat-form-field> -->
+  
+  
+            <mat-form-field *ngIf="categorias$ | async as arreglo">
+              <mat-select placeholder="Ingrese la categoria" required formControlName="categoria">
+                <mat-option *ngFor="let categoria of arreglo.cat_grupos" [value]="categoria.nombre">
+                  {{categoria.nombre}}
+                </mat-option>
+              </mat-select>
+              <mat-error *ngIf="formErrores.categoria">{{formErrores.categoria}}</mat-error>
+            </mat-form-field>
+  
+  
+            <!-- <div class="form-row">
+              <div class="col-md-12 form-group">
+                <label for="nombre">Nombre </label>&nbsp;
+                <i class="fa fa-info-circle text-danger" *ngIf="formErrores.nombre"></i>
+                <input type="text" class="form-control" formControlName="nombre" id="nombre" placeholder="Ej: Noticia 1" required>
+                <p class="alert alert-danger" *ngIf="formErrores.nombre" role="alert">
+                  {{ formErrores.nombre }}
+                </p>
+              </div>
+  
+            </div>
+  
+            <div class="form-row">
+              <div class="col-md-12 form-group">
+                <label for="bajada">Bajada</label>
+                &nbsp;
+                <i class="fa fa-info-circle text-danger" *ngIf="formErrores.bajada"></i>
+                <textarea rows="2" type="text" class="form-control" formControlName="bajada" id="bajada" required></textarea>
+                <p class="alert alert-danger" *ngIf="formErrores.bajada" role="alert">
+                  {{ formErrores.bajada }}
+                </p>
+              </div>
+            </div>
+  
+            <div class="form-row">
+  
+              <div class="col-md-12 form-group">
+                <label for="categoria">Categoría</label>
+                &nbsp;
+                <i class="fa fa-info-circle text-danger" *ngIf="formErrores.categoria"></i>
+                <input type="text" class="form-control" formControlName="categoria" id="categoria" placeholder="Ej: Observatorio" required>
+                <p class="alert alert-danger" *ngIf="formErrores.categoria" role="alert">
+                  {{ formErrores.categoria }}
+                </p>
+              </div>
+            </div> -->
+            <!-- 
+          <div class="form-row">
+            <div class="col-md-12 form-group">
+              <label for="texto">Noticia</label>
+              &nbsp;
+              <i class="fa fa-info-circle text-danger" *ngIf="formErrores.texto"></i>
+              <textarea rows="3" type="text" class="form-control" formControlName="texto" id="texto" required></textarea>
+              <p class="alert alert-danger" *ngIf="formErrores.texto" role="alert">
+                {{ formErrores.texto }}
+              </p>
+            </div>
+          </div> -->
+  
+  
+            <mat-form-field>
+              <textarea formControlName="texto" required minlenght="1" matInput #texto placeholder="Descripción" matTextareaAutosize matAutosizeMinRows="3"
+                matAutosizeMaxRows="10"></textarea>
+              <mat-hint *ngIf="texto.value.length > 300" align="end">{{texto.value.length}} / 300</mat-hint>
+              <!-- <label *ngIf="!grupoId" class="file-label" class="float-right" matTooltip="Agregar Imagen">
+                <input class="file-input" type="file" access=".png,.jpg,.jpeg,.JPG,.JPEG,.PNG" (change)="cargaMultipleVacio($event.target.files, user)"
+                  hidden="true">
+                <a mat-icon-button color="primary">
+                  <i class="material-icons">add_a_photo</i>
+                </a>
+              </label>
+              <div *ngIf="grupoActual | async as grupo">
+                <label *ngIf="grupo.fotos" class="file-label" class="float-right" matTooltip="Agregar Imagen">
+                  <input class="file-input" type="file" access=".png,.jpg,.jpeg,.JPG,.JPEG,.PNG" (change)="cargaMultipleFotos($event.target.files,grupo.fotos)"
+                    hidden="true">
+                  <a mat-icon-button color="primary">
+                    <i class="material-icons">add_a_photo</i>
+                  </a>
+                </label>
+              </div> -->
+            </mat-form-field>
+            <br>
+          </div>
+  
+          <!-- <div class="col-2 rounded" style="background: #f2f2f2; width:75px; height:75px;">
+            <div style="padding-top: 15px;"></div>
+            <p class="text-center">
+              <label class="file-label">
+                <input class="file-input" type="file" access=".png,.jpg,.jpeg,.JPG,.JPEG,.PNG" (change)="cargaMultiple($event.target.files)"
+                  hidden="true" multiple>
+                <a mat-icon-button color="accent">
+                  <i class="material-icons">add_a_photo</i>
+                </a>
+              </label>
+            </p>
+          </div> -->
+  
+          <div class="row" *ngIf="grupoActual | async as grupo">
+  
+            <div class="col-2" *ngFor="let foto of grupo.fotos">
+              <!-- <div class="ribbon" *ngIf="foto.photoURL == noticia.principal">
+                <span>Principal</span>
+              </div> -->
+              <!-- 
+              <div class="image">
+                <img class="rounded" height="75px;" width="75px;" [src]="foto.photoURL" />
+                <div class="overlay rounded">
+                  <div class="text-left"  *ngIf="foto.photoURL != noticia.principal">
+                    <a mat-icon-button color="accent" (click)="cambiarPrincipal(foto.photoURL)">
+                      <i class="material-icons icono-boton">stars</i>
+                    </a>
+                  </div>
+                  <div class="text-left"  *ngIf="foto.photoURL == noticia.principal">
+                      <i class="material-icons" style="color:yellow">stars</i>
+                  </div>
+                  <div class="text-right">
+                    <a mat-icon-button color="warn" (click)="eliminarFoto(noticia.fotos, foto.path)">
+                      <i class="material-icons icono-boton">delete</i>
+                    </a>
+                  </div>
+                </div>
+              </div> -->
+              <div class="foto">
+                <img class="rounded" height="75px;" width="75px;" [src]="foto.photoURL" />
+                <div class="destacado" *ngIf="foto.photoURL == grupo.principal">
+                    <i class="material-icons" matTooltip="Imagen Principal" style="cursor: default">star_rate</i>
+                </div>
+                <div class="borrar">
+                  <a [matMenuTriggerFor]="menu">
+                    <i class="material-icons icono-boton">more_vert</i>
+                  </a>
+                  <mat-menu #menu="matMenu">
+                      <button mat-menu-item (click)="eliminarFoto(grupo.fotos, foto.path)">
+                        <i class="material-icons icono-boton">delete</i> Eliminar</button>
+                      <button mat-menu-item (click)="cambiarPrincipal(foto.photoURL)">
+                        <i class="material-icons icono-boton">photo</i> Imagen Principal</button>
+                    </mat-menu>
+                </div>
+              </div>
+  
+  
+            </div>
+            <div class="col-2 rounded" style="width:75px; height:75px;" *ngIf="loading">
+              <div style="margin-top:25px;margin-left:25px;">
+                <mat-spinner [diameter]="24" [strokeWidth]="2.4"></mat-spinner>
+              </div>
+            </div>
+          </div>
+  
+        </div>
+      </div>
+  
+  
+      <div class="modal-footer">
+        <button mat-raised-button *ngIf="!cargando" color="accent" type="submit" [disabled]="!formulario.valid">
+          <!-- <i class="material-icons icono-boton">edit</i> -->
+          <i class='material-icons icono-boton'>mode_edit</i> Agregar</button>
+        <button mat-raised-button disabled *ngIf="cargando" type="submit" disabled>
+          <i class='fa fa-circle-o-notch fa-spin'></i> Agregando...</button>
+        <!-- <button type="button" class="btn btn-outline-dark" (click)="activeModal.close('Close click')">Close</button> -->
+      </div>
+  
+    </form>
+  
+  </div>

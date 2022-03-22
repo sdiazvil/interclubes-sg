@@ -1,0 +1,83 @@
+<div class="container-fluid" *ngIf="authService.user | async as user">
+    <div class="container-fluid" *ngIf="vecindario | async as vecindario">
+        <div class="row">
+            <button *ngIf="checkAdminBarrio(vecindario.admin, user) || user.admin" mat-fab color="accent"
+                class="pos-bottom-right" (click)="open()" matTooltip="Agregar">
+                <i class="material-icons icono-boton">edit</i>
+            </button>
+        </div>
+        <div class="row" *ngIf="encuestas | async as encuestas">
+
+            <div class="col-12 col-md-6" *ngFor="let encuesta of encuestas | slice:0:this.maximo">
+
+                <mat-card>
+                    <mat-card-title-group>
+                        <mat-card-title>
+                             {{encuesta.nombre}}
+                            <i class="material-icons icono-boton" style="color:#FF2907;"
+                                *ngIf="encuesta.password">lock</i>
+                        </mat-card-title>
+                        <mat-icon *ngIf="checkAdminBarrio(vecindario.admin, user) || user.admin"
+                            style="color:grey; cursor: pointer;" mat-icon-button [matMenuTriggerFor]="menu">
+                            more_vert</mat-icon>
+                        <mat-card-subtitle>
+                            🕚 Publicado {{ encuesta.fecha | amTimeAgo }}
+                        </mat-card-subtitle>
+                    </mat-card-title-group>
+
+                    <mat-menu #menu="matMenu">
+                        <!-- <button mat-menu-item>✏️ &nbsp; Editar</button> -->
+                        <button mat-menu-item (click)="eliminar(encuesta.id)">
+                            <mat-icon>delete</mat-icon>
+                            Eliminar
+                        </button>
+                    </mat-menu>
+
+                    <mat-card-content>
+                        <div class="row">
+                            <div class="col-12">
+                                <mostrar-mas class="text-justify" [texto]="encuesta.descripcion" [largoMax]="100">
+                                </mostrar-mas>
+                            </div>
+                            <!-- <div class="col-12">
+                            <iframe [src]="encuesta.url | safe" width="100%"  height="500" frameborder="0" marginheight="0" marginwidth="0">Loading...</iframe>
+                        </div> -->
+                        </div>
+                    </mat-card-content>
+
+                    <mat-card-actions align="end">
+                        <div class="row">
+                            <div class="col-12">
+                                <button mat-raised-button
+                                    style="background-color: #00285C;color:#fff;margin-right: 10px; border-radius: 10px;"
+                                    routerLink="/link/{{encuesta.id}}">
+                                    <i class="material-icons icono-boton">visibility</i> Ver</button>
+                                <!-- <mat-slide-toggle *ngIf="(authService.user | async)?.admin" [(ngModel)]="encuesta.oculto" (change)="toggleOculto(encuesta.oculto, encuesta.id)">Ocultar</mat-slide-toggle> -->
+                            </div>
+                        </div>
+                    </mat-card-actions>
+                </mat-card>
+            </div>
+
+
+
+
+        </div>
+        <div class="container-fluid" *ngIf="encuestas | async as encuestas">
+            <div class="row" style="padding-bottom:30px;">
+                <div class="col-12">
+                    <div class="alert alert-secondary" role="alert" *ngIf="encuestas.length==0">
+                        No existen encuestas en esta sección.
+                    </div>
+                </div>
+            </div>
+            <div class="row" *ngIf="encuestas?.length > this.maximo">
+                <div class="col-12 text-center">
+                    <button color="primary" mat-button (click)="cargarMas()">Cargar más...</button>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+</div>

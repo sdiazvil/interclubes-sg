@@ -1,0 +1,144 @@
+<!-- <mat-toolbar style="background:#2583E2;">
+  <button mat-button routerLink="/grupos" style="color:rgba(255, 255, 255, 0.7)">
+    <i class="material-icons icono-boton">keyboard_arrow_left</i> Volver</button>
+</mat-toolbar> -->
+<div class="container-fluid" style="padding-right: 0; padding-left: 0;">
+  <mat-toolbar>
+    <button mat-button color="primary" routerLink="/grupos">
+      <i class="material-icons icono-boton">keyboard_arrow_left</i> Volver</button>
+  </mat-toolbar>
+  <br>
+
+  <div class="row justify-content-center" style="padding-right: 0; padding-left: 0;">
+    <div class="col-12 col-md-8 col-lg-6 col-xl-8" style="padding-right: 0; padding-left: 0;">
+      <mat-card>
+        <mat-card-header>
+          <!-- <img mat-card-avatar
+          [src]="grupo.principal || '/assets/img-grupo.jpg'"> -->
+          <mat-card-title style="margin-top:-10px;">
+            <!-- <i class="material-icons icono-boton">groups</i>  -->
+            {{grupo.nombre}}<button style="color:grey; margin-left:-5px;" mat-icon-button matTooltip="Ver Descripción"
+            (click)="this.mostrar=!this.mostrar">
+            <i class="material-icons icono-boton">info</i>
+          </button> <span class="badge badge-primary">{{grupo.categoria}}</span>
+          </mat-card-title>
+
+          <!-- <mat-card-subtitle style="margin-top:-20px;">
+            <h5><span class="badge badge-primary">Categoría: {{grupo.categoria}}</span>
+            </h5>
+          </mat-card-subtitle> -->
+          <mat-card-subtitle style="margin-top:-25px;color:green;">
+            <small>🕚 Última actualización {{ grupo.enlinea | amTimeAgo }}</small>
+          </mat-card-subtitle>
+        </mat-card-header>
+
+        <mat-card-header style="margin-top:-20px;">
+          <mat-card-title class="title-card-left" matTooltip="Cantidad de vecinos"><i
+              style="color: grey; font-size:24px;position:relative;top:5px;" class="material-icons">groups</i>
+              <span *ngIf="grupo.integrantes">{{grupo.integrantes.length}} Vecino<span *ngIf="grupo.integrantes.length>1 || grupo.integrantes.length==0">s</span> </span>
+              </mat-card-title>
+          <mat-card-title *ngIf="grupo.userRef" class="title-card-right" matTooltip="Creado por"><i
+              style="color: grey; font-size:24px;position:relative;top:5px;" class="material-icons">person</i><a
+              style="cursor: pointer; color:#007bff;">&nbsp;{{ (grupo.userRef | doc | async)?.displayName }}</a>
+          </mat-card-title>
+        </mat-card-header>
+
+        <!-- <img *ngIf="this.mostrar" mat-card-image [src]="grupo.principal || '../../assets/fondomin.jpg'"> -->
+
+        <mat-card-content>
+          <div *ngIf="this.mostrar">
+            <i style="color: grey; font-size:12px;" class="material-icons icono-boton">access_time</i>
+            <small style="opacity: 0.87;">Fecha de Creación: {{ grupo.creado | amTimeAgo }}</small>
+          </div>
+          <mostrar-mas *ngIf="grupo.texto && this.mostrar" class="text-justify" [texto]="grupo.texto" [largoMax]="200">
+          </mostrar-mas>
+
+          <hr *ngIf="grupo.comentarios?.length > 0">
+
+          <div *ngIf="authService.user | async as user">
+
+            <div class="col-12 text-center" *ngIf="grupo.comentarios?.length > this.revMax">
+              <button mat-button (click)="cargarMas()">💬 Cargar más comentarios...
+                <span class="badge badge-primary">{{ grupo.comentarios?.length - this.revMax }}</span>
+              </button>
+            </div>
+
+            <!-- <br *ngIf="grupo.comentarios?.length > 0"> -->
+            <div *ngIf="grupo.comentarios?.length > 0">
+              <div *ngFor="let comentario of (grupo.comentarios | slice: this.maxCom)">
+
+
+                <div class="row">
+                  <!-- <div class="col-2 col-md-2" *ngIf="comentario.userId != user.uid"> -->
+                  <div class="col-3 col-md-2">
+                    <p class="text-center">
+                      <img class="rounded-circle" style="margin-top:10px;" width="50px" height="50px"
+                        src="{{(comentario.userRef | doc | async)?.photoURL || '../../../assets/user_google.jpg'}}">
+                    </p>
+                  </div>
+                  <div class="col-9 col-md-10 comentario"
+                    [ngStyle]="{'background': comentario.userId == user.uid ? '#caeefa' :'#f2f2f2'}">
+                    <b>{{ (comentario.userRef | doc | async)?.displayName }}</b>
+                    <i style="color: grey; font-size:12px;" class="material-icons icono-boton">access_time</i>
+                    <small style="opacity: 0.87;">Comentó {{ comentario.fecha | amTimeAgo }}</small>
+                    <button *ngIf="user.admin" class="float-right" color="warn" mat-icon-button matTooltip="Eliminar"
+                      (click)="eliminarComentario(comentario.id, grupo.comentarios)">
+                      <i class="material-icons">delete</i>
+                    </button>
+                    <mostrar-mas *ngIf="comentario.comentario" class="text-justify" [texto]="comentario.comentario"
+                      [largoMax]="200"></mostrar-mas>
+                  </div>
+                  <!-- <div class="col-2 col-md-2" *ngIf="comentario.userId == user.uid">
+                    <p class="text-right">
+                      <img class="rounded-circle" style="margin-top:10px;" width="50px" height="50px"
+                        src="{{(comentario.userRef | doc | async)?.photoURL || '../../../assets/user_google.jpg'}}">
+                    </p>
+                  </div> -->
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+          <div class="col-12" *ngIf="authService.user | async as user;">
+            <hr>
+            <div class="row">
+              <div class="col-3 col-md-2">
+                <p class="text-right">
+                  <img class="rounded-circle" width="50px" height="50px"
+                    [src]="user.photoURL || '../../../assets/user.png'">
+                </p>
+              </div>
+              <div class="col-9 col-md-10">
+                <form [formGroup]="formulario" (ngSubmit)="comentar(user, grupo.comentarios)" novalidate>
+                  <div class="example-container" style="margin-top:-15px;">
+                    <mat-form-field floatLabel="never">
+                      <textarea formControlName="texto" minlenght="1" matInput #texto
+                        placeholder="Escribe un comentario..." matTextareaAutosize matAutosizeMinRows="3"
+                        matAutosizeMaxRows="10" required></textarea>
+                      <mat-hint *ngIf="texto.value.length > 500" align="end">{{texto.value.length}} / 500</mat-hint>
+                      <mat-error *ngIf="texto.value.length < 1">Ingresa el comentario y presiona enviar.</mat-error>
+                      <button *ngIf="texto.value.length > 0" mat-mini-fab color="primary" class="float-right"
+                        type="submit" [disabled]="!formulario.valid" matTooltip="Enviar">
+                        <i class="material-icons icono-boton">send</i>
+                      </button>
+                    </mat-form-field>
+                  </div>
+                  <!-- <div class="text-right">
+                  <button mat-raised-button color="primary" type="submit" [disabled]="!formulario.valid">
+                    <i class="material-icons icono-boton">send</i> ENVIAR</button>
+                </div> -->
+                </form>
+                <!-- <input type='file' (change)="readURL($event);" />
+              <img id="blah" [src]="imageSrc || 'http://placehold.it/180'" alt="your image" /> -->
+              </div>
+            </div>
+          </div>
+          <div #panel></div>
+        </mat-card-content>
+
+      </mat-card>
+
+    </div>
+  </div>
+</div>

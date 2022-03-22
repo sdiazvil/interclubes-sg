@@ -1,0 +1,196 @@
+<div *ngIf="authService.user | async as user">
+  <form [formGroup]="formulario" (ngSubmit)="agregar(user)" novalidate>
+
+    <!-- <div class="modal-header" style="background:#06A8F9;color:#fff;">
+        <span class="modal-title">
+          <i class="material-icons icono-boton">edit</i>&nbsp; ¿Qué le quieres contar a tus vecinos hoy? </span>
+  
+        <div *ngIf="noticiaActual | async as noticia">
+          <button type="button" class="close" aria-label="Close" (click)="cerrarModal(noticia.fotos)">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+  
+        <div *ngIf="!noticiaActual">
+          <button type="button" class="close" aria-label="Close" (click)="cerrarModalSF()">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+  
+      </div> -->
+
+    <div class="container-fluid" style="padding-right: 0; padding-left: 0;">
+
+      <div class="row">
+        <div class="col-12">
+          <div class="example-container">
+
+            <mat-form-field class="area" appearance="fill" (click)="this.ns.mostrarFormulario=true">
+              <textarea formControlName="texto" minlenght="1" matInput #texto placeholder="Escriba aquí el texto..."
+                matTextareaAutosize matAutosizeMinRows="2" matAutosizeMaxRows="5" required></textarea>
+                <mat-error *ngIf="formErrores.texto">{{formErrores.texto}}</mat-error>
+                <mat-hint *ngIf="texto.value.length > 3000" align="end">{{texto.value.length}} / 3000</mat-hint>
+              <label *ngIf="!noticiaId && this.ns.mostrarFormulario" class="file-label" class="float-right"
+                matTooltip="Agregar Imagen">
+                <input class="file-input" type="file" access=".png,.jpg,.jpeg,.JPG,.JPEG,.PNG"
+                  (change)="cargaMultipleVacio($event.target.files, user)" hidden="true">
+                <a mat-icon-button color="primary">
+                  <i class="material-icons">add_a_photo</i>
+                </a>
+              </label>
+              <label *ngIf="!noticiaId && this.ns.mostrarFormulario && user.admin" class="file-label" class="float-right"
+                matTooltip="Agregar Video">
+                <input (change)="cargarVideo($event.target.files, user)" access=".mp4,.mpeg,.mov,.ogg"
+                  class="file-input" type="file" hidden="true">
+                <a mat-icon-button color="primary">
+                  <i class="material-icons">videocam</i>
+                </a>
+              </label>
+              <label *ngIf="this.ns.mostrarFormulario" class="file-label" class="float-right"
+                matTooltip="Agregar Página Web">
+                <a mat-icon-button color="primary" (click)="this.mostrarURL=!this.mostrarURL">
+                  <i class="material-icons">public</i>
+                </a>
+              </label>
+              <!-- <div *ngIf="noticiaActual | async as noticia">
+                <label *ngIf="noticia.fotos.length<1" class="file-label" class="float-right" matTooltip="Agregar Imagen">
+                  <input class="file-input" type="file" access=".png,.jpg,.jpeg,.JPG,.JPEG,.PNG"
+                    (change)="cargaMultipleFotos($event.target.files,noticia.fotos)" hidden="true">
+                  <a mat-icon-button color="primary">
+                    <i class="material-icons">add_a_photo</i>
+                  </a>
+                </label>
+              </div> -->
+            </mat-form-field>
+          </div>
+        </div>
+      </div>
+
+      <div class="row" *ngIf="mostrarURL && this.ns.mostrarFormulario">
+        <div class="col-12">
+          <div class="example-container">
+            <mat-form-field >
+              <input matInput formControlName="url" placeholder="Dirección URL" value="https://">
+              <!-- <input (keyup)="onPreview($event)" matInput formControlName="url" placeholder="Dirección URL" value="https://"> -->
+              <!-- <mat-icon style="cursor: pointer;" matSuffix (click)="onPreview()">visibility</mat-icon> -->
+              <mat-error *ngIf="formErrores.url">{{formErrores.url}}</mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+      </div>
+
+      <div class="row" *ngIf="this.ns.mostrarFormulario">
+        <div class="col-12">
+          <div class="example-container">
+            <mat-form-field *ngIf="categorias$ | async as arreglo">
+              <mat-select placeholder="Ingrese la categoria" required formControlName="categoria">
+                <mat-option *ngFor="let categoria of arreglo.cat_noticias" [value]="categoria.nombre">
+                  {{categoria.nombre}}
+                </mat-option>
+              </mat-select>
+              <mat-error *ngIf="formErrores.categoria">{{formErrores.categoria}}</mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+      </div>
+
+      <div class="row" *ngIf="this.ns.progreso">
+        <div class="col-12" style="padding-top:10px;padding-bottom:20px;">
+          <p class="text-center">{{ this.ns.progreso | number: '1.0-0' }}%</p>
+          <mat-progress-bar mode="determinate" [value]="this.ns.progreso"></mat-progress-bar>
+        </div>
+      </div>
+      <div *ngIf="noticiaActual | async as noticia">
+
+        <div *ngFor="let foto of noticia.fotos">
+          <br>
+          <img mat-card-image [src]="foto.photoURL">
+        </div>
+        <div *ngFor="let video of noticia.videos">
+          <br>
+          <video mat-card-image controls>
+            <source [src]="video.videoURL">
+          </video>
+        </div>
+        <!-- <div class="col-2" *ngFor="let foto of noticia.fotos">
+          <div class="foto">
+            <img class="rounded" height="75px;" width="75px;" [src]="foto.photoURL" />
+            <div class="destacado" *ngIf="foto.photoURL == noticia.principal">
+              <i class="material-icons" matTooltip="Imagen Principal" style="cursor: default">star_rate</i>
+            </div>
+            <div class="borrar">
+              <a [matMenuTriggerFor]="menu">
+                <i class="material-icons icono-boton">more_vert</i>
+              </a>
+              <mat-menu #menu="matMenu">
+                <button mat-menu-item (click)="eliminarFoto(noticia.fotos, foto.path)">
+                 <mat-icon>delete</mat-icon> Eliminar</button>
+              </mat-menu>
+            </div>
+          </div>
+        </div> -->
+
+        <!-- <div class="col-2 rounded" style="width:75px; height:75px;" *ngIf="loading">
+          <div style="margin-top:25px;margin-left:25px;">
+            <mat-spinner [diameter]="24" [strokeWidth]="2.4"></mat-spinner>
+          </div>
+        </div> -->
+      </div>
+      <div *ngIf="preview.url" class="preview">
+        <div [hidden]="!preview.image">
+          <br>
+          <img mat-card-image [src]="preview.image">
+        </div>
+        <div class="preview-text">
+          <div [hidden]="!preview.url" class="url">
+            <a href="{{preview.url}}" target="_blank">{{preview.url}}</a>
+          </div>
+          <div [hidden]="!preview.title" class="title">
+            <b>{{preview.title}}</b>
+          </div>
+          <div [hidden]="!preview.description" class="description">
+            <span>{{preview.description}}</span>
+          </div>
+        </div>
+      </div>
+      <br>
+
+      <!-- <div>
+        <button [disabled]="!url.valid || preview.url" class="preview-button" (click)="onPreview()">
+          Mostrar
+        </button>
+        <button [disabled]="!preview.url" class="preview-button" (click)="onCancel()">
+          Cancelar
+        </button>
+      </div>
+      <br>
+      <div>
+        <button [disabled]="!preview.url" (click)="onSubmit()">
+          Guardar
+        </button>
+
+      </div>
+      <div>
+        <div *ngFor="let link of links">
+          <div class="link-row">
+            <a href="{{ link.url }}" class="hyperlink" target="_blank">
+              <span>{{ link.title }}</span>
+            </a>
+          </div>
+          <br>
+        </div>
+      </div> -->
+
+      <div class="row" *ngIf="this.ns.mostrarFormulario">
+        <div class="col-12" style="margin-bottom:-25px;">
+          <p class="text-right">
+            <button mat-raised-button *ngIf="!cargando" color="accent" type="submit" [disabled]="!formulario.valid">
+              <i class='material-icons icono-boton'>mode_edit</i> Publicar</button>
+            <button mat-raised-button disabled *ngIf="cargando" type="submit" disabled>
+              <i class='fa fa-circle-o-notch fa-spin'></i> Publicando...</button>
+          </p>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>

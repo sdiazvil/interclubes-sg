@@ -1,0 +1,165 @@
+<!-- <mat-toolbar style="background:#06A8F9;color:#fff;border-radius: 10px;">
+  <button mat-raised-button color="primary" (click)="this._location.back();">
+    <i class="material-icons icono-boton">keyboard_arrow_left</i> Volver</button>
+  <span class="app-toolbar-filler"></span>
+  <span class="titulo">
+    <i class="material-icons icono-titulo">date_range</i> Eventos</span>
+  <span class="app-toolbar-filler"></span>
+</mat-toolbar> -->
+
+<button mat-button color="primary" (click)="this._location.back();">
+  <i class="material-icons icono-boton">keyboard_arrow_left</i> Volver</button>
+<br>
+<br>
+
+<div class="row justify-content-center">
+  <div class="col-12 col-md-8">
+
+    <mat-card>
+      <mat-card-title-group>
+        <mat-card-subtitle>
+          <i style="color: grey; font-size:12px;" class="material-icons icono-boton">access_time</i>
+          <small style="opacity: 0.87;">Publicado {{ evento.creado | amTimeAgo }}</small>
+        </mat-card-subtitle>
+        <!-- <mat-card-title>
+          <i class="material-icons icono-boton">public</i> {{evento.nombre}}
+        </mat-card-title> -->
+        <mat-card-title *ngIf="evento.tipo == 'Actividad'">
+          <!-- <i class="material-icons icono-titulo">date_range</i>  -->
+          {{evento.nombre}} 
+          <span class="badge badge-warning">Actividad</span>
+        </mat-card-title>
+        <mat-card-title *ngIf="evento.tipo == 'Reunión'">
+          <!-- <i class="material-icons icono-titulo">groups</i>  -->
+          {{evento.nombre}} <span class="badge badge-success">Reunión</span>
+        </mat-card-title>
+        <mat-card-title *ngIf="evento.tipo == 'Información'">
+          <!-- <i class="material-icons icono-titulo">info</i>  -->
+          {{evento.nombre}} <span class="badge badge-primary">Información</span>
+        </mat-card-title>
+
+      </mat-card-title-group>
+
+      <ngb-carousel *ngIf="evento.fotos">
+        <ng-template ngbSlide *ngFor="let foto of evento.fotos">
+          <img class="img-fluid" [src]="foto.photoURL" [alt]="evento.nombre">
+          <!-- <div *ngIf="foto.bajada" class="carousel-caption" style="background: rgb(0, 0, 0, 0.5);border-radius: 25px;"> 
+                    <h6>{{foto.bajada}}</h6>
+                  </div> -->
+        </ng-template>
+      </ngb-carousel>
+
+      <mat-card-content>
+        <br>
+        <div class="row">
+          <div class="col-4 col-md-3">
+            <ul>
+              <li class="dia">{{evento.fecha | date:'dd'}}</li>
+              <li class="fecha">{{evento.fecha | date:'MMMM' | uppercase }}</li>
+              <li class="hora">
+                <i class="material-icons icono-hora">access_time</i>{{evento.hora?.hour}}:{{evento.hora?.minute}}
+              </li>
+            </ul>
+          </div>
+          <div class="col-8 col-md-9">
+            <span>
+              <i class="fa fa-map-marker icono"></i>&nbsp;
+              <b>{{evento.lugar}}</b>
+            </span>
+            <mostrar-mas *ngIf="evento.descripcion" class="text-justify" [texto]="evento.descripcion" [largoMax]="4000">
+            </mostrar-mas>
+            <br>
+            <br>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12">
+            <mat-toolbar style="height: 50px;" *ngIf="evento.archivos.length>0 || (authService.user | async)?.admin">
+              <span>
+                <i class="material-icons icono-titulo">folder</i> Documentos
+                <i *ngIf="loading" class='fa fa-circle-o-notch fa-spin'></i>
+              </span>
+              <span class="app-toolbar-filler"></span>
+              <label class="file-label" matTooltip="Subir Archivos" *ngIf="(authService.user | async)?.admin">
+                <input class="file-input" type="file" (change)="cargar($event.target.files, evento.archivos)"
+                  hidden="true" multiple>
+                <a mat-icon-button color="primary">
+                  <i class="material-icons">cloud_upload</i>
+                </a>
+              </label>
+            </mat-toolbar>
+            <mat-list>
+              <mat-list-item *ngFor="let archivo of evento.archivos">
+                <mat-icon mat-list-icon>note</mat-icon>
+                <!-- <a [href]="archivo.url" target="_blank" [download]="archivo.nombre">
+                  <mat-icon class="md-list-icon" matTooltip="Descargar" md-list-icon>cloud_download</mat-icon>
+                </a> -->
+
+                <a (click)="mostrar(archivo.url)">
+                  <mat-icon class="md-list-icon" matTooltip="Mostrar Archivo" md-list-icon>visibility
+                  </mat-icon>
+                </a> &nbsp;
+                <mat-icon *ngIf="(authService.user | async)?.admin" class="md-list-icon" style="cursor:pointer"
+                  matTooltip="Eliminar Archivo" md-list-icon (click)="eliminarArchivo(evento.archivos, archivo.path)">
+                  delete</mat-icon>
+                <p mat-line> {{archivo.nombre }} </p>
+                <p mat-line> {{archivo.creado | date}} </p>
+              </mat-list-item>
+            </mat-list>
+          </div>
+          <br *ngIf="mostrarArchivo">
+          <iframe *ngIf="mostrarArchivo" [src]="mostrarArchivo | safe" width="100%" height="900" frameborder="0"
+            marginheight="0" marginwidth="0">Cargando...</iframe>
+
+          <div class="col-12" *ngIf="(authService.user | async)?.admin">
+            <br>
+            <mat-toolbar style="height: 50px;">
+              <span>
+                <i class="material-icons icono-titulo">insert_photo</i> Galería
+              </span>
+              <span class="app-toolbar-filler"></span>
+              <label class="file-label" matTooltip="Subir Foto">
+                <input class="file-input" type="file" (change)="cargaMultipleFotos($event.target.files, evento.fotos)"
+                  hidden="true" multiple>
+                <a mat-icon-button color="primary">
+                  <i class="material-icons">add_a_photo</i>
+                </a>
+              </label>
+            </mat-toolbar>
+            <br>
+            <div class="row">
+              <div class="col-2" *ngFor="let foto of evento.fotos">
+                <div class="foto">
+                  <img class="rounded" height="75px;" width="75px;" [src]="foto.photoURL" />
+                  <div class="destacado" *ngIf="foto.photoURL == evento.principal">
+                    <i class="material-icons" matTooltip="Imagen Principal" style="cursor: default">star_rate</i>
+                  </div>
+                  <div class="borrar">
+                    <a [matMenuTriggerFor]="menu">
+                      <i class="material-icons icono-boton">more_vert</i>
+                    </a>
+                    <mat-menu #menu="matMenu">
+                      <button mat-menu-item (click)="eliminarFoto(evento.fotos, foto.path)">
+                        <i class="material-icons icono-boton">delete</i> Eliminar</button>
+                      <button mat-menu-item (click)="cambiarPrincipal(foto.photoURL)">
+                        <i class="material-icons icono-boton">photo</i> Imagen Principal</button>
+                    </mat-menu>
+                  </div>
+                </div>
+
+              </div>
+              <div class="col-2 rounded" style="width:75px; height:75px;" *ngIf="cargando">
+                <div style="margin-top:25px;margin-left:25px;">
+                  <mat-spinner [diameter]="24" [strokeWidth]="2.4"></mat-spinner>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </mat-card-content>
+
+    </mat-card>
+
+  </div>
+</div>

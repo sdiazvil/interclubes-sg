@@ -1,0 +1,59 @@
+<!-- <mat-sidenav #sidenav [opened]="!isScreenSmall()" [mode]="isScreenSmall() ? 'over' : 'side'">
+        <div class="espacio"></div>
+
+        <ng-template ngFor let-ruta [ngForOf]="grupoRutas">
+            <mat-nav-list>
+                <mat-list-item (click)="ruta.active = !ruta.active">
+                    <mat-icon mat-list-icon>keyboard_arrow_right</mat-icon>
+                    {{ruta.section}}
+                    <span class="app-toolbar-filler"></span>
+                    <mat-icon *ngIf="!ruta.active ">keyboard_arrow_down</mat-icon>
+                    <mat-icon *ngIf="ruta.active">keyboard_arrow_up</mat-icon>
+                </mat-list-item>
+                <div class="submenu" *ngFor="let route of ruta.routes">
+                    <mat-list-item *ngIf="ruta.active && route.data" routerLink="{{route.path}}" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }"
+                        (click)="cambiarTitulo(route.data.text)">
+                        <mat-icon mat-list-icon>{{route.data.icon}}</mat-icon>
+                        {{route.data.text}}
+                    </mat-list-item>
+                </div>
+            </mat-nav-list>
+        </ng-template>
+        <div class="tool-footer footer-side">
+            <div class="container">
+
+                <div class="row">
+                    <div class="col">
+                        Condiciones
+                    </div>
+                    <div class="col">
+                        <p class="text-right">v.beta.2</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </mat-sidenav> -->
+
+<mat-sidenav #sidenav [opened]="!isScreenSmall()" [mode]="isScreenSmall() ? 'over' : 'side'">
+    <div class="espacio"></div>
+
+    <mat-list>
+        <a mat-list-item class="itemmenu" routerLink="{{menu.ruta}}" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }"
+            *ngFor="let menu of menus">
+            <mat-icon class="iconomenu" mat-list-avatar>{{ menu.icono }}</mat-icon>{{menu.nombre}}</a>
+    </mat-list>
+
+    <div class="tool-footer footer-side">
+        <div class="container">
+
+            <div class="row">
+                <div class="col">
+                    Condiciones
+                </div>
+                <div class="col">
+                    <p class="text-right">v.beta.2</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</mat-sidenav>

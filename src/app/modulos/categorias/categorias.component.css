@@ -1,0 +1,8 @@
+.demo-chip-list {
+    width: 100%;
+  }
+
+  mat-card{
+    margin-bottom: 10px;
+    /* border-radius:20px!important; */
+  }

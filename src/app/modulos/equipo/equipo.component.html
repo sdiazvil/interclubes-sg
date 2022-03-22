@@ -1,0 +1,93 @@
+<!-- <div class="container-fluid">
+  <div class="row">
+    <div class="col">
+      <h3>Equipo</h3>
+    </div>
+    <div class="col-3text-right">
+      <button mat-raised-button color="primary" (click)="abrirModal()"> <i class="material-icons" style="font-size:14px;">edit</i>  Editar</button>
+    </div>
+  </div>
+  <hr>
+</div> -->
+
+<mat-toolbar style="background:#2583E2;">
+  <span class="titulo">
+    <i class="material-icons icono-titulo">group</i> Equipo</span>
+  <span class="app-toolbar-filler"></span>
+  <button *ngIf="(authService.user | async)?.admin" mat-raised-button color="accent" (click)="abrirModal()">
+    <i class="material-icons icono-boton">edit</i> AGREGAR
+  </button>
+</mat-toolbar>
+<br>
+
+<div class="row" *ngIf="usuarios$ | async; let usuarios;">
+  <button *ngIf="(authService.user | async)?.admin" mat-fab color="accent" class="pos-bottom-right" (click)="abrirModal()"
+    matTooltip="Agregar">
+    <i class="material-icons icono-boton">edit</i>
+  </button>
+  <div class="col-12 col-sm-12 col-md-6 col-lg-6" *ngFor="let usuario of usuarios">
+    <mat-card>
+      <!-- <mat-card-title-group>
+        <img mat-card-sm-image [src]="usuario.photoURL" alt="">
+        <mat-card-subtitle>{{usuario.displayName}}</mat-card-subtitle>
+        <mat-card-subtitle>{{usuario.email}}</mat-card-subtitle>
+      </mat-card-title-group> -->
+
+      <mat-card-content>
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-12 col-md-4 text-center">
+              <img class="rounded-circle border" width="120" height="120" style="margin-bottom:30px;" [src]="usuario.photoURL || '../../../assets/user.png'"
+                [alt]="usuario.nombre">
+            </div>
+            <div class="col-12 col-md-8">
+              <ul>
+                <li class="nombre">
+                  <i class="material-icons icono-nombre">person</i> {{usuario.displayName}}</li>
+                <li class="cargo">
+                  <i class="material-icons icono">work</i> {{usuario.ocupacion_otro}} </li>
+                <li class="otro">
+                  <i class="material-icons icono">mail</i> {{usuario.email}} </li>
+                <!-- <li class="otro"><i class="material-icons icono-boton" style="color:grey">phone</i> {{usuario.fono}} </li> -->
+              </ul>
+            </div>
+          </div>
+        </div>
+
+      </mat-card-content>
+
+
+      <mat-card-actions align="end">
+        <!-- <div class="row">
+            <div class="col-12">
+              <span>
+                <mat-slide-toggle color="primary" [(ngModel)]="usuario.equipo">Equipo</mat-slide-toggle>
+              </span>
+              <span class="float-right">
+                <mat-slide-toggle color="warn">Administrador</mat-slide-toggle>
+              </span>
+            </div>
+          </div> -->
+        <a href="mailto:{{usuario.email}}" mat-button>
+          <i class="material-icons icono-boton">mail</i> ENVIAR EMAIL</a>
+      </mat-card-actions>
+
+      <mat-card-footer *ngIf="(authService.user | async)?.modo_edicion">
+        <div class="container">
+          <div class="row">
+            <div class="col-6 col-sm-8 col-md-6 col-lg-5">
+              <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text" id="basic-addon1">
+                    Posición </span>
+                </div>
+                <input type="number" class="form-control" [(ngModel)]="usuario.posicion" (change)="cambiarPosicion($event.target.value,usuario.uid)"
+                  aria-label="Posicion" aria-describedby="basic-addon1">
+              </div>
+            </div>
+          </div>
+        </div>
+      </mat-card-footer>
+    </mat-card>
+  </div>
+</div>

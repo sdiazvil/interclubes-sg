@@ -1,0 +1,135 @@
+<!--The content below is only a placeholder and can be replaced.-->
+<!-- <div style="text-align:center">
+  <h1>
+    Welcome to {{ title }}!
+  </h1>
+  <img width="300" alt="Angular Logo" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg==">
+</div>
+<h2>Here are some links to help you start: </h2>
+<ul>
+  <li>
+    <h2><a target="_blank" rel="noopener" href="https://angular.io/tutorial">Tour of Heroes</a></h2>
+  </li>
+  <li>
+    <h2><a target="_blank" rel="noopener" href="https://github.com/angular/angular-cli/wiki">CLI Documentation</a></h2>
+  </li>
+  <li>
+    <h2><a target="_blank" rel="noopener" href="https://blog.angular.io/">Angular blog</a></h2>
+  </li>
+</ul> -->
+<app-header></app-header>
+
+<mat-sidenav-container fullscreen>
+
+
+  <mat-sidenav #sidenav class="lateral" [opened]="!isScreenSmall()" [mode]="isScreenSmall() ? 'over' : 'side'">
+    <div>
+      <div class="espacio-top" *ngIf="!(authService.user | async)"></div>
+      <div class="sidenav">
+        <div class="text-center" style="background: #f2f2f2; padding-top:80px;padding-bottom:10px;"
+          *ngIf="authService.user | async as user">
+          <a routerLink="/perfil">
+            <img class="rounded-circle foto-perfil" [src]="user.photoURL || '../assets/user_google.jpg'"
+              [alt]="user.displayName" width="100px" height="100px">
+          </a>
+          <br>
+          <small>Bienvenido(a)</small>
+          <br>
+          <span class="nombre">
+            <a routerLink="/perfil">{{user.displayName}}
+            </a>
+          </span>
+          <!-- <div class="example-container">
+            <button mat-button color="warn" (click)="salir()">
+              <i class="material-icons icono-boton">exit_to_app</i>
+              Cerrar Sesión
+            </button>
+          </div> -->
+        </div>
+        <div *ngIf="!(authService.user | async)">
+          <div class="text-center">
+            <img src="/assets/logo-vert.png" width="250" alt="Vecindiario">
+          </div>
+        </div>
+        <!-- <div class="espacioside"></div> -->
+        <div style="margin-top:0px;" *ngIf="authService.user | async as usuario">
+          <div class="menu-titulo">COMUNIDAD ACTUAL</div>          
+          <!-- <div style="margin-top:-8px;" *ngIf="(authService.user | async)"> -->
+          <!-- <div *ngIf="vecindarios$ | async as vecindarios">
+            <select class="custom-select">
+              <option *ngFor="let vecindario of (vecindarios | filtro:usuario.uid)">{{vecindario.nombre}}</option>
+              <option selected disabled *ngIf="(vecindarios | filtro:usuario.uid).length === 0">No hay vecindarios</option>
+            </select>
+            <div class="menu-titulo" *ngIf="(vecindarios | filtro:usuario.uid).length > 0">SECCIONES</div>
+            <mat-list style="margin-top:-8px;" *ngIf="(vecindarios | filtro:usuario.uid).length > 0">
+              <a mat-list-item class="itemmenu" routerLink="{{menu.ruta}}" routerLinkActive="active"
+                [routerLinkActiveOptions]="{ exact: true }" *ngFor="let menu of menus">
+                <mat-icon class="iconomenu" mat-list-avatar>{{ menu.icono }}</mat-icon>{{menu.nombre}}
+              </a>
+              <mat-divider></mat-divider>
+            </mat-list>s
+          </div> -->
+          <select class="custom-select" (change)="cambiarVecindario()" [(ngModel)]="vecindarioActual">
+            <option selected disabled value="0" *ngIf="usuario.vecindarios.length==0">No hay vecindarios
+            </option>
+            <option *ngFor="let vecindario of usuario.vecindarios" [selected]="vecindarioActual == vecindario.vecindarioId" [value]="vecindario.vecindarioId">{{vecindario.nombre}}</option>
+          </select>
+          <div class="menu-titulo" *ngIf="usuario.vecindarios.length > 0">SECCIONES</div>
+          <mat-list style="margin-top:-8px;" *ngIf="usuario.vecindarios.length > 0">
+            <a mat-list-item class="itemmenu" routerLink="{{menu.ruta}}" routerLinkActive="active"
+              [routerLinkActiveOptions]="{ exact: true }" *ngFor="let menu of menus">
+              <mat-icon class="iconomenu" mat-list-avatar>{{ menu.icono }}</mat-icon>{{menu.nombre}}
+            </a>
+            <mat-divider></mat-divider>
+          </mat-list>
+        </div>
+        <div class="example-container" *ngIf="authService.user | async">
+          <button routerLink="comunidades" color="primary" mat-raised-button><i class="material-icons icono-boton">domain</i> Explorar otras comunidades</button>
+        </div>
+        <div class="text-center" style="position: absolute;bottom:3px;left:45px;">
+          <!-- <a href=""><small class="politicas"><i class="material-icons icono-politicas">info_outline</i> Privacidad y
+              política de datos</small></a><br> -->
+          <!-- <a href=""><small class="politicas"> <i class="material-icons icono-politicas">help_outline</i> Preguntas
+              frecuentes</small></a><br> -->
+          <!-- <a routerLink="contacto"><small class="politicas"><i class="material-icons icono-politicas">mail_outline</i>
+              Contáctanos</small></a><br> -->
+          <small class="politicas"><i class="material-icons icono-politicas" routerLink="contacto" matTooltip="Contáctenos">mail_outline</i><i matTooltip="Privacidad & Políticas" class="material-icons icono-politicas">info_outline</i> <b>Versión 2.2.5 | Hecho en</b> <span class="flag-icon flag-icon-cl"></span>
+          </small>
+        </div>
+        <!-- <a mat-button style="width: 100%; margin-top:20px;" routerLink="{{menu.ruta}}" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" *ngFor="let menu of menus">
+          <mat-icon class="icono-boton" mat-list-avatar>{{ menu.icono }}</mat-icon> &nbsp; {{menu.nombre}}
+      </a> -->
+
+        <!-- <div class="footer-side">
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col">
+              <span class="flag-icon flag-icon-cl"></span>
+            </div>
+            <div class="col">
+              <p class="text-right">v.1.0.0</p>
+            </div>
+          </div>
+        </div>
+    </div> -->
+      </div>
+    </div>
+
+  </mat-sidenav>
+
+
+
+  <div class="loading-overlay" *ngIf="loading">
+    <mat-spinner [diameter]="48" [strokeWidth]="4.8"></mat-spinner>
+  </div>
+
+  <div class="container-fluid" *ngIf="!loading">
+    <div *ngIf="(authService.user | async)" class="espacio80"></div>
+    <!-- <app-modo></app-modo> -->
+    <router-outlet></router-outlet>
+    <div *ngIf="(authService.user | async)" class="espacio80"></div>
+  </div>
+
+  <app-footer *ngIf="(authService.user | async)?.vecindarios.length>0" class="footer"></app-footer>
+
+</mat-sidenav-container>

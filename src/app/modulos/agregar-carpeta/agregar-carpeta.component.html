@@ -1,0 +1,16 @@
+<form [formGroup]="formulario" (ngSubmit)="agregar()" novalidate>
+  <div class="row">
+    <div class="col-8 col-md-9">
+      <div class="example-container">
+        <mat-form-field>
+          <input matInput placeholder="Agregar Carpeta" type="text" formControlName="nombre" required>
+          <mat-error *ngIf="formErrores.nombre">{{formErrores.nombre}}</mat-error>
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="col-4 col-md-3">
+      <button mat-raised-button color="accent" type="submit" [disabled]="!formulario.valid">
+        <i class='material-icons icono-boton'>mode_edit</i> Agregar</button>
+    </div>
+  </div>
+</form>

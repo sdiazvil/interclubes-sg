@@ -1,0 +1,103 @@
+<div class="modal-header" style="background:#06A8F9;color:#fff;">
+  <span class="modal-title">
+    <i class="material-icons icono-titulo">person_add</i> Usuarios {{titulo}} </span>
+  <button type="button" class="close" aria-label="Close" (click)="cerrarModal()">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+
+<div class="modal-body" *ngIf="this.authService.user | async as user">
+
+  <div class="input-group mb-3">
+    <div class="input-group-prepend">
+      <span class="input-group-text" id="basic-addon1">
+        <i class="fa fa-search"></i>
+      </span>
+    </div>
+    <input type="text" class="form-control" [(ngModel)]="buscar" placeholder="Buscar..." aria-label="Buscar"
+      aria-describedby="basic-addon1">
+    <!-- <input type="text" class="form-control" (keyup)="buscar($event)" placeholder="Buscar..." aria-label="Buscar"
+      aria-describedby="basic-addon1"> -->
+  </div>
+  <mat-list *ngIf="titulo=='en espera de Aprobación'">
+    <mat-list-item class="itemmenu" *ngFor="let usuario of pendientes  | filter:'displayName':buscar">
+      <mat-divider></mat-divider>
+      <mat-icon mat-list-icon>person_add</mat-icon>
+      <!-- <h4 mat-line color="primary">{{usuario.userId}}</h4> -->
+      <h4 mat-line color="primary">{{ usuario.displayName }}</h4>
+      <!-- <h4 mat-line color="primary">{{ (usuario.userRef | doc | async)?.displayName }}</h4> -->
+      <button mat-button color="primary" (click)="aceptarVecino(usuario)">Aceptar</button>
+      <p mat-line>USUARIO</p>
+      <mat-divider></mat-divider>
+    </mat-list-item>
+  </mat-list>
+  <mat-list *ngIf="titulo=='de la Comunidad'">
+    <mat-list-item class="itemmenu" *ngFor="let usuario of vecinos  | filter:'displayName':buscar">
+      <mat-divider></mat-divider>
+      <mat-icon mat-list-icon *ngIf="!checkAdmin(usuario.userId)">person</mat-icon>
+      <mat-icon mat-list-icon *ngIf="checkAdmin(usuario.userId)">local_police</mat-icon>
+      <!-- <h4 mat-line color="primary">{{usuario.userId}}</h4> -->
+      <h4 mat-line color="primary">{{ usuario.displayName }}</h4>
+
+      <!-- <mat-icon *ngIf="(authService.user | async)?.admin" style="color:grey; cursor: pointer;" mat-icon-button
+      [matMenuTriggerFor]="menu">more_vert</mat-icon> -->
+      <!-- <h4 mat-line color="primary">{{ (usuario.userRef | doc | async)?.displayName }}</h4> -->
+      <!-- <button mat-button color="primary" *ngIf="!checkAdmin(usuario.userId)" (click)="agregarAdmin(usuario)">Admin</button> &nbsp;
+      <button mat-button color="warn" *ngIf="!checkAdmin(usuario.userId)" (click)="eliminarVecino(usuario)">Eliminar</button> -->
+      <p mat-line *ngIf="!checkAdmin(usuario.userId)">VECINO</p>
+      <p mat-line *ngIf="checkAdmin(usuario.userId)">ADMINISTRADOR </p>
+      <!-- <mat-divider></mat-divider> -->
+      <mat-icon *ngIf="checkAdminBarrio(user) || user.admin" style="color:grey; cursor: pointer;" mat-icon-button [matMenuTriggerFor]="menu">more_vert</mat-icon>
+      <mat-divider></mat-divider>
+      <mat-menu #menu="matMenu">
+        <!-- <button mat-menu-item>✏️ &nbsp; Editar</button> -->
+        <button *ngIf="user.admin" mat-menu-item (click)="agregarAdmin(usuario)">
+          <mat-icon>local_police</mat-icon>
+          Nombrar administrador</button>
+        <button mat-menu-item (click)="eliminarVecino(usuario)">
+          <mat-icon>person_off</mat-icon>
+          Eliminar</button>
+      </mat-menu>
+    </mat-list-item>
+  </mat-list>
+  <mat-list *ngIf="titulo=='Administradores'">
+    <mat-list-item class="itemmenu" *ngFor="let usuario of admin  | filter:'displayName':buscar">
+      <mat-divider></mat-divider>
+      <mat-icon mat-list-icon>local_police</mat-icon>
+      <!-- <h4 mat-line color="primary">{{usuario.userId}}</h4> -->
+      <h4 mat-line color="primary">{{ usuario.displayName }}</h4>
+      <!-- <h4 mat-line color="primary">{{ (usuario.userRef | doc | async)?.displayName }}</h4> -->
+      <!-- <button mat-button color="primary" (click)="eliminarAdmin(usuario)">Eliminar</button> -->
+      <p mat-line>ADMINISTRADOR</p>
+      <mat-icon *ngIf="user.admin" style="color:grey; cursor: pointer;" mat-icon-button [matMenuTriggerFor]="menu">more_vert</mat-icon>
+      <mat-divider></mat-divider>
+      <mat-menu #menu="matMenu">
+        <!-- <button mat-menu-item>✏️ &nbsp; Editar</button> -->
+        <button mat-menu-item (click)="eliminarAdmin(usuario)">
+          <mat-icon>local_police</mat-icon>
+          Eliminar administrador</button>
+      </mat-menu>
+    </mat-list-item>
+  </mat-list>
+  <mat-list *ngIf="pendientes.length == 0 && titulo=='en espera de Aprobación'">
+    <mat-list-item>
+      <mat-icon mat-list-icon>person</mat-icon>
+      <h4 mat-line color="primary">No existen usuarios</h4>
+    </mat-list-item>
+    <mat-divider></mat-divider>
+  </mat-list>
+  <mat-list *ngIf="vecinos.length == 0 && titulo=='de la Comunidad'">
+    <mat-list-item>
+      <mat-icon mat-list-icon>person</mat-icon>
+      <h4 mat-line color="primary">No existen usuarios</h4>
+    </mat-list-item>
+    <mat-divider></mat-divider>
+  </mat-list>
+  <mat-list *ngIf="admin.length == 0 && titulo=='Administradores'">
+    <mat-list-item>
+      <mat-icon mat-list-icon>person</mat-icon>
+      <h4 mat-line color="primary">No existen usuarios</h4>
+    </mat-list-item>
+    <mat-divider></mat-divider>
+  </mat-list>
+</div>

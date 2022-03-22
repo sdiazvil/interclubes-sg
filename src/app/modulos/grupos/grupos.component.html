@@ -1,0 +1,189 @@
+<div style="padding-right: 0;padding-left: 0;" class="container-fluid" *ngIf="authService.user | async as user;">
+
+  <div class="row">
+    <div class="col-12">
+      <h4>
+        <i class="material-icons icono-titulo" style="margin-bottom:5px">person</i>
+        Mis Grupos
+      </h4>
+    </div>
+  </div>
+
+  <button mat-fab color="accent" class="pos-bottom-right" (click)="open()" matTooltip="Agregar">
+    <i class="material-icons icono-boton">groups</i>
+  </button>
+
+  <div class="row" style="padding-left: 0;padding-right: 0;" *ngIf="misgrupos | async as misgrupos">
+    <div style="padding-left: 0;padding-right: 0;" class="col-6 col-md-6 col-lg-4 col-xl-4"
+      *ngFor="let grupo of checkMisGrupos(misgrupos, user.uid); trackBy: itemTrackBy;">
+      <mat-card>
+        <mat-card-title-group>
+          <!-- <img mat-card-avatar [src]="grupo.principal || '/assets/img-grupo.jpg'"> -->
+          <mat-card-title>
+            <!-- <i class="material-icons icono-boton">groups</i>  -->
+            {{grupo.nombre}} <span class="badge badge-primary">{{grupo.categoria}}</span>
+          </mat-card-title>
+          <mat-icon
+            *ngIf="checkIntegrante(grupo.integrantes,user.uid) || user.admin || checkAdminBarrio(vecindario.admin, user)"
+            style="color:grey; cursor: pointer;" mat-icon-button [matMenuTriggerFor]="menu">
+            more_vert</mat-icon>
+          <mat-card-subtitle style="margin-top:-20px;" matTooltip="Cantidad de vecinos"><i
+              style="color: grey; font-size:24px;position:relative;top:5px;" class="material-icons">groups</i>
+            {{grupo.integrantes.length}}
+            Vecino<span *ngIf="grupo.integrantes.length>1 || grupo.integrantes.length==0">s</span></mat-card-subtitle>
+          <mat-card-subtitle style="margin-top:-20px;" matTooltip="Creado por"><i
+              style="color: grey; font-size:24px;position:relative;top:5px;" class="material-icons">person</i><a
+              style="cursor: pointer; color:#007bff;">&nbsp;{{ (grupo.userRef
+              | doc | async)?.displayName }}</a>
+          </mat-card-subtitle>
+          <mat-card-subtitle style="color:green;margin-top:-18px;">
+            <small><i style="color: grey; font-size:24px;position:relative;top:5px;"
+                class="material-icons">access_time</i> Actualizado {{ grupo.enlinea | amTimeAgo }}</small>
+          </mat-card-subtitle>
+        </mat-card-title-group>
+
+        <mat-menu #menu="matMenu">
+          <button *ngIf="checkIntegrante(grupo.integrantes,user.uid)" mat-menu-item
+            (click)="salirGrupo(grupo.id, grupo.integrantes, user.uid)">
+            <mat-icon>close</mat-icon>
+            Abandonar Grupo
+          </button>
+        </mat-menu>
+
+
+        <mat-card-content>
+
+          <div class="row">
+            <div class="col-12">
+              <!-- <small>Creado por Juan Pérez</small> -->
+              <mostrar-mas class="text-justify" [texto]="grupo.texto" [largoMax]="100"></mostrar-mas>
+            </div>
+          </div>
+        </mat-card-content>
+        <mat-card-actions align="end" style="margin-top:-20px;">
+          <button mat-button routerLink="/grupo/{{grupo.id}}"
+            style="background-color: green;color:#fff;margin-right: 10px; border-radius: 10px;">
+            <i class="material-icons icono-boton">login</i>
+            Ingresar
+          </button>
+          <!-- 
+          <button mat-button style="background-color: red;color:#fff;margin-right: 10px; border-radius: 10px;"
+            (click)="salirGrupo(grupo.id, grupo.integrantes, user.uid)">
+            <i class="material-icons icono-boton">close</i>
+            Abandonar
+          </button> -->
+        </mat-card-actions>
+      </mat-card>
+    </div>
+
+    <div class="col-12" *ngIf="checkMisGrupos(misgrupos, user.uid).length == 0;">
+      <div class="jumbotron" style="border-radius: 20px; border-style: dashed;border-color:lightgrey;border-width:2px;">
+        <h1 class="display-4 text-center" style="color:grey;"><i class="material-icons">groups</i> </h1>
+        <p class="lead text-center" style="color:grey">Aún no te has unido a ningún grupo</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="row justify-content-center">
+    <div class="col-12">
+      <app-catgrupos></app-catgrupos>
+    </div>
+  </div>
+
+  <div class="row" *ngIf="grupos | async as grupos" style="padding-left: 0;padding-right: 0;">
+    <div style="padding-left: 0;padding-right: 0;" class="col-6 col-sm-12 col-md-6 col-lg-4 col-xl-4"
+      *ngFor="let grupo of grupos; trackBy: itemTrackBy;">
+      <!-- <div class="col-12 col-sm-12 col-md-6 col-lg-4 col-xl-4"
+      *ngFor="let grupo of (grupos | slice:0:this.maximo); trackBy: itemTrackBy;"> -->
+      <div *ngIf="vecindario | async as vecindario">
+        <mat-card>
+          <mat-card-title-group>
+            <!-- <img mat-card-avatar [src]="grupo.principal || '/assets/img-grupo.jpg'"> -->
+            <mat-card-title>
+              <!-- <i class="material-icons icono-boton">groups</i>  -->
+              {{grupo.nombre}} <span class="badge badge-primary">{{grupo.categoria}}</span>
+            </mat-card-title>
+            <mat-icon
+              *ngIf="checkIntegrante(grupo.integrantes,user.uid) || user.admin || checkAdminBarrio(vecindario.admin, user)"
+              style="color:grey; cursor: pointer;" mat-icon-button [matMenuTriggerFor]="menu">
+              more_vert</mat-icon>
+            <mat-card-subtitle style="margin-top:-20px;" matTooltip="Cantidad de vecinos"><i
+                style="color: grey; font-size:24px;position:relative;top:5px;" class="material-icons">groups</i>
+              {{grupo.integrantes.length}}
+              Vecino<span *ngIf="grupo.integrantes.length>1 || grupo.integrantes.length==0">s</span></mat-card-subtitle>
+            <mat-card-subtitle style="margin-top:-20px;" matTooltip="Creado por"><i
+                style="color: grey; font-size:24px;position:relative;top:5px;" class="material-icons">person</i><a
+                style="cursor: pointer; color:#007bff;">&nbsp;{{ (grupo.userRef
+                | doc | async)?.displayName }}</a>
+            </mat-card-subtitle>
+            <mat-card-subtitle style="color:green;margin-top:-18px;">
+              <small><i style="color: grey; font-size:24px;position:relative;top:5px;"
+                  class="material-icons">access_time</i> Actualizado {{ grupo.enlinea | amTimeAgo }}</small>
+            </mat-card-subtitle>
+          </mat-card-title-group>
+
+          <mat-menu #menu="matMenu">
+            <!-- <button mat-menu-item>✏️ &nbsp; Editar</button> -->
+            <button *ngIf="checkAdminBarrio(vecindario.admin, user) || user.admin" mat-menu-item
+              (click)="eliminar(grupo)">
+              <mat-icon>delete</mat-icon>
+              Eliminar
+            </button>
+            <button *ngIf="checkIntegrante(grupo.integrantes,user.uid)" mat-menu-item
+              (click)="salirGrupo(grupo.id, grupo.integrantes, user.uid)">
+              <mat-icon>close</mat-icon>
+              Abandonar Grupo
+            </button>
+          </mat-menu>
+
+          <mat-card-content>
+
+            <div class="row">
+              <div class="col-12">
+                <!-- <small>Creado por Juan Pérez</small> -->
+                <mostrar-mas class="text-justify" [texto]="grupo.texto" [largoMax]="100"></mostrar-mas>
+              </div>
+            </div>
+          </mat-card-content>
+          <mat-card-actions align="end" style="margin-top:-20px;">
+            <button mat-button color="primary" *ngIf="!checkIntegrante(grupo.integrantes,user.uid)"
+              style="margin-right: 10px; border-radius: 10px;" (click)="unirse(grupo.id, grupo.integrantes, user.uid)">
+              <i class="material-icons icono-boton">add_circle_outline</i>
+              Unirse
+            </button>
+            <button mat-button *ngIf="checkIntegrante(grupo.integrantes,user.uid)" routerLink="/grupo/{{grupo.id}}"
+              style="background-color: green;color:#fff;margin-right: 10px; border-radius: 10px;">
+              <i class="material-icons icono-boton">login</i>
+              Ingresar
+            </button>
+            <!-- <button mat-raised-button *ngIf="checkIntegrante(grupo.integrantes,user.uid)"
+            style="background-color: red;color:#fff;margin-right: 10px; border-radius: 10px;"
+            (click)="salirGrupo(grupo.id, grupo.integrantes, user.uid)">
+            <i class="material-icons icono-boton">close</i>
+            Abandonar
+          </button> -->
+
+          </mat-card-actions>
+        </mat-card>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="(grupos | async)?.length == 0">
+    <div class="row">
+      <div class="col-12">
+        <div class="alert alert-secondary" role="alert">No existen grupos en esta sección.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- <div class="container-fluid" style="padding-bottom:30px;" *ngIf="grupos | async as grupos">
+    <div class="row" *ngIf="grupos?.length > this.maximo">
+      <div class="col-12 text-center">
+        <button color="primary" mat-button (click)="cargarMas()">Cargar más grupos...</button>
+      </div>
+    </div>
+  </div> -->
+
+</div>

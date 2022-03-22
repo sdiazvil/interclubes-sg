@@ -1,0 +1,396 @@
+<mat-sidenav-container fullscreen *ngIf="authService.user | async as user">
+
+  <div class="container-fluid" style="margin-top:75px;" *ngIf="vecindario | async as vecindario">
+
+    <div class="row" style="padding-bottom:10px" *ngIf="checkAdminBarrio(vecindario.admin, user.uid) || user.admin">
+      <mat-toolbar>
+        <div>
+          <mat-slide-toggle (click)="toggleOculto(vecindario.comentarios_plaza)"
+            [(ngModel)]="vecindario.comentarios_plaza">
+            <span *ngIf="vecindario.comentarios_plaza">Comentarios Activados</span><span
+              *ngIf="!vecindario.comentarios_plaza">Comentarios Desactivados</span>
+          </mat-slide-toggle>
+        </div>
+        <span class="app-toolbar-filler"></span>
+        <!-- <button color="primary" mat-button><i class="material-icons icono-titulo">add_photo_alternate</i> Subir
+          banner</button> -->
+        <button mat-button color="primary" [matMenuTriggerFor]="menudos">
+          <mat-icon>settings</mat-icon> Configuración
+        </button>
+        <!-- <p class="mb-0 text-center">
+          <label class="file-label">
+            <input class="file-input" type="file" access=".png,.jpg,.jpeg,.JPG,.JPEG,.PNG"
+              (change)="subirBanner($event.target.files, vecindario)" hidden="true">
+            <a mat-button color="accent">
+              <i class="material-icons icono-boton">photo_camera</i> Subir banner
+            </a>
+          </label>
+        </p> -->
+      </mat-toolbar>
+      <mat-menu #menudos="matMenu">
+        <button mat-menu-item>
+          <label class="file-label">
+            <input class="file-input" type="file" access=".png,.jpg,.jpeg,.JPG,.JPEG,.PNG"
+              (change)="subirBanner($event.target.files, vecindario,'Movil')" hidden="true">
+            <a>
+              <mat-icon>phone_iphone</mat-icon>
+              Subir Banner Móvil
+            </a>
+          </label>
+
+        </button>
+        <button mat-menu-item>
+          <label class="file-label">
+            <input class="file-input" type="file" access=".png,.jpg,.jpeg,.JPG,.JPEG,.PNG"
+              (change)="subirBanner($event.target.files, vecindario,'Web')" hidden="true">
+            <a>
+              <mat-icon>desktop_windows</mat-icon>
+              Subir Banner Web
+            </a>
+          </label>
+
+        </button>
+        <div mat-menu-item>
+          <mat-slide-toggle (click)="toggleOculto(vecindario.comentarios_plaza)"
+          [(ngModel)]="vecindario.comentarios_plaza">
+          <span *ngIf="vecindario.comentarios_plaza">Comentarios Activados</span><span
+            *ngIf="!vecindario.comentarios_plaza">Comentarios Desactivados</span>
+        </mat-slide-toggle>
+        </div>
+        <div mat-menu-item>
+          <mat-slide-toggle (click)="togglePublicacionesPlaza(vecindario.publicaciones_plaza)"
+          [(ngModel)]="vecindario.publicaciones_plaza">
+          <span *ngIf="vecindario.publicaciones_plaza">Publicaciones Activadas</span><span
+            *ngIf="!vecindario.publicaciones_plaza">Publicaciones Desactivadas</span>
+        </mat-slide-toggle>
+        </div>
+      </mat-menu>
+    </div>
+    <!-- 
+  <button mat-fab color="accent" class="pos-bottom-right" (click)="open()" matTooltip="Escribir en la Plaza">
+    <i class="material-icons icono-boton">edit</i>
+  </button> -->
+
+    <!-- BANNER -->
+    <div class="row justify-content-center" style="margin-bottom:-15px;"
+      *ngIf="!vecindario.banner_movil && isScreenSmall() && !cargando_movil">
+      <div class="col-12 col-md-8 col-lg-6">
+        <div *ngIf="this.isScreenSmall()" class="alert alert-primary" role="alert">
+          <h4 class="alert-heading">Banner en tu Comunidad!</h4>
+          <p>En este espacio podemos agregar un banner publicitario de 728x90 pixeles para tu comunidad.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="row justify" style="padding-bottom:10px;" *ngIf="!cargando_movil && isScreenSmall()">
+      <div class="col-12 text-center">
+        <img *ngIf="vecindario.banner_movil" class="img-fluid" [src]="vecindario.banner_movil">
+      </div>
+    </div>
+
+    <div class="row justify" style="padding-bottom:30px; padding-top:20px;" *ngIf="cargando_movil">
+      <div class="col-12">
+        <mat-progress-bar mode="buffer"></mat-progress-bar>
+      </div>
+    </div>
+
+    <div *ngIf="vecindario.publicaciones_plaza" class="row" style="padding-left: 0;padding-right: 0;">
+      <div style="padding-left: 0;padding-right: 0;"
+        class="col-12 col-md-8 offset-md-2 col-lg-6 offset-lg-3 col-xl-8 offset-xl-2">
+        <!-- style="padding-right: 0; padding-left: 0;" -->
+        <mat-card>
+          <mat-card-title-group>
+            <mat-card-title style="color:grey;margin-left:10px;margin-bottom:2px;font-size: 21px;">
+              ¿Que le quieres contar a tus vecinos hoy?
+            </mat-card-title>
+          </mat-card-title-group>
+          <mat-card-content>
+            <app-escribir-plaza></app-escribir-plaza>
+          </mat-card-content>
+        </mat-card>
+      </div>
+    </div>
+    <!-- 
+    <div style="padding-right: 0; padding-left: 0;" class="row">
+      <div class="col-12 col-md-8 offset-md-2 col-lg-6 offset-lg-3 col-xl-6 offset-xl-3"
+        style="padding-right: 0; padding-left: 0;">
+        <mat-card>
+          <mat-card-content>
+            <app-categorias></app-categorias>
+          </mat-card-content>
+        </mat-card>
+      </div>
+    </div> -->
+
+    <app-categorias></app-categorias>
+
+    <div class="row" style="padding-left: 0;padding-right: 0;" *ngIf="cargando">
+      <div style="padding-left: 0;padding-right: 0;"
+        class="col-12 col-md-8 offset-md-2 col-lg-6 offset-lg-3 col-xl-8 offset-xl-2">
+        <!-- style="padding-right: 0; padding-left: 0;" -->
+        <mat-card>
+          <div class="timeline-wrapper" style="z-index: 999;">
+            <div class="timeline-item" style="z-index: 999;">
+              <div class="animated-background" style="z-index: 999;">
+                <div class="background-masker header-top"></div>
+                <div class="background-masker header-left"></div>
+                <div class="background-masker header-right"></div>
+                <div class="background-masker header-bottom"></div>
+                <div class="background-masker subheader-left"></div>
+                <div class="background-masker subheader-right"></div>
+                <div class="background-masker subheader-bottom"></div>
+                <div class="background-masker content-top"></div>
+                <div class="background-masker content-first-end"></div>
+                <div class="background-masker content-second-line"></div>
+                <div class="background-masker content-second-end"></div>
+                <div class="background-masker content-third-line"></div>
+                <div class="background-masker content-third-end"></div>
+              </div>
+            </div>
+          </div>
+        </mat-card>
+      </div>
+      <div style="padding-left: 0;padding-right: 0;"
+        class="col-12 col-md-8 offset-md-2 col-lg-6 offset-lg-3 col-xl-8 offset-xl-2">
+        <!-- style="padding-right: 0; padding-left: 0;" -->
+
+        <mat-card>
+          <div class="timeline-wrapper" style="z-index: 999;">
+            <div class="timeline-item" style="z-index: 999;">
+              <div class="animated-background" style="z-index: 999;">
+                <div class="background-masker header-top"></div>
+                <div class="background-masker header-left"></div>
+                <div class="background-masker header-right"></div>
+                <div class="background-masker header-bottom"></div>
+                <div class="background-masker subheader-left"></div>
+                <div class="background-masker subheader-right"></div>
+                <div class="background-masker subheader-bottom"></div>
+                <div class="background-masker content-top"></div>
+                <div class="background-masker content-first-end"></div>
+                <div class="background-masker content-second-line"></div>
+                <div class="background-masker content-second-end"></div>
+                <div class="background-masker content-third-line"></div>
+                <div class="background-masker content-third-end"></div>
+              </div>
+            </div>
+          </div>
+        </mat-card>
+      </div>
+      <div style="padding-left: 0;padding-right: 0;"
+        class="col-12 col-md-8 offset-md-2 col-lg-6 offset-lg-3 col-xl-8 offset-xl-2">
+        <!-- style="padding-right: 0; padding-left: 0;" -->
+        <mat-card>
+          <div class="timeline-wrapper" style="z-index: 999;">
+            <div class="timeline-item" style="z-index: 999;">
+              <div class="animated-background" style="z-index: 999;">
+                <div class="background-masker header-top"></div>
+                <div class="background-masker header-left"></div>
+                <div class="background-masker header-right"></div>
+                <div class="background-masker header-bottom"></div>
+                <div class="background-masker subheader-left"></div>
+                <div class="background-masker subheader-right"></div>
+                <div class="background-masker subheader-bottom"></div>
+                <div class="background-masker content-top"></div>
+                <div class="background-masker content-first-end"></div>
+                <div class="background-masker content-second-line"></div>
+                <div class="background-masker content-second-end"></div>
+                <div class="background-masker content-third-line"></div>
+                <div class="background-masker content-third-end"></div>
+              </div>
+            </div>
+          </div>
+        </mat-card>
+      </div>
+    </div>
+
+
+    <div class="row" style="padding-left: 0px;padding-right: 0px;" *ngIf="noticias$ | async as noticias">
+
+      <!-- 
+    <div class="col-12 col-md-6" style="padding-right: 0; padding-left: 0;"
+      *ngFor="let noticia of (noticias | slice:0:this.maxNoticias); trackBy: itemTrackBy"> -->
+
+      <div style="padding-left: 0px;padding-right: 0px;"
+        class="col-12 col-sm-12 col-md-8 offset-md-2 col-lg-6 offset-lg-3 col-xl-8 offset-xl-2"
+        *ngFor="let noticia of (noticias | slice:0:this.maxNoticias); trackBy: itemTrackBy">
+        <!-- style="padding-right: 0; padding-left: 0;" -->
+
+        <mat-card *ngIf="!cargando">
+          <mat-card-header>
+            <img mat-card-avatar
+              src="{{(noticia.userRef | doc | async)?.photoURL ||  '../../assets/user_google.jpg' }}">
+            <mat-card-title>
+              <a style="cursor: pointer; color:#007bff;">{{ (noticia.userRef | doc | async)?.displayName }}</a> escribió
+              una publicación
+            </mat-card-title>
+            <mat-card-subtitle style="margin-top:-20px;">
+              <small>
+                🕚 {{ noticia.creado | amTimeAgo }}
+              </small>
+            </mat-card-subtitle>
+            <span class="app-toolbar-filler"></span>
+            <mat-icon *ngIf="checkAdminBarrio(vecindario.admin, user.uid) || user.uid == noticia.userId || user.admin"
+              style="color:grey; cursor: pointer;" mat-icon-button [matMenuTriggerFor]="menu">more_vert</mat-icon>
+          </mat-card-header>
+
+          <mat-menu #menu="matMenu">
+            <button mat-menu-item (click)="eliminar(noticia)">
+              <mat-icon>delete</mat-icon>
+              Eliminar
+            </button>
+
+          </mat-menu>
+
+          <mostrar-mas *ngIf="noticia.texto" class="text-justify" [texto]="noticia.texto" [largoMax]="250">
+          </mostrar-mas>
+
+          <p *ngIf="noticia.url"><i style="color:#0D2A50;" class="material-icons icono-titulo">public</i>
+            <a href="{{noticia.url}}" target="_blank">{{noticia.url}}</a>
+          </p>
+
+          <br *ngIf="noticia.principal">
+
+          <div *ngIf="noticia.principal">
+            <img mat-card-image [src]="noticia.principal || '/assets/fondomin.jpg'">
+          </div>
+
+          <div *ngIf="noticia.videos" style="margin-top:30px;">
+            <video mat-card-image *ngIf="noticia.videos.length>0" controls>
+              <source [src]="noticia.videos[0].videoURL">
+            </video>
+          </div>
+
+          <mat-card-content style="margin-bottom: -20px;">
+            <div class="row" style="margin-bottom:10px;">
+              <div class="col-6">
+                <button mat-button class="boton" color="primary" routerLink="/iniciosesion"
+                  *ngIf="!(authService.user | async);">
+                  <i class="fa fa-thumbs-o-up" aria-hidden="true"></i> Me gusta
+                </button>
+                <div *ngIf="authService.user | async as user;" class="boton">
+                  <button *ngIf="!checkMeGusta(noticia.megusta, user.uid)" style="width:100%" mat-button color="primary"
+                    (click)="meGusta(noticia.id, noticia.megusta, user.uid)">
+                    <i class="fa fa-thumbs-o-up" aria-hidden="true"></i> Me gusta
+                    <span class="badge badge-primary">{{noticia.megusta?.length}}</span>
+                  </button>
+                  <button *ngIf="checkMeGusta(noticia.megusta, user.uid)" style="width:100%" mat-raised-button
+                    color="primary" (click)="eliminarMeGusta(noticia.id, noticia.megusta, user.uid)">
+                    <i class="fa fa-thumbs-up" aria-hidden="true"></i> Me gusta
+                    <span class="badge badge-primary">{{noticia.megusta?.length}}</span>
+                  </button>
+                </div>
+              </div>
+              <div class="col-6">
+                <button mat-button class="boton" color="primary" routerLink="/iniciosesion"
+                  *ngIf="!(authService.user | async);">
+                  <i class="material-icons icono-boton">comment</i>
+                  Comentarios
+                </button>
+                <button mat-button class="boton" color="primary" *ngIf="authService.user | async as user;">
+                  <i class="material-icons icono-boton">comment</i>
+                  Comentarios
+                  <span class="badge badge-primary">{{ noticia.comentarios?.length }}</span>
+                </button>
+              </div>
+            </div>
+            <div *ngIf="comentariosActivos()">
+              <div *ngIf="authService.user | async as user">
+                <div class="col-12 text-center" *ngIf="noticia.comentarios.length > this.revMax "
+                  style="margin-bottom:10px">
+                  <button mat-button (click)="cargarComentarios()">💬 Cargar más comentarios...
+                    <span class="badge badge-primary">{{ noticia.comentarios?.length - this.revMax }}</span>
+                  </button>
+                </div>
+                <div class="row justify-content-center"
+                  *ngFor="let comentario of (noticia.comentarios | slice: this.maxCom); trackBy: itemTrackBy;">
+                  <div class="col-2 col-md-2">
+                    <p class="text-center">
+                      <img class="rounded-circle" width="40px" height="40px"
+                        src="{{(comentario.userRef | doc | async)?.photoURL || '../../../assets/user_google.jpg'}}">
+                    </p>
+                  </div>
+                  <div class="col-10 col-md-10 comentario"
+                    [ngStyle]="{'background': comentario.userId == user.uid ? '#caeefa' :'#f2f2f2'}">
+                    <b>{{ (comentario.userRef | doc | async)?.displayName }}</b>
+                    <i style="color: grey; font-size:12px;" class="material-icons icono-boton">access_time</i>
+                    <small style="opacity: 0.87;">Comentó {{ comentario.fecha | amTimeAgo }}</small>
+                    <button *ngIf="checkAdminBarrio(vecindario.admin, user.uid) || user.admin || user.uid == comentario.userId" class="float-right" color="warn" mat-icon-button
+                      matTooltip="Eliminar"
+                      (click)="eliminarComentario(comentario.id, noticia.comentarios, noticia.id)">
+                      <i class="material-icons">close</i>
+                    </button>
+                    <mostrar-mas *ngIf="comentario.comentario" class="text-justify" [texto]="comentario.comentario"
+                      [largoMax]="200"></mostrar-mas>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+            <div *ngIf="comentariosActivos()">
+              <hr>
+              <div class="row" *ngIf="authService.user | async as user;">
+                <div class="col-2 col-md-2 ">
+                  <p class="text-center">
+                    <img class="rounded-circle" width="40px;" height="40px;"
+                      [src]="user.photoURL || '../../../assets/user_google.jpg'">
+                  </p>
+                </div>
+                <div class="col-10 col-md-10">
+                  <form [formGroup]="formulario" (ngSubmit)="comentar(noticia.id, user, noticia.comentarios)"
+                    novalidate>
+                    <div class="example-container" style="margin-top:-8px;">
+                      <mat-form-field floatLabel="never">
+                        <textarea class="scroll" (click)="this.ns.mostrarFormulario=false;" formControlName="texto" minlenght="1"
+                          matInput #texto placeholder="Escribe un comentario..." matTextareaAutosize
+                          matAutosizeMinRows="1" matAutosizeMaxRows="5"></textarea>
+                        <mat-hint *ngIf="texto.value.length > 500" align="end">{{texto.value.length}} / 500</mat-hint>
+                        <!-- <mat-hint *ngIf="texto.value.length < 1">Ingresa el comentario y presiona enviar.</mat-hint> -->
+                        <button mat-mini-fab matSuffix style="margin-left:5px;" *ngIf="texto.value.length > 0" color="primary"
+                          type="submit" [disabled]="!formulario.valid" matTooltip="Enviar">
+                          <i class="material-icons icono-boton">send</i>
+                        </button>
+                      </mat-form-field>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+
+          </mat-card-content>
+        </mat-card>
+      </div>
+    </div>
+  </div>
+
+  <div class="container-fluid" style="padding-bottom:70px;" *ngIf="noticias$ | async as noticias">
+    <div class="row" style="padding-right: 0; padding-left: 0;" *ngIf="noticias?.length > this.maxNoticias">
+      <div class="col-12 text-center">
+        <button color="primary" mat-button (click)="cargarMasNoticias()">Cargar más publicaciones...</button>
+      </div>
+    </div>
+    <div class="col-12 col-md-8 offset-md-2 col-lg-6 offset-lg-3 col-xl-8 offset-xl-2" *ngIf="noticias?.length == 0">
+      <br>
+      <div class="alert alert-secondary" role="alert">
+        No existen publicaciones en la plaza de esta comunidad.
+      </div>
+    </div>
+  </div>
+
+  <mat-sidenav position="end" #sidenav [opened]="!isScreenSmall()" [mode]="isScreenSmall() ? 'over' : 'side'">
+    <div style="padding-top:90px!important; padding:10px; min-height: 100%!important;" class="text-center"
+      *ngIf="vecindar | async as vecindar">
+      <div class="alert alert-primary alerta-lateral" role="alert" *ngIf="!vecindar.banner_web && !cargando_web">
+        <h4 class="alert-heading" style="margin-top:30vh">Banner en tu Comunidad!</h4>
+
+        <p>En este espacio podemos agregar un banner publicitario de 200x800 pixeles para tu comunidad.</p>
+      </div>
+      <div *ngIf="vecindar.banner_web && !cargando_web">
+        <img class="img-fluid" [src]="vecindar.banner_web" alt="">
+      </div>
+      <div *ngIf="cargando_web" style="padding-left: 80px; padding-top:400px;">
+        <mat-spinner [diameter]="36" [strokeWidth]="3.6"></mat-spinner>
+      </div>
+    </div>
+  </mat-sidenav>
+
+</mat-sidenav-container>
