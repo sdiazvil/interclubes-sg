@@ -2,13 +2,13 @@
   <div class="container-fluid" style="margin-top:75px;" *ngIf="vecindario | async as vecindario">
     <div class="row" style="padding-bottom:10px" *ngIf="checkAdminBarrio(vecindario.admin, user.uid) || user.admin">
       <mat-toolbar>
-        <div>
+        <!-- <div>
           <mat-slide-toggle (click)="toggleOculto(vecindario.comentarios_plaza)"
             [(ngModel)]="vecindario.comentarios_plaza">
             <span *ngIf="vecindario.comentarios_plaza">Comentarios Activados</span><span
               *ngIf="!vecindario.comentarios_plaza">Comentarios Desactivados</span>
           </mat-slide-toggle>
-        </div>
+        </div> -->
         <span class="app-toolbar-filler"></span>
         <button mat-button color="primary" [matMenuTriggerFor]="menudos">
           <mat-icon>settings</mat-icon> Configuración
@@ -70,7 +70,7 @@
         <mat-progress-bar mode="buffer"></mat-progress-bar>
       </div>
     </div>
-    <div *ngIf="vecindario.publicaciones_plaza" class="row" style="padding-left: 0;padding-right: 0;">
+    <div *ngIf="vecindario.publicaciones_plaza || checkAdminBarrio(vecindario.admin, user.uid) || user.admin" class="row" style="padding-left: 0;padding-right: 0;">
       <div style="padding-left: 0;padding-right: 0;"
         class="col-12 col-md-8 offset-md-2 col-lg-6 offset-lg-3 col-xl-8 offset-xl-2">
         <mat-card>
