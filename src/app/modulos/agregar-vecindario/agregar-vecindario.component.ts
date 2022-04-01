@@ -90,6 +90,7 @@ export class AgregarVecindarioComponent implements OnInit {
         descripcion: descripcion_con_espacio || null,
         region: this.region.value,
         comuna: this.comuna.value,
+        publicaciones_plaza: true,
         vecinos: [],
         admin: [],
         pendientes: [],
