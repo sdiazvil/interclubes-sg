@@ -1,0 +1,6 @@
+{
+    "short_name": "Vecindiario v2",
+    "name": "Vecindiario v2 Notificaciones",
+    "start_url": "/",
+    "gcm_sender_id": "103953800507"
+  }

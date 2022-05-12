@@ -7,6 +7,7 @@ import * as _ from 'lodash';
 import { AuthService } from '../../core/auth.service';
 import { EventosService } from '../../core/eventos.service';
 import { NoticiasService } from '../../core/noticias.service';
+import { NotificacionesService } from '../../core/notificaciones.service';
 import { VecindariosService } from '../../core/vecindarios.service';
 import { ArchivoOcho } from './../../interfaces/archivo-ocho';
 const SMALL_WIDTH_BREAKPOINT = 1100;
@@ -31,7 +32,7 @@ export class PlazaComponent implements OnInit {
   listaArchivos: ArchivoOcho;
   cargando_movil = false;
   cargando_web = false;
-  constructor(private elementRef: ElementRef, private router: Router, public vs: VecindariosService, private es: EventosService, private storage: AngularFireStorage, public fb: FormBuilder, public snackBar: MatSnackBar, public authService: AuthService, private ns: NoticiasService) {
+  constructor(public notificacionesService: NotificacionesService,private elementRef: ElementRef, private router: Router, public vs: VecindariosService, private es: EventosService, private storage: AngularFireStorage, public fb: FormBuilder, public snackBar: MatSnackBar, public authService: AuthService, private ns: NoticiasService) {
   }
   ngOnInit() {
     this.noticias$ = this.ns.getNoticiasFiltrable();

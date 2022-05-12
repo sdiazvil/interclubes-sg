@@ -87,6 +87,7 @@ import { ModoComponent } from './ui/modo/modo.component';
 import { MostrarMasComponent } from './ui/mostrar-mas/mostrar-mas.component';
 import { SidenavComponent } from './ui/sidenav/sidenav.component';
 import { SpinnerComponent } from './ui/spinner/spinner.component';
+import { NotificacionesService } from './core/notificaciones.service';
 registerLocaleData(locale);
 @NgModule({
   declarations: [
@@ -183,7 +184,8 @@ registerLocaleData(locale);
     NoticiasComponent,
     PlazaComponent,
     ProntoGuard,
-    AdminGuard
+    AdminGuard,
+    NotificacionesService
   ],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],

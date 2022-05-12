@@ -4,6 +4,7 @@ import { Event as RouterEvent, NavigationCancel, NavigationEnd, NavigationError,
 import 'rxjs/add/observable/empty';
 import { AuthService } from './core/auth.service';
 import { NoticiasService } from './core/noticias.service';
+import { NotificacionesService } from './core/notificaciones.service';
 import { VecindariosService } from './core/vecindarios.service';
 import { MENUS } from './interfaces/menus';
 const SMALL_WIDTH_BREAKPOINT = 1100;
@@ -21,7 +22,7 @@ export class AppComponent {
   user: any;
   vecindarios$: any;
   vecindarioActual: any = 0;
-  constructor(private ns: NoticiasService, private vs: VecindariosService, public snackBar: MatSnackBar, private router: Router, public authService: AuthService) {
+  constructor(public notificacionesService: NotificacionesService, private ns: NoticiasService, private vs: VecindariosService, public snackBar: MatSnackBar, private router: Router, public authService: AuthService) {
     router.events.subscribe((event: RouterEvent) => {
       this.navigationInterceptor(event);
     });
@@ -30,6 +31,9 @@ export class AppComponent {
     this.authService.user.subscribe(user => {
       this.user = user
       if (user) {
+        this.notificacionesService.permisoNotificaciones(user);
+        this.notificacionesService.monitorRefrescarToken(user);
+        this.notificacionesService.recibirNotificaciones();
         if (user.vecindarios.length > 0) {
           if (this.user.actual) {
             this.vecindarioActual = this.user.actual;
