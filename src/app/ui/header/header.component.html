@@ -18,15 +18,30 @@
                 matTooltip="Usuarios">
                 <i class="material-icons">group</i>
             </button>
-            <button mat-icon-button style="color:#fff;margin-right:5px;" [matMenuTriggerFor]="menu2"
+            <!-- <button *ngIf="this.checkDosBarbas(user)" mat-icon-button style="color:#fff;margin-right:5px;" [matMenuTriggerFor]="menu2" -->
+            <button *ngIf="this.mostrarNotificaciones" mat-icon-button style="color:#fff;margin-right:5px;" [matMenuTriggerFor]="menu2"
                 matTooltip="Notificaciones">
                 <i class="material-icons">public</i>
+                <sup *ngIf="this.notificaciones | async as notificaciones" class="badge badge-pill badge-danger">{{this.checkNotificacionesNoleidas(notificaciones)}}</sup>
             </button>
+            <!-- <div class="circle red"></div> -->
             <mat-menu #menu2="matMenu" style="z-index:99!important;">
-                <button mat-menu-item>
-                    <mat-icon>public</mat-icon>
-                    <span>Pronto estarán disponibles las Notificaciones!</span>
-                </button>
+                <!-- <button mat-menu-item style="white-space: normal;background-color: rgb(31, 167, 251,0.4);" routerLink="/">
+                    <mat-icon>home</mat-icon>
+                    <b>Juan Perez</b> ha publicado en la Plaza de la Comunidad <b>"Dos Barbas"</b>
+                  </button>
+                <button mat-menu-item style="white-space: normal">
+                    <mat-icon>home</mat-icon>
+                    Juan Perez ha publicado en la Plaza de Dos Baras.
+                  </button> -->
+                <button mat-menu-item *ngFor="let notificacion of this.notificaciones | async" style="white-space: normal;" [ngClass]="{'noleido':!notificacion.leido, 'leido':notificacion.leido}" (click)="marcarLeida(notificacion.id)">
+                    <mat-icon>home</mat-icon>
+                    <b>Un vecino</b> {{notificacion.accion}}. <small>{{notificacion.fecha | amTimeAgo}}</small>
+                  </button>
+                <!-- <button mat-menu-item style="white-space: normal" *ngFor="let notificacion_leida of this.notificaciones_leidas | async">
+                    <mat-icon>home</mat-icon>
+                    <b>{{(notificacion_leida.userRef | doc | async)?.displayName }}</b> {{notificacion_leida.accion}}. <small>{{notificacion_leida.fecha | amTimeAgo}}</small>
+                  </button> -->
             </mat-menu>
             <button mat-button *ngIf="!this.ac.isScreenSmall()" [matMenuTriggerFor]="menu1">
                 <img class="rounded-circle foto-perfil" width="30px" height="30px"

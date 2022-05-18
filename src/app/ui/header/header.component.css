@@ -1,21 +1,25 @@
-  .tool-logo{
-    background-color: #00285C;
-    height: 64px;
-    z-index:98!important;
-  }
-  .logo{
-    padding-top: 20px;
+.tool-logo {
+  background-color: #00285C;
+  height: 64px;
+  z-index: 98 !important;
 }
+
+.logo {
+  padding-top: 20px;
+}
+
 mat-toolbar {
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
-.foto-perfil{
+
+.foto-perfil {
   border: double 2px transparent;
   border-radius: 80px;
-  background-image: linear-gradient(white, white), radial-gradient(circle at top left, #fff,#f6f6f6);
+  background-image: linear-gradient(white, white), radial-gradient(circle at top left, #fff, #f6f6f6);
   background-origin: border-box;
-  background-clip: content-box, border-box;  
+  background-clip: content-box, border-box;
 }
+
 .image-cropper {
   width: 25px;
   height: 25px;
@@ -23,10 +27,89 @@ mat-toolbar {
   overflow: hidden;
   border-radius: 50%;
 }
+
 .profile-pic {
-display: inline;
-margin: 0 auto;
-margin-left: -25%;
-height: 100%;
-width: auto;
+  display: inline;
+  margin: 0 auto;
+  margin-left: -25%;
+  height: 100%;
+  width: auto;
+}
+
+::ng-deep button.mat-menu-item {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  cursor: pointer;
+  outline: 0;
+  border: none;
+  -webkit-tap-highlight-color: transparent;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: block;
+  /** set line height to desired height */
+  line-height: 18px;
+  /** set height to auto */
+  height: auto;
+  padding: 10px 16px;
+  margin-top: 5px;
+  text-align: left;
+  text-decoration: none;
+  max-width: 100%;
+  position: relative;
+}
+
+::ng-deep div.mat-menu-panel {
+  min-width: 112px;
+  /** set width to 500px */
+  max-width: 500px;
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
+  max-height: calc(100vh - 48px);
+  border-radius: 4px;
+  outline: 0;
+}
+
+@keyframes up-right {
+  0% {
+    transform: scale(1);
+    opacity: .25
+  }
+
+  50% {
+    transform: scale (1, 5);
+    opacity: 1;
+  }
+
+  100% {
+    transform: scale(1);
+    opacity: .25;
+  }
+}
+
+.circle {
+  border-radius: 50%;
+  width: 15px;
+  height: 15px;
+  opacity: .25;
+}
+
+.red {
+  background-color: red;
+  position: absolute;
+  top: 25%;
+  left: 86%;
+  -webkit-animation: up-right 1s infinite;
+  -moz-animation: up-right 1s infinite;
+  -o-animation: up-right 1s infinite;
+  animation: up-right 1s infinite;
+}
+
+.noleido {
+  background-color: rgb(31, 167, 251, 0.4);
+}
+
+.leido {
 }

@@ -9,6 +9,8 @@ import { Observable } from 'rxjs/Observable';
 import { AuthService } from '../../core/auth.service';
 import { CategoriasService } from '../../core/categorias.service';
 import { NoticiasService } from '../../core/noticias.service';
+import { NotificacionesService } from '../../core/notificaciones.service';
+import { VecindariosService } from '../../core/vecindarios.service';
 import { ArchivoCuatro } from '../../interfaces/archivo-cuatro';
 export interface IlinkPreview {
   description: string;
@@ -73,7 +75,7 @@ export class EscribirPlazaComponent implements OnInit {
       image: 'http://www.google.com/images/branding/googlelogo/1x/googlelogo_white_background_color_272x92dp.png'
     }
   ];
-  constructor(private http: HttpClient, public cs: CategoriasService, private storage: AngularFireStorage, private ns: NoticiasService, public snackBar: MatSnackBar, private router: Router, public authService: AuthService, public fb: FormBuilder) { }
+  constructor(private vs: VecindariosService, private http: HttpClient, public cs: CategoriasService,public notiService: NotificacionesService, private storage: AngularFireStorage, private ns: NoticiasService, public snackBar: MatSnackBar, private router: Router, public authService: AuthService, public fb: FormBuilder) { }
   ngOnInit() {
     this.formulario = this.fb.group({
       'nombre': [''],
@@ -149,6 +151,21 @@ export class EscribirPlazaComponent implements OnInit {
       this.noticiaId = null;
       this.formulario.reset();
       this.ns.mostrarFormulario=false;
+      if(this.authService.vecindarioId == 'XlsfFUjwbcuAzeQesPIa'){
+        let vecinos:any;
+        this.vs.getVecindario('XlsfFUjwbcuAzeQesPIa').subscribe((vecindario:any) => {
+          vecinos = vecindario.vecinos;
+          console.log(vecinos);
+          console.log(user.uid);
+          vecinos = vecinos.filter(vecino => vecino.userId !== user.uid);
+          console.log(vecinos);
+          vecinos.forEach(vecino =>{
+            setTimeout(() => {
+              this.notiService.agregarNotificacion(vecino.userId);
+            }, 500);
+          });
+        });
+      }
     }, 1000);
   }
   cerrarModal(fotos: Array<any>) {

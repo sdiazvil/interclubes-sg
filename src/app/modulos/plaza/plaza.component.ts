@@ -32,6 +32,7 @@ export class PlazaComponent implements OnInit {
   listaArchivos: ArchivoOcho;
   cargando_movil = false;
   cargando_web = false;
+  noti:any;
   constructor(public notificacionesService: NotificacionesService,private elementRef: ElementRef, private router: Router, public vs: VecindariosService, private es: EventosService, private storage: AngularFireStorage, public fb: FormBuilder, public snackBar: MatSnackBar, public authService: AuthService, private ns: NoticiasService) {
   }
   ngOnInit() {
@@ -52,6 +53,7 @@ export class PlazaComponent implements OnInit {
         this.sidenav.close();
       }
     });
+    this.notificacionesService.notificacionActual.subscribe(noti => this.noti = noti);
   }
   get texto() { return this.formulario.get('texto') }
   ngOnDestroy() {

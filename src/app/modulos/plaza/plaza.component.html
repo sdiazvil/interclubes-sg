@@ -70,6 +70,20 @@
         <mat-progress-bar mode="buffer"></mat-progress-bar>
       </div>
     </div>
+    <div class="row justify-content-center" *ngIf="this.noti">
+      <div class="col-12 col-md-9">
+        <div class="alert alert-warning" role="alert">
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close"
+            (click)="this.notificacionesService.notificacionBase.next('')">
+            <span aria-hidden="true">&times;</span>
+          </button>
+          <h4 class="alert-heading">
+            <img class="rounded-circle" [src]="noti.notification.icon" width="50px">
+            {{ noti.notification.title }}</h4>
+          <p> {{ noti.notification.body }} </p>
+        </div>
+      </div>
+    </div>
     <div *ngIf="vecindario.publicaciones_plaza || checkAdminBarrio(vecindario.admin, user.uid) || user.admin" class="row" style="padding-left: 0;padding-right: 0;">
       <div style="padding-left: 0;padding-right: 0;"
         class="col-12 col-md-8 offset-md-2 col-lg-6 offset-lg-3 col-xl-8 offset-xl-2">
@@ -86,20 +100,7 @@
       </div>
     </div>
     <app-categorias></app-categorias>
-    <div class="row justify-content-center" *ngIf="this.notificacionesService.notificacionActual | async as noti">
-      <div class="col-12 col-md-8">
-        <div class="alert alert-warning" role="alert">
-          <button type="button" class="close" data-dismiss="alert" aria-label="Close"
-            (click)="this.notificacionesService.notificacionBase.next('')">
-            <span aria-hidden="true">&times;</span>
-          </button>
-          <h4 class="alert-heading">
-            <img class="rounded-circle" [src]="noti.notification.icon" width="50px">
-            {{ noti.notification.title }}</h4>
-          <p> {{ noti.notification.body }} </p>
-        </div>
-      </div>
-    </div>
+
     <div class="row" style="padding-left: 0;padding-right: 0;" *ngIf="cargando">
       <div style="padding-left: 0;padding-right: 0;"
         class="col-12 col-md-8 offset-md-2 col-lg-6 offset-lg-3 col-xl-8 offset-xl-2">

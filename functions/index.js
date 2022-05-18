@@ -16,7 +16,7 @@ admin.initializeApp({
 });
 
 exports.notifyUser = functions.firestore
-  .document('noticias/{noticiaId}')
+  .document('notificaciones/{notificacionId}')
   .onCreate(event => {
 
     const notificacion = event.data();
@@ -25,8 +25,14 @@ exports.notifyUser = functions.firestore
     // Message details for end user
     const payload = {
       notification: {
-        title: 'Tienes una nueva noticia!',
-        body: `${notificacion.categoria} es la categoria de publicacion!`,
+        // title: 'Tienes una nueva noticia!',
+        // body: `${notificacion.categoria} es la categoria de publicacion!`,
+        // icon: 'https://i.stack.imgur.com/34AD2.jpg',
+        // sound: 'default',
+        // badge: '1',
+        // click_action: "https://www.vecindiario.org/"
+        title: 'Tienes una nueva notificación!',
+        body: `Un vecino escribió en la plaza de tu comunidad!`,
         icon: 'https://i.stack.imgur.com/34AD2.jpg',
         sound: 'default',
         badge: '1',
