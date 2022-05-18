@@ -11,6 +11,7 @@ import { NotificacionesService } from '../../core/notificaciones.service';
 import { VecindariosService } from '../../core/vecindarios.service';
 import { ArchivoOcho } from './../../interfaces/archivo-ocho';
 const SMALL_WIDTH_BREAKPOINT = 1100;
+import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'app-plaza',
   templateUrl: './plaza.component.html',
@@ -32,8 +33,8 @@ export class PlazaComponent implements OnInit {
   listaArchivos: ArchivoOcho;
   cargando_movil = false;
   cargando_web = false;
-  noti:any;
-  constructor(public notificacionesService: NotificacionesService,private elementRef: ElementRef, private router: Router, public vs: VecindariosService, private es: EventosService, private storage: AngularFireStorage, public fb: FormBuilder, public snackBar: MatSnackBar, public authService: AuthService, private ns: NoticiasService) {
+  noti: any;
+  constructor(private toastr: ToastrService, public notificacionesService: NotificacionesService, private elementRef: ElementRef, private router: Router, public vs: VecindariosService, private es: EventosService, private storage: AngularFireStorage, public fb: FormBuilder, public snackBar: MatSnackBar, public authService: AuthService, private ns: NoticiasService) {
   }
   ngOnInit() {
     this.noticias$ = this.ns.getNoticiasFiltrable();
@@ -53,7 +54,10 @@ export class PlazaComponent implements OnInit {
         this.sidenav.close();
       }
     });
-    this.notificacionesService.notificacionActual.subscribe(noti => this.noti = noti);
+    this.notificacionesService.notificacionActual.subscribe(noti => {
+      this.noti = noti;
+      this.toastr.success('Hello world!', 'Toastr fun!');
+    });
   }
   get texto() { return this.formulario.get('texto') }
   ngOnDestroy() {
@@ -180,14 +184,14 @@ export class PlazaComponent implements OnInit {
       item.userId == userId
     )
   }
-  subirBanner(evento: FileList, vecindario: any, tipo:string) {
-    if(tipo == 'Movil'){
+  subirBanner(evento: FileList, vecindario: any, tipo: string) {
+    if (tipo == 'Movil') {
       if (vecindario.path_banner_movil) {
         this.storage.ref(vecindario.path_banner_movil).delete();
         this.cargando_movil = true;
       }
     }
-    if(tipo == 'Web'){
+    if (tipo == 'Web') {
       if (vecindario.path_banner_web) {
         this.storage.ref(vecindario.path_banner_web).delete();
         this.cargando_web = true;

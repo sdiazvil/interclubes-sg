@@ -88,6 +88,7 @@ import { MostrarMasComponent } from './ui/mostrar-mas/mostrar-mas.component';
 import { SidenavComponent } from './ui/sidenav/sidenav.component';
 import { SpinnerComponent } from './ui/spinner/spinner.component';
 import { NotificacionesService } from './core/notificaciones.service';
+import { ToastrModule } from 'ngx-toastr';
 registerLocaleData(locale);
 @NgModule({
   declarations: [
@@ -159,7 +160,12 @@ registerLocaleData(locale);
     InfiniteScrollModule,
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyBOzieyGzalZ5117bvhqkvFyZkB6Jx7Ppo'
-    })
+    }),
+    ToastrModule.forRoot({
+      timeOut: 4000,
+      positionClass: 'toast-bottom-right',
+      // preventDuplicates: false,
+    }),
   ],
   providers: [
     AuthService,
