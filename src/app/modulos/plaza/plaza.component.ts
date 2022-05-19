@@ -56,7 +56,7 @@ export class PlazaComponent implements OnInit {
     });
     this.notificacionesService.notificacionActual.subscribe(noti => {
       this.noti = noti;
-      this.toastr.success('Hello world!', 'Toastr fun!');
+      this.toastr.success(this.noti.notification.body, this.noti.notification.title, {progressBar:true});
     });
   }
   get texto() { return this.formulario.get('texto') }
