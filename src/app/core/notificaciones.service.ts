@@ -22,27 +22,23 @@ export class NotificacionesService {
   permisoNotificaciones(user) {
     this.notificacion.requestPermission()
       .then(() => {
-        console.log('Permisos de Notificación Entregados.');
+        // console.log('Permisos de Notificación Entregados.');
         return this.notificacion.getToken()
       })
       .then(token => {
-        console.log(token)
+        // console.log(token)
         this.guardarToken(user, token)
       })
       .catch((err) => {
-        console.log('No es posible entregar permisos de notificación.', err);
+        // console.log('No es posible entregar permisos de notificación.', err);
       });
-  }
-
-  llamarFuncion(noti:any){
-    console.log(noti);
   }
 
   monitorRefrescarToken(user) {
     this.notificacion.onTokenRefresh(() => {
       this.notificacion.getToken()
         .then(refreshedToken => {
-          console.log('Token refrescado.');
+          // console.log('Token refrescado.');
           this.guardarToken(user, refreshedToken)
         })
         .catch(err => console.log(err, 'No se puede entregar un nuevo token'))
@@ -51,7 +47,7 @@ export class NotificacionesService {
 
   recibirNotificaciones() {
     this.notificacion.onMessage(payload => {
-      console.log('Notificiación recibida. ', payload);
+      // console.log('Notificiación recibida. ', payload);
       this.notificacionBase.next(payload)
     });
 
@@ -61,7 +57,7 @@ export class NotificacionesService {
   private guardarToken(user, token): void {
 
     const currentTokens = user.fcmTokens || {}
-    console.log(currentTokens, token)
+    // console.log(currentTokens, token)
 
     // If token does not exist in firestore, update db
     if (!currentTokens[token]) {
@@ -91,13 +87,6 @@ export class NotificacionesService {
       })
     })
   }
-  // getMisNotificacionesLeidas(id:string){
-  //   return this.afs.collection('notificaciones', ref => ref.orderBy('fecha', 'desc').where('vecindarioId', '==', 'XlsfFUjwbcuAzeQesPIa').where('leido','==',true).limit(5)).snapshotChanges().map(actions => {
-  //     return actions.map(a => {
-  //       return { id: a.payload.doc.id, ...a.payload.doc.data() }
-  //     })
-  //   })
-  // }
 
   get(id) {
     return this.afs.doc<any>(`notificaciones/${id}`);

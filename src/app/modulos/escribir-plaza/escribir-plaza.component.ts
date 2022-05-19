@@ -155,10 +155,7 @@ export class EscribirPlazaComponent implements OnInit {
         let vecinos:any;
         this.vs.getVecindario('XlsfFUjwbcuAzeQesPIa').subscribe((vecindario:any) => {
           vecinos = vecindario.vecinos;
-          console.log(vecinos);
-          console.log(user.uid);
           vecinos = vecinos.filter(vecino => vecino.userId !== user.uid);
-          console.log(vecinos);
           vecinos.forEach(vecino =>{
             setTimeout(() => {
               this.notiService.agregarNotificacion(vecino.userId);

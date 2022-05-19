@@ -14,14 +14,12 @@ export class HeaderComponent implements OnInit {
   selected = 'Brisas del Norte';
   notificaciones: any;
   mostrarNotificaciones: boolean = false;
-  // notificaciones_leidas:any;
   constructor(public ac: AppComponent, private modalService: NgbModal, public snackBar: MatSnackBar, public authService: AuthService,
     private router: Router, public notiService: NotificacionesService,
     private activatedRouter: ActivatedRoute) { }
   ngOnInit() {
 
     this.authService.user.subscribe(user => {
-      console.log(user)
       user.vecindarios.forEach(vecindario => {
         if (vecindario.vecindarioId == 'XlsfFUjwbcuAzeQesPIa') {
           this.mostrarNotificaciones = true;
@@ -31,7 +29,6 @@ export class HeaderComponent implements OnInit {
       })
       this.notificaciones = this.notiService.getMisNotificaciones(user.uid);
     });
-    // this.notificaciones_leidas = this.notiService.getMisNotificacionesLeidas('asdf');
   }
   onLogout() {
     this.authService.salir();
@@ -54,14 +51,7 @@ export class HeaderComponent implements OnInit {
       } else {
         return false;
       }
-    })
-
-    // const dosbarbas = user.vecindarios.find(vecindario => vecindario.vecindarioId == 'XlsfFUjwbcuAzeQesPIa');
-    // if (dosbarbas) {
-    //   return true;
-    // } else {
-    //   return false;
-    // }
+    });
   }
 
   marcarLeida(id: string) {
