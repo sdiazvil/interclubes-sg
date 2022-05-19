@@ -165,7 +165,7 @@ registerLocaleData(locale);
     ToastrModule.forRoot({
       timeOut: 4000,
       positionClass: 'toast-bottom-right',
-      // preventDuplicates: false,
+      preventDuplicates: true,
     }),
   ],
   providers: [

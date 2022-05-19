@@ -12,7 +12,9 @@ export class NotificacionesService {
   private notificacionBase = new Subject();
   notificacionesCol: AngularFirestoreCollection<any>;
 
-  notificacionActual = this.notificacionBase.asObservable()
+  notificacionActual = this.notificacionBase.asObservable();
+
+  mostrarNotificaciones = false;
 
   constructor(private afs: AngularFirestore, private authService: AuthService) {
     this.notificacionesCol = this.afs.collection('notificaciones', ref => ref.orderBy('fecha', 'desc'));

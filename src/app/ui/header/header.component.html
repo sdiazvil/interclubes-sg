@@ -19,7 +19,7 @@
                 <i class="material-icons">group</i>
             </button>
             <!-- <button *ngIf="this.checkDosBarbas(user)" mat-icon-button style="color:#fff;margin-right:5px;" [matMenuTriggerFor]="menu2" -->
-            <button *ngIf="this.mostrarNotificaciones" mat-icon-button style="color:#fff;margin-right:5px;" [matMenuTriggerFor]="menu2"
+            <button *ngIf="this.notiService.mostrarNotificaciones" mat-icon-button style="color:#fff;margin-right:5px;" [matMenuTriggerFor]="menu2"
                 matTooltip="Notificaciones">
                 <i class="material-icons">public</i>
                 <sup *ngIf="this.notificaciones | async as notificaciones" class="badge badge-pill badge-danger">{{this.checkNotificacionesNoleidas(notificaciones)}}</sup>
