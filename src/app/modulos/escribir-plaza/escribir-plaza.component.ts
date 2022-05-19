@@ -155,11 +155,9 @@ export class EscribirPlazaComponent implements OnInit {
         let vecinos:any;
         this.vs.getVecindario('XlsfFUjwbcuAzeQesPIa').subscribe((vecindario:any) => {
           vecinos = vecindario.vecinos;
-          vecinos = vecinos.filter(vecino => vecino.userId !== user.uid);
+          vecinos = vecinos.filter(vecino => vecino.userId != user.uid);
           vecinos.forEach(vecino =>{
-            setTimeout(() => {
               this.notiService.agregarNotificacion(vecino.userId);
-            }, 500);
           });
         });
       }
