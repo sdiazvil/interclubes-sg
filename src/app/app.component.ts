@@ -31,9 +31,6 @@ export class AppComponent {
     this.authService.user.subscribe(user => {
       this.user = user
       if (user) {
-        this.notificacionesService.permisoNotificaciones(user);
-        this.notificacionesService.monitorRefrescarToken(user);
-        this.notificacionesService.recibirNotificaciones();
         if (user.vecindarios.length > 0) {
           if (this.user.actual) {
             this.vecindarioActual = this.user.actual;
@@ -41,6 +38,9 @@ export class AppComponent {
             this.vecindarioActual = this.user.vecindarios[0].vecindarioId;
           }
           this.authService.vecindarioId = this.vecindarioActual;
+          this.notificacionesService.permisoNotificaciones(user);
+          this.notificacionesService.monitorRefrescarToken(user);
+          this.notificacionesService.recibirNotificaciones();
         }
       } else {
       }

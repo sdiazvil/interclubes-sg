@@ -75,7 +75,7 @@ export class EscribirPlazaComponent implements OnInit {
       image: 'http://www.google.com/images/branding/googlelogo/1x/googlelogo_white_background_color_272x92dp.png'
     }
   ];
-  constructor(private vs: VecindariosService, private http: HttpClient, public cs: CategoriasService,public notiService: NotificacionesService, private storage: AngularFireStorage, private ns: NoticiasService, public snackBar: MatSnackBar, private router: Router, public authService: AuthService, public fb: FormBuilder) { }
+  constructor(private vs: VecindariosService, private http: HttpClient, public cs: CategoriasService, public notiService: NotificacionesService, private storage: AngularFireStorage, private ns: NoticiasService, public snackBar: MatSnackBar, private router: Router, public authService: AuthService, public fb: FormBuilder) { }
   ngOnInit() {
     this.formulario = this.fb.group({
       'nombre': [''],
@@ -141,6 +141,17 @@ export class EscribirPlazaComponent implements OnInit {
         }
       );
     }
+    if (this.authService.vecindarioId == 'XlsfFUjwbcuAzeQesPIa') {
+      let vecinos: any;
+      this.vs.getVecindario('XlsfFUjwbcuAzeQesPIa').subscribe((vecindario: any) => {
+        vecinos = vecindario.vecinos;
+        vecinos = vecinos.filter(vecino => vecino.userId != user.uid);
+        // console.log(vecinos)
+        vecinos.forEach(vecino => {
+          this.notiService.agregarNotificacion(vecino.userId);
+        });
+      });
+    }
     this.snackBar.open('La publicación ha sido agregada correctamente.', 'CERRAR', {
       duration: 4000
     });
@@ -150,17 +161,7 @@ export class EscribirPlazaComponent implements OnInit {
       this.noticiaActual = null;
       this.noticiaId = null;
       this.formulario.reset();
-      this.ns.mostrarFormulario=false;
-      if(this.authService.vecindarioId == 'XlsfFUjwbcuAzeQesPIa'){
-        let vecinos:any;
-        this.vs.getVecindario('XlsfFUjwbcuAzeQesPIa').subscribe((vecindario:any) => {
-          vecinos = vecindario.vecinos;
-          vecinos = vecinos.filter(vecino => vecino.userId != user.uid);
-          vecinos.forEach(vecino =>{
-              this.notiService.agregarNotificacion(vecino.userId);
-          });
-        });
-      }
+      this.ns.mostrarFormulario = false;
     }, 1000);
   }
   cerrarModal(fotos: Array<any>) {

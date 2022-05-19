@@ -13,20 +13,12 @@ import { NotificacionesService } from '../../core/notificaciones.service';
 export class HeaderComponent implements OnInit {
   selected = 'Brisas del Norte';
   notificaciones: any;
-  mostrarNotificaciones: boolean = false;
   constructor(public ac: AppComponent, private modalService: NgbModal, public snackBar: MatSnackBar, public authService: AuthService,
     private router: Router, public notiService: NotificacionesService,
     private activatedRouter: ActivatedRoute) { }
   ngOnInit() {
 
     this.authService.user.subscribe(user => {
-      user.vecindarios.forEach(vecindario => {
-        if (vecindario.vecindarioId == 'XlsfFUjwbcuAzeQesPIa') {
-          this.notiService.mostrarNotificaciones = true;
-        } else {
-          this.notiService.mostrarNotificaciones = false;
-        }
-      })
       this.notificaciones = this.notiService.getMisNotificaciones(user.uid);
     });
   }

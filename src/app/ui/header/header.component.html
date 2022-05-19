@@ -5,10 +5,11 @@
     </button>
     <span>
         <a routerLink="/">
-            <img *ngIf="!this.ac.isScreenSmall()" src="/assets/logo4.png" style="padding-bottom:5px; margin-left:10px;" width="200"
-                class="img-fluid d-inline-block" alt="VecinDiario">
-            <img *ngIf="this.ac.isScreenSmall()" src="/assets/logo_mobile.png" style="padding-bottom:5px; margin-left:10px;" width="35"
-                class="img-fluid d-inline-block" alt="VecinDiario">
+            <img *ngIf="!this.ac.isScreenSmall()" src="/assets/logo4.png" style="padding-bottom:5px; margin-left:10px;"
+                width="200" class="img-fluid d-inline-block" alt="VecinDiario">
+            <img *ngIf="this.ac.isScreenSmall()" src="/assets/logo_mobile.png"
+                style="padding-bottom:5px; margin-left:10px;" width="35" class="img-fluid d-inline-block"
+                alt="VecinDiario">
         </a>
     </span>
     <span class="app-toolbar-filler"></span>
@@ -19,10 +20,11 @@
                 <i class="material-icons">group</i>
             </button>
             <!-- <button *ngIf="this.checkDosBarbas(user)" mat-icon-button style="color:#fff;margin-right:5px;" [matMenuTriggerFor]="menu2" -->
-            <button *ngIf="this.notiService.mostrarNotificaciones" mat-icon-button style="color:#fff;margin-right:5px;" [matMenuTriggerFor]="menu2"
+            <button mat-icon-button style="color:#fff;margin-right:5px;" [matMenuTriggerFor]="menu2"
                 matTooltip="Notificaciones">
                 <i class="material-icons">public</i>
-                <sup *ngIf="this.notificaciones | async as notificaciones" class="badge badge-pill badge-danger">{{this.checkNotificacionesNoleidas(notificaciones)}}</sup>
+                <sup *ngIf="this.notificaciones | async as notificaciones"
+                    class="badge badge-pill badge-danger">{{this.checkNotificacionesNoleidas(notificaciones)}}</sup>
             </button>
             <!-- <div class="circle red"></div> -->
             <mat-menu #menu2="matMenu" style="z-index:99!important;">
@@ -34,10 +36,18 @@
                     <mat-icon>home</mat-icon>
                     Juan Perez ha publicado en la Plaza de Dos Baras.
                   </button> -->
-                <button mat-menu-item *ngFor="let notificacion of this.notificaciones | async" style="white-space: normal;" [ngClass]="{'noleido':!notificacion.leido, 'leido':notificacion.leido}" (click)="marcarLeida(notificacion.id)">
+                <button mat-menu-item *ngFor="let notificacion of this.notificaciones | async"
+                    style="white-space: normal;" [ngClass]="{'noleido':!notificacion.leido, 'leido':notificacion.leido}"
+                    (click)="marcarLeida(notificacion.id)">
                     <mat-icon>home</mat-icon>
                     <b>Un vecino</b> {{notificacion.accion}}. <small>{{notificacion.fecha | amTimeAgo}}</small>
-                  </button>
+                </button>
+                <div *ngIf="this.notificaciones | async as notificaciones">
+                    <button *ngIf="notificaciones.length==0" mat-menu-item style="white-space: normal;">
+                        <mat-icon>public</mat-icon>
+                        No tienes nuevas notificaciones.
+                    </button>
+                </div>
                 <!-- <button mat-menu-item style="white-space: normal" *ngFor="let notificacion_leida of this.notificaciones_leidas | async">
                     <mat-icon>home</mat-icon>
                     <b>{{(notificacion_leida.userRef | doc | async)?.displayName }}</b> {{notificacion_leida.accion}}. <small>{{notificacion_leida.fecha | amTimeAgo}}</small>
