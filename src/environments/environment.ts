@@ -1,12 +1,12 @@
 export const environment = {
   production: false,
   firebase: {
-    apiKey: "AIzaSyBghgGT-v5SulmVsLmqM4hKo33DxE4r_gs",
-    authDomain: "vecindiario-v2.firebaseapp.com",
-    projectId: "vecindiario-v2",
-    storageBucket: "vecindiario-v2.appspot.com",
-    messagingSenderId: "439570071836",
-    appId: "1:439570071836:web:8d63f29ff1a77f96b5bad9",
-    measurementId: "G-RYHP9SJL3P"
+    apiKey: "AIzaSyAFcChY4pit_ikvuQtFf8RZMwXVnUpMyXE",
+    authDomain: "liga-socios.firebaseapp.com",
+    projectId: "liga-socios",
+    storageBucket: "liga-socios.appspot.com",
+    messagingSenderId: "467722401923",
+    appId: "1:467722401923:web:956a9ae184e323e0e083b6",
+    measurementId: "G-WXX4TH7L4D"
   }
 };

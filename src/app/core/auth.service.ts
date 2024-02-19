@@ -84,9 +84,6 @@ export class AuthService {
               displayName: datos.displayName,
               userRef: this.getUserPub(user.uid).ref,
             });
-            this.vs.actualizar(datos.vecindarioId,
-              { pendientes: arreglo }
-            );
           resolve(user);
         })
         .catch((err: any) => {
@@ -123,8 +120,6 @@ export class AuthService {
       photoURL: user.photoURL || null,
       admin: false,
       path: null,
-      vecindarios: [],
-      actual: null
     }
     return userRef.set(data)
   }

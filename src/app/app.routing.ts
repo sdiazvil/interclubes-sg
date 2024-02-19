@@ -20,22 +20,29 @@ import { ProntoComponent } from './modulos/pronto/pronto.component';
 import { RepositorioComponent } from './modulos/repositorio/repositorio.component';
 import { UsuariosComponent } from './modulos/usuarios/usuarios.component';
 import { VecindariosComponent } from './modulos/vecindarios/vecindarios.component';
+import { LigaComponent } from './modulos-nuevos/liga/liga.component';
+import { MatchesComponent } from './modulos-nuevos/matches/matches.component';
+import { TablaComponent } from './modulos-nuevos/tabla/tabla.component';
+
 const ingreso = 'Ingreso';
 const secciones = 'Secciones';
+
 export const ROUTES: Routes = [
-  { path: '', component: PlazaComponent,  canActivate: [AuthGuard, ProntoGuard] },
-  { path: 'links', component: EncuestasComponent,  canActivate: [AuthGuard] },
-  { path: 'link/:id', component: EncuestaComponent,  canActivate: [AuthGuard] },
-  { path: 'documentos', component: RepositorioComponent,  canActivate: [AuthGuard] },
-  { path: 'equipo', component: EquipoComponent,  canActivate: [AuthGuard] },
-  { path: 'agenda', component: EventosComponent,  canActivate: [AuthGuard] },
-  { path: 'contacto', component: ContactoComponent,  canActivate: [AuthGuard]},
-  { path: 'preview', component: PreviewComponent,  canActivate: [AuthGuard, ProntoGuard] },
-  { path: 'agenda/:id', component: EventoComponent,  canActivate: [AuthGuard] },
-  { path: 'pronto', component: ProntoComponent,  canActivate: [AuthGuard] },
-  { path: 'grupos', component: GruposComponent,  canActivate: [AuthGuard] },
-  { path: 'grupo/:id', component: GrupoComponent,  canActivate: [AuthGuard] },
-  { path: 'comunidades', component: VecindariosComponent,  canActivate: [AuthGuard] },
+  { path: '', component: LigaComponent,  canActivate: [AuthGuard] },
+  { path: 'matches', component: MatchesComponent,  canActivate: [AuthGuard] },
+  { path: 'ranking', component: TablaComponent,  canActivate: [AuthGuard] },
+  // { path: 'links', component: EncuestasComponent,  canActivate: [AuthGuard] },
+  // { path: 'link/:id', component: EncuestaComponent,  canActivate: [AuthGuard] },
+  // { path: 'documentos', component: RepositorioComponent,  canActivate: [AuthGuard] },
+  // { path: 'equipo', component: EquipoComponent,  canActivate: [AuthGuard] },
+  // { path: 'agenda', component: EventosComponent,  canActivate: [AuthGuard] },
+  // { path: 'contacto', component: ContactoComponent,  canActivate: [AuthGuard]},
+  // { path: 'preview', component: PreviewComponent,  canActivate: [AuthGuard, ProntoGuard] },
+  // { path: 'agenda/:id', component: EventoComponent,  canActivate: [AuthGuard] },
+  // { path: 'pronto', component: ProntoComponent,  canActivate: [AuthGuard] },
+  // { path: 'grupos', component: GruposComponent,  canActivate: [AuthGuard] },
+  // { path: 'grupo/:id', component: GrupoComponent,  canActivate: [AuthGuard] },
+  // { path: 'comunidades', component: VecindariosComponent,  canActivate: [AuthGuard] },
   { path: 'usuarios', component: UsuariosComponent,  canActivate: [AuthGuard] },
   { path: 'registro', component: RegistroComponent, data: {  active: false, icon: 'person_add', text: 'Crear Cuenta', section: ingreso }, canActivate: [LoginGuard] },
   { path: 'iniciosesion', component: InisesComponent, data: {  active: false, icon: 'person', text: 'Iniciar Sesión', section: ingreso }, canActivate: [LoginGuard] },

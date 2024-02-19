@@ -1,13 +1,13 @@
 <div class="container-fluid">
-  <div class="row justify-content-center" style="padding-top: 120px; margin-bottom: 250px;">
+  <div class="row justify-content-center" style="padding-top: 100px; margin-bottom: 250px;">
     <div class="col-xs-10 col-sm-10 col-md-12 col-lg-6 col-xl-6">
       <div class="card">
         <form [formGroup]="formulario" (ngSubmit)="enviar()" novalidate>
           <div class="card-body">
-            <div class="text-center">
-              <img src="/assets/logo-vert.png" width="250" alt="Vecindiario">
-            </div>
-            <h3 class="text-center que">¡Regístrate en nuestra comunidad!
+            <!-- <div class="text-center">
+              <img src="/assets/logo_socios.png" width="170" alt="Vecindiario">
+            </div> -->
+            <h3 class="text-center que">Registro de Usuarios
             </h3>
             <div class="example-container">
               <mat-form-field>
@@ -60,14 +60,6 @@
                   }}</i>
                 <mat-error *ngIf="formulario.controls.confirmar.errors?.verificarContrasena">Las contraseñas no son
                   iguales.</mat-error>
-              </mat-form-field>
-              <mat-form-field>
-                <mat-select formControlName="vecindario" required placeholder="Seleccionar Comunidad...">
-                <mat-option [value]="vecindario" *ngFor="let vecindario of vecindarios | async">
-                  {{vecindario.nombre}}
-                </mat-option>
-                <mat-error *ngIf="formErrores.vecindario">{{formErrores.vecindario}}</mat-error>
-              </mat-select>
               </mat-form-field>
             </div>
             <button class="boton" type="submit" mat-raised-button color="accent" *ngIf="!cargando"

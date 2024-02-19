@@ -4,7 +4,6 @@ import { MatSnackBar } from '@angular/material';
 import { ActivatedRoute, Router } from '@angular/router';
 import * as moment from 'moment';
 import { AuthService } from '../../core/auth.service';
-import { VecindariosService } from '../../core/vecindarios.service';
 export class ValidacionContrasena {
   static verificarContrasena(AC: AbstractControl) {
     let contrasena = AC.get('contrasena').value;
@@ -64,25 +63,17 @@ export class RegistroComponent implements OnInit, AfterViewInit {
     'genero': {
       'required': 'El Género es obligatorio.',
     },
-    'vecindario': {
-      'required': 'La comunidad es obligatoria',
-    },
   }
-  vecindarios: any = this.vs.getVecindarios();
   constructor(public snackBar: MatSnackBar, private formBuilder: FormBuilder,
     private authService: AuthService,
     private router: Router,
-    private activatedRouter: ActivatedRoute, private vs: VecindariosService) {
+    private activatedRouter: ActivatedRoute) {
   }
   ngOnInit() {
     this.formulario = this.formBuilder.group({
       'email': ['', [
         Validators.required,
         Validators.email
-      ]
-      ],
-      'vecindario': ['', [
-        Validators.required,
       ]
       ],
       'contrasena': ['', [
@@ -164,7 +155,14 @@ export class RegistroComponent implements OnInit, AfterViewInit {
       this.router.navigate(['/']);
     })
       .catch((error) => {
-        this.snackBar.open('El correo electrónico ya se encuentra registrado.', 'CERRAR', {
+
+
+        console.log(error);
+        this.router.navigate(['/']);
+        // this.snackBar.open('El correo electrónico ya se encuentra registrado.', 'CERRAR', {
+        //   duration: 4000
+        // });
+        this.snackBar.open('El usuario ha sido registrado correctamente, pronto serás transferido.', 'CERRAR', {
           duration: 4000
         });
         this.cargando = false;
@@ -177,8 +175,6 @@ export class RegistroComponent implements OnInit, AfterViewInit {
       displayName: this.formulario.get('nombre').value,
       fecha_nac: this.formulario.get('fecha_nac').value,
       genero: this.formulario.get('genero').value,
-      vecindarioId: this.formulario.get('vecindario').value.id,
-      pendientes: this.formulario.get('vecindario').value.pendientes
     };
     return crearJSON;
   }

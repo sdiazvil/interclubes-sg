@@ -11,9 +11,9 @@
     border-top:1px solid rgba(0, 0, 0, 0.12);
   }
   .active {
-    color: #06A8F9 !important;
+    color: #BF5D44 !important;
     font-weight: bolder;
-    border-right: solid 4px #06A8F9;
+    border-right: solid 4px #BF5D44;
     background: #F3F8FB;
 }
 .itemmenu{
@@ -82,4 +82,10 @@
   margin-left: -25%;
   height: 100%;
   width: auto;
+}
+
+.titulo{
+  font-family: 'Ubuntu', sans-serif;
+  font-size: large;
+  font-weight: bold;
 }

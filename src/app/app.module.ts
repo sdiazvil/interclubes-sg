@@ -89,6 +89,9 @@ import { SidenavComponent } from './ui/sidenav/sidenav.component';
 import { SpinnerComponent } from './ui/spinner/spinner.component';
 import { NotificacionesService } from './core/notificaciones.service';
 import { ToastrModule } from 'ngx-toastr';
+import { LigaComponent } from './modulos-nuevos/liga/liga.component';
+import { MatchesComponent } from './modulos-nuevos/matches/matches.component';
+import { TablaComponent } from './modulos-nuevos/tabla/tabla.component';
 registerLocaleData(locale);
 @NgModule({
   declarations: [
@@ -140,7 +143,10 @@ registerLocaleData(locale);
     PlazaComponent,
     EscribirPlazaComponent,
     PreviewComponent,
-    ConfirmarEliminarComponent   
+    ConfirmarEliminarComponent,
+    LigaComponent,
+    MatchesComponent,
+    TablaComponent   
   ],
   imports: [
     BrowserModule,

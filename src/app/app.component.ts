@@ -20,8 +20,8 @@ export class AppComponent {
   @ViewChild('sidenav') sidenav: MatSidenav;
   userId: any = null;
   user: any;
-  vecindarios$: any;
-  vecindarioActual: any = 0;
+  // vecindarios$: any;
+  // vecindarioActual: any = 0;
   constructor(public notificacionesService: NotificacionesService, private ns: NoticiasService, private vs: VecindariosService, public snackBar: MatSnackBar, private router: Router, public authService: AuthService) {
     router.events.subscribe((event: RouterEvent) => {
       this.navigationInterceptor(event);
@@ -30,27 +30,27 @@ export class AppComponent {
   ngOnInit() {
     this.authService.user.subscribe(user => {
       this.user = user
-      if (user) {
-        if (user.vecindarios.length > 0) {
-          if (this.user.actual) {
-            this.vecindarioActual = this.user.actual;
-          } else {
-            this.vecindarioActual = this.user.vecindarios[0].vecindarioId;
-          }
-          this.authService.vecindarioId = this.vecindarioActual;
-          this.notificacionesService.permisoNotificaciones(user);
-          this.notificacionesService.monitorRefrescarToken(user);
-          this.notificacionesService.recibirNotificaciones();
-        }
-      } else {
-      }
+      // if (user) {
+      //   if (user.vecindarios.length > 0) {
+      //     if (this.user.actual) {
+      //       this.vecindarioActual = this.user.actual;
+      //     } else {
+      //       this.vecindarioActual = this.user.vecindarios[0].vecindarioId;
+      //     }
+      //     this.authService.vecindarioId = this.vecindarioActual;
+      //     this.notificacionesService.permisoNotificaciones(user);
+      //     this.notificacionesService.monitorRefrescarToken(user);
+      //     this.notificacionesService.recibirNotificaciones();
+      //   }
+      // } else {
+      // }
     });
     this.router.events.subscribe(() => {
       if (this.isScreenSmall()) {
         this.sidenav.close();
       }
     });
-    this.vecindarios$ = this.vs.getVecindarios();
+    // this.vecindarios$ = this.vs.getVecindarios();
   }
   isScreenSmall(): boolean {
     return window.matchMedia(`(max-width: ${SMALL_WIDTH_BREAKPOINT}px)`).matches;
@@ -76,13 +76,13 @@ export class AppComponent {
     this.authService.salir();
     this.router.navigate(['/']);
   }
-  cambiarVecindario() {
-    this.vecindarioActual = this.vecindarioActual;
-    this.authService.updateUsuario(this.user.uid, {
-      actual: this.vecindarioActual
-    })
-    this.ns.filtroVecindario$.next(this.vecindarioActual);
-    this.authService.vecindarioId = this.vecindarioActual;
-    this.router.navigate(['/plaza'])
-  }
+  // cambiarVecindario() {
+  //   this.vecindarioActual = this.vecindarioActual;
+  //   this.authService.updateUsuario(this.user.uid, {
+  //     actual: this.vecindarioActual
+  //   })
+  //   this.ns.filtroVecindario$.next(this.vecindarioActual);
+  //   this.authService.vecindarioId = this.vecindarioActual;
+  //   this.router.navigate(['/plaza'])
+  // }
 }

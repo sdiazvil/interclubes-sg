@@ -22,7 +22,7 @@ export class HeaderComponent implements OnInit {
     this.subs = this.authService.user.subscribe(user => {
       if(user){
         console.log(user.uid);
-        this.notificaciones = this.notiService.getMisNotificaciones(user.uid);
+        // this.notificaciones = this.notiService.getMisNotificaciones(user.uid);
       }
     });
   }
@@ -40,30 +40,30 @@ export class HeaderComponent implements OnInit {
   toggle() {
     this.ac.sidenav.toggle();
   }
-  checkDosBarbas(user: any) {
+  // checkDosBarbas(user: any) {
 
-    user.vecindarios.forEach(vecindario => {
-      if (vecindario.vecindarioId == 'XlsfFUjwbcuAzeQesPIa') {
-        return true;
-      } else {
-        return false;
-      }
-    });
-  }
+  //   user.vecindarios.forEach(vecindario => {
+  //     if (vecindario.vecindarioId == 'XlsfFUjwbcuAzeQesPIa') {
+  //       return true;
+  //     } else {
+  //       return false;
+  //     }
+  //   });
+  // }
 
-  marcarLeida(id: string) {
-    this.notiService.actualizar(id, { leido: true });
-    this.router.navigate(['/']);
-  }
+  // marcarLeida(id: string) {
+  //   this.notiService.actualizar(id, { leido: true });
+  //   this.router.navigate(['/']);
+  // }
 
-  checkNotificacionesNoleidas(notificaciones: any) {
-    let contador = 0;
-    notificaciones.forEach(notificacion => {
-      if (!notificacion.leido) {
-        contador++;
-      }
-    }
-    );
-    return contador;
-  }
+  // checkNotificacionesNoleidas(notificaciones: any) {
+  //   let contador = 0;
+  //   notificaciones.forEach(notificacion => {
+  //     if (!notificacion.leido) {
+  //       contador++;
+  //     }
+  //   }
+  //   );
+  //   return contador;
+  // }
 }

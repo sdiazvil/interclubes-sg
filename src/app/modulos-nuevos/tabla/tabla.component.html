@@ -1,4 +1,5 @@
 <div class="container-fluid">
+  <h1>Ranking</h1>
   <div class="row" *ngIf="usuarios | async as users">
     <div class="col-12">
       <div class="example-header">
@@ -17,7 +18,7 @@
       <div class="example-container mat-elevation-z8">
         <mat-table [dataSource]="dataSource" matSort>
           <ng-container matColumnDef="id">
-            <mat-header-cell *matHeaderCellDef mat-sort-header> ID </mat-header-cell>
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Posicion </mat-header-cell>
             <mat-cell *matCellDef="let row"> {{row.id}} </mat-cell>
           </ng-container>
           <ng-container matColumnDef="nombre">
@@ -25,17 +26,24 @@
             <mat-cell *matCellDef="let row"> <i class="material-icons icono-titulo" *ngIf="row.gestion">local_police</i>
               {{row.nombre | titlecase }} </mat-cell>
           </ng-container>
-          <ng-container matColumnDef="vecindarios">
+          <!-- <ng-container matColumnDef="vecindarios">
             <mat-header-cell *matHeaderCellDef mat-sort-header> Vecindarios </mat-header-cell>
             <mat-cell *matCellDef="let row"> <span *ngIf="row.vecindarios"><span
                   *ngFor="let vecindario of row.vecindarios; let esUltimo=last">{{vecindario.nombre}}{{esUltimo ? '' :
                   ', '}} </span></span> </mat-cell>
-          </ng-container>
+          </ng-container> -->
           <ng-container matColumnDef="registro">
             <mat-header-cell *matHeaderCellDef mat-sort-header> Fecha de Registro </mat-header-cell>
             <mat-cell *matCellDef="let row"> {{row.registro | amTimeAgo}} ({{row.registro | amCalendar}}) </mat-cell>
           </ng-container>
-          <ng-container matColumnDef="gestion">
+          <ng-container matColumnDef="puntos">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Puntos </mat-header-cell>
+            <mat-cell *matCellDef="let row"> 0 </mat-cell>
+            <!-- <mat-cell *matCellDef="let row"> <span *ngIf="row.vecindarios"><span
+                  *ngFor="let vecindario of row.vecindarios; let esUltimo=last">{{vecindario.nombre}}{{esUltimo ? '' :
+                  ', '}} </span></span> </mat-cell> -->
+          </ng-container>
+          <!-- <ng-container matColumnDef="gestion">
             <mat-header-cell *matHeaderCellDef mat-sort-header> Gestionar </mat-header-cell>
             <mat-cell *matCellDef="let row"><button mat-icon-button [matMenuTriggerFor]="menu">
                 <mat-icon>more_vert</mat-icon>
@@ -51,7 +59,7 @@
                 </button>
               </mat-menu>
             </mat-cell>
-          </ng-container>
+          </ng-container> -->
           <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
           <mat-row *matRowDef="let row; columns: displayedColumns;">
           </mat-row>
