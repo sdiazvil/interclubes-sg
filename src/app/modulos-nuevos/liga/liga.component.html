@@ -1,11 +1,15 @@
 <div class="container-fluid">
   <h1>Resultados</h1>
   <div class="row">
-    <div class="col-md-9 mx-auto">
+    <div class="col-md-9 mx-auto" *ngFor="let partido of this.partidos | async">
+        <div [ngClass]="isScreenSmall() ? 'scoreboard_date_small' : 'scoreboard_date'" >Fecha: {{partido.fecha | amCalendar}}</div>
+        <!-- <div [ngClass]="isScreenSmall() ? 'game__score_small' : 'game__score'">1</div> -->
       <div class="scoreboard__player">
         <div class="player">
           <div class="player__rank">1</div>
-          <div class="player__name">Cesar Avalos</div>
+          <!-- <div class="player__name" *ngIf="!this.isScreenSmall()">Cesar</div> -->
+          <div [ngClass]="isScreenSmall() ? 'player__name_small' : 'player__name'">{{ (partido.jugador1Ref
+            | doc | async)?.displayName }}</div>
           <div class="player__nationality"><span class="flag-icon flag-icon-pe"></span></div>
         </div>
         <div class="set">
@@ -21,8 +25,10 @@
       <div class="scoreboard__player">
         <!-- <div class="player player--serve"> -->
         <div class="player">
-          <div class="player__rank">2</div>
-          <div class="player__name">Pedro Saavedra</div>
+          <div class="player__rank">12</div>
+          <!-- <div class="player__name" *ngIf="!this.isScreenSmall()">Pedro</div> -->
+          <div [ngClass]="isScreenSmall() ? 'player__name_small' : 'player__name'">{{ (partido.jugador2Ref
+            | doc | async)?.displayName }}</div>
           <div class="player__nationality"><span class="flag-icon flag-icon-cl"></span></div>
         </div>
         <div class="set">

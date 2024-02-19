@@ -92,6 +92,7 @@ import { ToastrModule } from 'ngx-toastr';
 import { LigaComponent } from './modulos-nuevos/liga/liga.component';
 import { MatchesComponent } from './modulos-nuevos/matches/matches.component';
 import { TablaComponent } from './modulos-nuevos/tabla/tabla.component';
+import { PartidosService } from './core/partidos.service';
 registerLocaleData(locale);
 @NgModule({
   declarations: [
@@ -198,7 +199,8 @@ registerLocaleData(locale);
     PlazaComponent,
     ProntoGuard,
     AdminGuard,
-    NotificacionesService
+    NotificacionesService,
+    PartidosService
   ],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],

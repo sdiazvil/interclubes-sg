@@ -37,7 +37,7 @@
             <div class="row">
               <div class="col-4 col-md-4" *ngIf="evento.tipo == 'Reunión' || evento.tipo == 'Actividad'">
                 <ul>
-                  <li class="dia">{{evento.fecha | date:'dd'}}</li>
+                  <li class="dia">{{evento | date:'dd'}}</li>
                   <li class="fecha">{{evento.fecha | date:'MMMM' | uppercase }}</li>
                   <li class="hora">
                     <small><i style="color: grey; font-size:14px;" class="material-icons icono-boton">access_time</i>

@@ -17,6 +17,7 @@
   }
   .scoreboard__player {
     display: flex;
+    width: 100%;
     margin-bottom: -0.1rem;
   }
   
@@ -27,7 +28,7 @@
     border: 0.1rem solid #060000;
     color: #fff;
     text-shadow: -0.05rem -0.05rem rgba(0, 0, 0, 0.75);
-    width: 28rem;
+    width: 100%;
     padding-top: 0.25rem;
     padding-bottom: 0.25rem;
     margin-right: -0.1rem;
@@ -56,20 +57,27 @@
   .player__rank {
     font-size: 0.6em;
     padding-left: 0.5rem;
-    padding-right: 0.5rem;
+    padding-right: 0.25rem;
     width: 2rem;
   }
   .player__name {
     margin-right: 0.25rem;
+    width: 100%;
+
+  }
+  .player__name_small {
+    margin-right: 0.25rem;
+    width: 100%;
+
   }
   /* .player__surname {
     margin-right: 0.25rem;
-    width: 5rem;
+    width: 6.4rem;
   } */
   .player__nationality {
     font-size: 0.6em;
     margin-left: auto;
-    margin-right: 2rem;
+    margin-right: 0.5rem;
     padding-left: 0.5rem;
     padding-right: 0.5rem;
   }
@@ -129,6 +137,30 @@
     padding-top: 0.25rem;
     padding-bottom: 0.25rem;
     text-align: center;
+    background: linear-gradient(to bottom, #F4B400, #F0FF32);
+    border: 0.1rem solid #060000;
+    color: #060000;
+    margin-right: -0.1rem;
+  }
+
+  .scoreboard_date {
+    width: 99.2%;
+    padding-top: 0.25rem;
+    padding-bottom: 0.25rem;
+    padding-left: 0.25rem;
+    /* text-align: center; */
+    background: linear-gradient(to bottom, #F4B400, #F0FF32);
+    border: 0.1rem solid #060000;
+    color: #060000;
+    margin-right: -0.1rem;
+  }
+  
+  .scoreboard_date_small {
+    width: 98.2%;
+    padding-top: 0.25rem;
+    padding-bottom: 0.25rem;
+    padding-left: 0.25rem;
+    /* text-align: center; */
     background: linear-gradient(to bottom, #F4B400, #F0FF32);
     border: 0.1rem solid #060000;
     color: #060000;

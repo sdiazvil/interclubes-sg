@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { PartidosService } from '../../core/partidos.service';
 const SMALL_WIDTH_BREAKPOINT = 1100;
 
 @Component({
@@ -7,10 +8,13 @@ const SMALL_WIDTH_BREAKPOINT = 1100;
   styleUrls: ['./liga.component.css']
 })
 export class LigaComponent implements OnInit {
-
-  constructor() { }
+  partidos: any;
+  constructor(public partidosService: PartidosService) { }
 
   ngOnInit() {
+    this.partidos = this.partidosService.getPartidos();
+    console.log(this.partidos)
+    // this.partidos = this.partidosService.getPartidos().subscribe((partidos:any) => console.log(partidos));
   }
 
   isScreenSmall(): boolean {
