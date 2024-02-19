@@ -33,9 +33,11 @@
           </div>
           <br>
           <form [formGroup]="formulario" novalidate (ngSubmit)="actualizarUser(user)">
-            <div class="input-group mb-3">
-              <div class="input-group-prepend">
-                <span class="input-group-text flag-icon" [ngClass]="{
+            <div class="form-group row">
+              <label for="displayname" class="col-sm-3 col-form-label">Nombre</label>
+              <div class="col-sm-9 input-group">
+                <div class="input-group-prepend">
+                  <span class="input-group-text flag-icon" [ngClass]="{
                 'flag-icon-cl': user.pais === 'cl',
                 'flag-icon-ar': user.pais === 'ar',
                 'flag-icon-pe': user.pais === 'pe',
@@ -44,18 +46,9 @@
                 'flag-icon-fr': user.pais === 'fr',
                 'flag-icon-ca': user.pais === 'ca'
               }" id="basic-addon1"></span>
-              </div>
-              <input type="text" class="form-control" [value]="user.displayName" formControlName="displayName"
-                placeholder="Nombre" aria-label="Nombre" aria-describedby="basic-addon1">
-            </div>
-            <div class="form-group row">
-              <label for="nombre" class="col-sm-3 col-form-label">Nombre Completo</label>
-              <div class="col-sm-9">
-                <div class="input-group-prepend">
-                  <span class="input-group-text" id="basic-addon1">@</span>
                 </div>
-                <input type="text" readonly class="form-control" id="nombre" formControlName="displayName"
-                  [value]="user.displayName">
+                <input disabled type="text" class="form-control" [value]="user.displayName" formControlName="displayName"
+                  placeholder="Nombre" aria-label="Nombre" aria-describedby="basic-addon1">
               </div>
             </div>
             <div class="form-group row">
