@@ -21,7 +21,7 @@ export class HeaderComponent implements OnInit {
   ngOnInit() {
     this.subs = this.authService.user.subscribe(user => {
       if(user){
-        console.log(user.uid);
+        // console.log(user.uid);
         // this.notificaciones = this.notiService.getMisNotificaciones(user.uid);
       }
     });

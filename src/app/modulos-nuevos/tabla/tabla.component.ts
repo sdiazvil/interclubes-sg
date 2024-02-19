@@ -8,7 +8,7 @@ import { AuthService } from '../../core/auth.service';
   styleUrls: ['./tabla.component.css']
 })
 export class TablaComponent implements OnInit, AfterViewInit {
-  displayedColumns = ['id', 'nombre', 'registro','puntos'];
+  displayedColumns = ['id', 'nombre','pg','sg','gg','puntos'];
   dataSource: MatTableDataSource<UserData>;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -33,8 +33,10 @@ export class TablaComponent implements OnInit, AfterViewInit {
     setTimeout(() => {
       // 
       for (let i = 0; i < this.authService.usuariosArreglo.length; i++) {
-        users.push(createNewUser(i+1, this.authService.usuariosArreglo[i].displayName, this.authService.usuariosArreglo[i].vecindarios, this.authService.usuariosArreglo[i].fecha_registro,this.authService.usuariosArreglo[i].admin,this.authService.usuariosArreglo[i].uid));
+        users.push(createNewUser(i+1, this.authService.usuariosArreglo[i].displayName));
       }
+      users.push(createNewUser(users.length+1, 'Juan Perez'))
+      users.push(createNewUser(users.length+1, 'Rodrigo Ramirez'))
       this.dataSource = new MatTableDataSource(users);
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
@@ -54,23 +56,23 @@ export class TablaComponent implements OnInit, AfterViewInit {
 }
 
 
-function createNewUser(id: number, name: any, vecindarios:Array<any>, registro: any, gestion:boolean, userId: string): UserData {
+function createNewUser(id: number, name: any): UserData {
 
   return {
     id: id.toString(),
     nombre: name,
-    vecindarios: vecindarios,
-    registro: registro,
-    gestion: gestion,
-    userId: userId
+    // vecindarios: vecindarios,
+    // registro: registro,
+    // gestion: gestion,
+    // userId: userId
   };
 }
 
 export interface UserData {
   id: string;
   nombre: string;
-  vecindarios: Array<any>;
-  registro: any;
-  gestion: boolean;
-  userId: string;
+  // vecindarios: Array<any>;
+  // registro: any;
+  // gestion: boolean;
+  // userId: string;
 }

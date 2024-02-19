@@ -65,7 +65,7 @@ export class PartidosService {
   // }
 
   getPartidos() {
-    return this.afs.collection(`partidos`).snapshotChanges().map(actions => {
+    return this.afs.collection(`partidos`, ref => ref.orderBy('fecha', 'desc')).snapshotChanges().map(actions => {
       return actions.map(a => {
         return { id: a.payload.doc.id, ...a.payload.doc.data() }
       })

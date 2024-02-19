@@ -50,6 +50,7 @@ export class PerfilComponent implements OnInit {
       'ciudad': [''],
       'fecha_nac': [''],
       'genero': [''],
+      'pais': [''],
       'ocupacion': [''],
       'ocupacion_otro': [''],
     });
@@ -91,6 +92,7 @@ export class PerfilComponent implements OnInit {
   get region() { return this.formulario.get('region') }
   get ciudad() { return this.formulario.get('ciudad') }
   get genero() { return this.formulario.get('genero') }
+  get pais() { return this.formulario.get('pais') }
   get ocupacion() { return this.formulario.get('ocupacion') }
   get ocupacion_otro() { return this.formulario.get('ocupacion_otro') }
   actualizarUser(user) {

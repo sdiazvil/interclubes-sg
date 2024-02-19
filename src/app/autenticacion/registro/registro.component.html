@@ -1,5 +1,5 @@
 <div class="container-fluid">
-  <div class="row justify-content-center" style="padding-top: 100px; margin-bottom: 250px;">
+  <div class="row justify-content-center" style="padding-top: 100px;">
     <div class="col-xs-10 col-sm-10 col-md-12 col-lg-6 col-xl-6">
       <div class="card">
         <form [formGroup]="formulario" (ngSubmit)="enviar()" novalidate>
@@ -15,32 +15,43 @@
                 <mat-icon matSuffix>person</mat-icon>
                 <mat-error *ngIf="formErrores.nombre">{{formErrores.nombre}}</mat-error>
               </mat-form-field>
-              <div class="row" style="margin-left:0px;">
-                <div class="col-12 col-md-6" style="padding-right: 5px; padding-left: 0px;">
-                  <div class="example-container">
-                    <mat-form-field>
-                      <input formControlName="fecha_nac" required matInput placeholder="Fecha de Nacimiento (DD-MM-AAAA)">
-                      <mat-error *ngIf="formErrores.fecha_nac">{{formErrores.fecha_nac}}</mat-error>
-                    </mat-form-field>
-                  </div>
-                </div>
-                <div class="col-12 col-md-6" style="padding-right: 0px; padding-left: 5px;">
-                  <div class="example-container">
-                    <mat-form-field>
-                      <mat-select formControlName="genero" placeholder="Género" required>
-                        <mat-option value="Femenino">
-                          Femenino </mat-option>
-                        <mat-option value="Masculino">
-                          Masculino </mat-option>
-                        <mat-option value="Otro">
-                          Otro </mat-option>
-                        <mat-option value="No">
-                          Prefiero no responder </mat-option>
-                      </mat-select>
-                    </mat-form-field>
-                  </div>
-                </div>
-              </div>
+              <mat-form-field>
+                <!-- <input formControlName="fecha_nac" required matInput placeholder="Fecha de Nacimiento (DD-MM-AAAA)"> -->
+                <input matInput required formControlName="fecha_nac"  [matDatepicker]="picker" placeholder="Fecha de Nacimiento">
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+                <mat-error *ngIf="formErrores.fecha_nac">{{formErrores.fecha_nac}}</mat-error>
+              </mat-form-field>
+              <mat-form-field>
+                <mat-select formControlName="genero" placeholder="Género" required>
+                  <mat-option value="Femenino">
+                    Femenino </mat-option>
+                  <mat-option value="Masculino">
+                    Masculino </mat-option>
+                  <mat-option value="Otro">
+                    Otro </mat-option>
+                  <mat-option value="No">
+                    Prefiero no responder </mat-option>
+                </mat-select>
+              </mat-form-field>
+              <mat-form-field>
+                <mat-select formControlName="pais" placeholder="País" required>
+                  <mat-option value="cl">
+                    Chile <span class="flag-icon flag-icon-cl"></span> </mat-option>
+                  <mat-option value="ar">
+                    Argentina <span class="flag-icon flag-icon-ar"></span> </mat-option>
+                  <mat-option value="pe">
+                    Perú <span class="flag-icon flag-icon-pe"></span> </mat-option>
+                  <mat-option value="br">
+                    Brasil <span class="flag-icon flag-icon-br"></span> </mat-option>
+                  <mat-option value="br">
+                    Canadá <span class="flag-icon flag-icon-ca"></span> </mat-option>
+                  <mat-option value="it">
+                    Italia <span class="flag-icon flag-icon-it"></span> </mat-option>
+                  <mat-option value="fr">
+                    Francia <span class="flag-icon flag-icon-fr"></span> </mat-option>
+                </mat-select>
+              </mat-form-field>
               <mat-form-field>
                 <input matInput placeholder="Correo Electrónico" type="email" formControlName="email" required>
                 <mat-icon matSuffix>mail</mat-icon>

@@ -13,7 +13,7 @@ export class LigaComponent implements OnInit {
 
   ngOnInit() {
     this.partidos = this.partidosService.getPartidos();
-    console.log(this.partidos)
+    // console.log(this.partidos)
     // this.partidos = this.partidosService.getPartidos().subscribe((partidos:any) => console.log(partidos));
   }
 

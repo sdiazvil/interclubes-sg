@@ -63,6 +63,9 @@ export class RegistroComponent implements OnInit, AfterViewInit {
     'genero': {
       'required': 'El Género es obligatorio.',
     },
+    'pais': {
+      'required': 'El País es obligatorio.',
+    },
   }
   constructor(public snackBar: MatSnackBar, private formBuilder: FormBuilder,
     private authService: AuthService,
@@ -95,6 +98,10 @@ export class RegistroComponent implements OnInit, AfterViewInit {
       ]
       ],
       'genero': ['', [
+        Validators.required,
+      ]
+      ],
+      'pais': ['', [
         Validators.required,
       ]
       ]
@@ -175,6 +182,7 @@ export class RegistroComponent implements OnInit, AfterViewInit {
       displayName: this.formulario.get('nombre').value,
       fecha_nac: this.formulario.get('fecha_nac').value,
       genero: this.formulario.get('genero').value,
+      pais: this.formulario.get('pais').value,
     };
     return crearJSON;
   }

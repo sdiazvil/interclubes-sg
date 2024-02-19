@@ -76,7 +76,8 @@ export class AuthService {
             {
               displayName: datos.displayName,
               fecha_nac: datos.fecha_nac,
-              genero: datos.genero
+              genero: datos.genero,
+              pais: datos.pais
             });
             var arreglo = datos.pendientes;
             arreglo.push({

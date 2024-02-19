@@ -81,6 +81,14 @@
     padding-left: 0.5rem;
     padding-right: 0.5rem;
   }
+
+  .flag-icon {
+    font-size: 0.6em;
+    margin-left: auto;
+    margin-right: 0.5rem;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+  }
   
   .set {
     display: flex;
@@ -144,7 +152,7 @@
   }
 
   .scoreboard_date {
-    width: 99.2%;
+    width:100%;
     padding-top: 0.25rem;
     padding-bottom: 0.25rem;
     padding-left: 0.25rem;
@@ -156,7 +164,7 @@
   }
   
   .scoreboard_date_small {
-    width: 98.2%;
+    width: 100%;
     padding-top: 0.25rem;
     padding-bottom: 0.25rem;
     padding-left: 0.25rem;
