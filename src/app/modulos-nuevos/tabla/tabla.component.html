@@ -17,14 +17,14 @@
         </mat-form-field>
       </div>
       <div class="example-container mat-elevation-z8">
-        <mat-table [dataSource]="dataSource" matSort>
+        <mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
           <ng-container matColumnDef="id">
             <mat-header-cell *matHeaderCellDef mat-sort-header> Posicion </mat-header-cell>
             <mat-cell *matCellDef="let row"> {{row.id}} </mat-cell>
           </ng-container>
           <ng-container matColumnDef="nombre">
-            <mat-header-cell *matHeaderCellDef mat-sort-header> Nombre </mat-header-cell>
-            <mat-cell *matCellDef="let row">
+            <mat-header-cell *matHeaderCellDef mat-sort-header style="flex: 3;"> Nombre </mat-header-cell>
+            <mat-cell *matCellDef="let row" style="flex: 3;">
               {{row.nombre | titlecase }} </mat-cell>
           </ng-container>
           <!-- <ng-container matColumnDef="vecindarios">
