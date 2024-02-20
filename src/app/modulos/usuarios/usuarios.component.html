@@ -23,7 +23,7 @@
           <ng-container matColumnDef="nombre">
             <mat-header-cell *matHeaderCellDef mat-sort-header> Nombre </mat-header-cell>
             <mat-cell *matCellDef="let row"> <i class="material-icons icono-titulo" *ngIf="row.gestion">local_police</i>
-              {{row.nombre | titlecase }} </mat-cell>
+              {{row.nombre }} </mat-cell>
           </ng-container>
           <ng-container matColumnDef="vecindarios">
             <mat-header-cell *matHeaderCellDef mat-sort-header> Vecindarios </mat-header-cell>

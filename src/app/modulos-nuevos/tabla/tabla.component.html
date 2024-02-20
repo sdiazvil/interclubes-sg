@@ -19,13 +19,23 @@
       <div class="example-container mat-elevation-z8">
         <mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
           <ng-container matColumnDef="id">
-            <mat-header-cell *matHeaderCellDef mat-sort-header> Posicion </mat-header-cell>
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Posición </mat-header-cell>
             <mat-cell *matCellDef="let row"> {{row.id}} </mat-cell>
           </ng-container>
           <ng-container matColumnDef="nombre">
             <mat-header-cell *matHeaderCellDef mat-sort-header style="flex: 3;"> Nombre </mat-header-cell>
-            <mat-cell *matCellDef="let row" style="flex: 3;">
-              {{row.nombre | titlecase }} </mat-cell>
+            <mat-cell *matCellDef="let row" style="flex: 3; display: flex; align-items: center;">
+              {{row.nombre }} &nbsp;<div [ngSwitch]="row.pais">
+                <div *ngSwitchCase="'cl'"><span class="flag-icon flag-icon-cl"></span> </div>
+                <div *ngSwitchCase="'pe'"><span class="flag-icon flag-icon-pe"></span> </div>
+                <div *ngSwitchCase="'ar'"><span class="flag-icon flag-icon-ar"></span> </div>
+                <div *ngSwitchCase="'it'"><span class="flag-icon flag-icon-it"></span> </div>
+                <div *ngSwitchCase="'fr'"><span class="flag-icon flag-icon-fr"></span> </div>
+                <div *ngSwitchCase="'br'"><span class="flag-icon flag-icon-br"></span> </div>
+                <div *ngSwitchCase="'ca'"><span class="flag-icon flag-icon-ca"></span> </div>
+                <div *ngSwitchDefault><span class="flag-icon flag-icon-cl"></span> </div>
+              </div>
+            </mat-cell>
           </ng-container>
           <!-- <ng-container matColumnDef="vecindarios">
             <mat-header-cell *matHeaderCellDef mat-sort-header> Vecindarios </mat-header-cell>
@@ -43,10 +53,6 @@
           </ng-container>
           <ng-container matColumnDef="gg">
             <mat-header-cell *matHeaderCellDef mat-sort-header> Games Ganados </mat-header-cell>
-            <mat-cell *matCellDef="let row"> 0 </mat-cell>
-          </ng-container>
-          <ng-container matColumnDef="puntos">
-            <mat-header-cell *matHeaderCellDef mat-sort-header> Puntos </mat-header-cell>
             <mat-cell *matCellDef="let row"> 0 </mat-cell>
           </ng-container>
           <!-- <ng-container matColumnDef="gestion">

@@ -54,7 +54,7 @@
             <div class="form-group row">
               <label for="email" class="col-sm-3 col-form-label">Email</label>
               <div class="col-sm-9">
-                <input type="text" readonly class="form-control" id="email" formControlName="email"
+                <input type="email" readonly class="form-control" id="email" formControlName="email"
                   [(ngModel)]="user.email">
               </div>
             </div>
@@ -62,7 +62,7 @@
               <label for="genero" class="col-sm-3 col-form-label">Fecha de Nacimiento</label>
               <div class="col-sm-9">
                 <input class="form-control" readonly type="text" formControlName="fecha_nac"
-                  [(ngModel)]="user.fecha_nac" id="example-date-input" [value]="user.fecha_nac | date:'dd-MM-yyyy'">
+                  [(ngModel)]="user.fecha_nac" id="example-date-input" [value]="user.fecha_nac">
               </div>
             </div>
             <div class="form-group row">

@@ -8,7 +8,7 @@ import { AuthService } from '../../core/auth.service';
   styleUrls: ['./tabla.component.css']
 })
 export class TablaComponent implements OnInit, AfterViewInit {
-  displayedColumns = ['id', 'nombre','pg','sg','gg','puntos'];
+  displayedColumns = ['id', 'nombre','pg','sg','gg'];
   dataSource: MatTableDataSource<UserData>;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -33,10 +33,8 @@ export class TablaComponent implements OnInit, AfterViewInit {
     setTimeout(() => {
       // 
       for (let i = 0; i < this.authService.usuariosArreglo.length; i++) {
-        users.push(createNewUser(i+1, this.authService.usuariosArreglo[i].displayName));
+        users.push(createNewUser(i+1, this.authService.usuariosArreglo[i].displayName, this.authService.usuariosArreglo[i].pais));
       }
-      users.push(createNewUser(users.length+1, 'Juan Perez'))
-      users.push(createNewUser(users.length+1, 'Rodrigo Ramirez'))
       this.dataSource = new MatTableDataSource(users);
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
@@ -56,11 +54,12 @@ export class TablaComponent implements OnInit, AfterViewInit {
 }
 
 
-function createNewUser(id: number, name: any): UserData {
+function createNewUser(id: number, name: any, pais:any): UserData {
 
   return {
     id: id.toString(),
     nombre: name,
+    pais: pais
     // vecindarios: vecindarios,
     // registro: registro,
     // gestion: gestion,
@@ -71,6 +70,7 @@ function createNewUser(id: number, name: any): UserData {
 export interface UserData {
   id: string;
   nombre: string;
+  pais: string;
   // vecindarios: Array<any>;
   // registro: any;
   // gestion: boolean;

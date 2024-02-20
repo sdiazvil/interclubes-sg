@@ -5,8 +5,7 @@
       <div class="container-fluid">
         <div class="row">
           <div class="col-md-9 mx-auto" *ngFor="let partido of this.partidos | async">
-            <div [ngClass]="isScreenSmall() ? 'scoreboard_date_small' : 'scoreboard_date'"> <b> Fecha 1: {{partido.fecha
-                | amCalendar }} </b></div>
+            <div [ngClass]="isScreenSmall() ? 'scoreboard_date_small' : 'scoreboard_date'"> <b> Fecha 1: {{partido.fecha | amDateFormat:'LLLL'}} </b></div>
             <!-- <div [ngClass]="isScreenSmall() ? 'game__score_small' : 'game__score'">1</div> -->
             <div class="scoreboard__player">
               <div class="player">
