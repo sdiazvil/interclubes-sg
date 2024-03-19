@@ -35,7 +35,7 @@ export class PartidosService {
   }
 
   getPartidosByCategoria(categoria:number) {
-    return this.afs.collection(`partidos`, ref => ref.orderBy('cancha', 'asc').where('categoria', '==', categoria)).snapshotChanges().map(actions => {
+    return this.afs.collection(`partidos`, ref => ref.orderBy('hora', 'asc').where('categoria', '==', categoria).orderBy('cancha', 'asc')).snapshotChanges().map(actions => {
       return actions.map(a => {
         return { id: a.payload.doc.id, ...a.payload.doc.data() }
       })
@@ -43,6 +43,7 @@ export class PartidosService {
   }
 
   agregarPartido(partido:any){
+    console.log(partido)
     return this.col.add(partido);
   }
 
