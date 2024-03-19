@@ -33,7 +33,7 @@ export class TablaComponent implements OnInit, AfterViewInit {
     setTimeout(() => {
       // 
       for (let i = 0; i < this.authService.usuariosArreglo.length; i++) {
-        users.push(createNewUser(i+1, this.authService.usuariosArreglo[i].displayName, this.authService.usuariosArreglo[i].pais));
+        users.push(createNewUser(i+1, 'Club de Tenis Serena Golf', 'cl'),createNewUser(i+2, 'Club de Tenis Illapel', 'cl'));
       }
       this.dataSource = new MatTableDataSource(users);
       this.dataSource.paginator = this.paginator;

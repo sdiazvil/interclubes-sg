@@ -97,3 +97,8 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', end
 .mat-card-header-text{
   width: 100% !important;
 }
+
+/* Ajusta el z-index del mat-datepicker */
+::ng-deep .mat-datepicker-content {
+  z-index: 9999; /* Cambia este valor según sea necesario */
+}

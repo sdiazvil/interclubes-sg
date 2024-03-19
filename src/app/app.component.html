@@ -2,9 +2,8 @@
 <mat-sidenav-container fullscreen>
   <mat-sidenav #sidenav class="lateral" [opened]="!isScreenSmall()" [mode]="isScreenSmall() ? 'over' : 'side'">
     <div>
-      <div class="espacio-top" *ngIf="!(authService.user | async)"></div>
       <div class="sidenav">
-        <div class="text-center" style="background: #f2f2f2; padding-top:80px;padding-bottom:10px;"
+        <!-- <div class="text-center" style="background: #f2f2f2; padding-top:80px;padding-bottom:10px;"
           *ngIf="authService.user | async as user">
           <a routerLink="/perfil">
             <img class="rounded-circle foto-perfil" [src]="user.photoURL || '../assets/user_google.jpg'"
@@ -17,14 +16,14 @@
             <a routerLink="/perfil">{{user.displayName}}
             </a>
           </span>
-        </div>
-        <div *ngIf="!(authService.user | async)">
+        </div> -->
+        <div style="padding-top:40px;padding-bottom:10px;">
           <div class="text-center pt-5">
             <img src="/assets/logo_socios.png" width="120" alt="Logo"> <br>
-            <h1 class="pt-2 titulo">Liga Socios</h1>
+            <h1 class="pt-2 titulo">Torneo Interclubes</h1>
           </div>
         </div>
-        <div style="margin-top:0px;" *ngIf="authService.user | async as usuario">
+        <div style="margin-top:0px;">
           <!-- <div class="menu-titulo">COMUNIDAD ACTUAL</div>          
           <select class="custom-select" (change)="cambiarVecindario()" [(ngModel)]="vecindarioActual">
             <option selected disabled value="0" *ngIf="usuario.vecindarios.length==0">No hay vecindarios
@@ -48,7 +47,7 @@
           <small class="politicas">
             <!-- <i class="material-icons icono-politicas" routerLink="contacto" matTooltip="Contáctenos">mail_outline</i>
             <i matTooltip="Privacidad & Políticas" class="material-icons icono-politicas">info_outline</i> -->
-            <b>Versión 1.0.3 | Hecho en</b> <span class="flag-icon flag-icon-cl"></span>
+            <b>Versión 1.0.0 | Hecho en</b> <span class="flag-icon flag-icon-cl"></span>
           </small>
         </div>
       </div>

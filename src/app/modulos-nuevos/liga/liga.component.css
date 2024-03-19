@@ -175,3 +175,8 @@
     margin-right: -0.1rem;
   }
   
+  .fab-button {
+    position: fixed;
+    bottom: 30px;
+    right: 50px;
+    }

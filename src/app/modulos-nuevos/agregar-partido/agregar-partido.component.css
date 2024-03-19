@@ -1,0 +1,10 @@
+.cdk-overlay-container { z-index: 1200 !important; }
+
+.mat-datepicker-content {
+    z-index: 1000; /* Asegúrate de que este valor sea mayor que el del mat-dialog */
+  }
+  
+
+  .md-datepicker-calendar-panel{
+    z-index: 1200}
+    

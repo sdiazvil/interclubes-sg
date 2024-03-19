@@ -1,6 +1,6 @@
 {
-  "name": "liga-socios-sg",
-  "version": "1.0.3",
+  "name": "interclubes-sg",
+  "version": "1.0.0",
   "license": "MIT",
   "scripts": {
     "ng": "ng",

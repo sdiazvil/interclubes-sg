@@ -28,9 +28,9 @@ const ingreso = 'Ingreso';
 const secciones = 'Secciones';
 
 export const ROUTES: Routes = [
-  { path: '', component: LigaComponent,  canActivate: [AuthGuard] },
-  { path: 'matches', component: MatchesComponent,  canActivate: [AuthGuard] },
-  { path: 'ranking', component: TablaComponent,  canActivate: [AuthGuard] },
+  { path: '', component: LigaComponent },
+  // { path: 'matches', component: MatchesComponent,  canActivate: [AuthGuard] },
+  { path: 'tabla', component: TablaComponent },
   // { path: 'links', component: EncuestasComponent,  canActivate: [AuthGuard] },
   // { path: 'link/:id', component: EncuestaComponent,  canActivate: [AuthGuard] },
   // { path: 'documentos', component: RepositorioComponent,  canActivate: [AuthGuard] },

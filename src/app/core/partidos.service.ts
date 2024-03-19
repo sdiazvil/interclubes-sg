@@ -72,6 +72,18 @@ export class PartidosService {
     })
   }
 
+  getPartidosByCategoria(categoria:number) {
+    return this.afs.collection(`partidos`, ref => ref.orderBy('cancha', 'desc').where('categoria', '==', categoria)).snapshotChanges().map(actions => {
+      return actions.map(a => {
+        return { id: a.payload.doc.id, ...a.payload.doc.data() }
+      })
+    })
+  }
+
+  agregarPartido(partido:any){
+
+  }
+
   // getMisVecindarios(userId:string) {
   //   return this.afs.collection('vecindarios').snapshotChanges().map(actions => {
   //     return actions.map(a => {

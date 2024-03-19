@@ -93,6 +93,7 @@ import { LigaComponent } from './modulos-nuevos/liga/liga.component';
 import { MatchesComponent } from './modulos-nuevos/matches/matches.component';
 import { TablaComponent } from './modulos-nuevos/tabla/tabla.component';
 import { PartidosService } from './core/partidos.service';
+import { AgregarPartidoComponent } from './modulos-nuevos/agregar-partido/agregar-partido.component';
 registerLocaleData(locale);
 @NgModule({
   declarations: [
@@ -147,7 +148,8 @@ registerLocaleData(locale);
     ConfirmarEliminarComponent,
     LigaComponent,
     MatchesComponent,
-    TablaComponent   
+    TablaComponent,
+    AgregarPartidoComponent
   ],
   imports: [
     BrowserModule,
@@ -204,6 +206,6 @@ registerLocaleData(locale);
   ],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
-  entryComponents: [ConfirmarEliminarComponent,AgregarGrupoComponent,AgregarNoticiaComponent,ListaUsuariosComponent, AgregarEventoComponent, AgregarEncuestaComponent, AgregarVecindarioComponent]
+  entryComponents: [ConfirmarEliminarComponent,AgregarGrupoComponent,AgregarNoticiaComponent,ListaUsuariosComponent, AgregarEventoComponent, AgregarEncuestaComponent, AgregarVecindarioComponent, AgregarPartidoComponent]
 })
 export class AppModule { }

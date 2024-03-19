@@ -4,14 +4,14 @@ export const MENUS = [
     ruta: '',
     icono: 'sports_tennis'
   },
+  // {
+  //   nombre: 'Mis Matches',
+  //   ruta: 'matches',
+  //   icono: 'person'
+  // },
   {
-    nombre: 'Mis Matches',
-    ruta: 'matches',
-    icono: 'person'
-  },
-  {
-    nombre: 'Ranking',
-    ruta: 'ranking',
+    nombre: 'Tabla de posiciones',
+    ruta: 'tabla',
     icono: 'lists'
   },
   // {
