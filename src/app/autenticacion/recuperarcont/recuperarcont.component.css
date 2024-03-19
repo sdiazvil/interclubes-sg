@@ -22,12 +22,9 @@
     color:#00285C;
   }
 .container-fluid{
-  background-image: url('../../../assets/tenis_back.png');
-  background-repeat: no-repeat;
-  background-size: cover;
-  height:100vh;
-  margin-left: 0!important;
-  margin-right: 0!important;
-  padding-right: 0!important;
-  padding-left: 0!important;
+  background-image: url('/assets/tenis_back.png');
+  background-size: cover; /* ajusta la imagen al tamaño del contenedor */
+  background-position: center; /* centra la imagen */
+  background-repeat: no-repeat; /* evita que la imagen se repita */
+  height: 100vh;
 }

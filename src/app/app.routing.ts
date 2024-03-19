@@ -44,9 +44,9 @@ export const ROUTES: Routes = [
   // { path: 'grupo/:id', component: GrupoComponent,  canActivate: [AuthGuard] },
   // { path: 'comunidades', component: VecindariosComponent,  canActivate: [AuthGuard] },
   { path: 'usuarios', component: UsuariosComponent,  canActivate: [AuthGuard] },
-  { path: 'registro', component: RegistroComponent, data: {  active: false, icon: 'person_add', text: 'Crear Cuenta', section: ingreso }, canActivate: [LoginGuard] },
+  // { path: 'registro', component: RegistroComponent, data: {  active: false, icon: 'person_add', text: 'Crear Cuenta', section: ingreso }, canActivate: [LoginGuard] },
   { path: 'iniciosesion', component: InisesComponent, data: {  active: false, icon: 'person', text: 'Iniciar Sesión', section: ingreso }, canActivate: [LoginGuard] },
-  { path: 'recuperarcont', component: RecuperarcontComponent, data: {  active: false, icon: 'lock', text: 'Reestablecer Contraseña', section: ingreso }, canActivate: [LoginGuard] },
+  // { path: 'recuperarcont', component: RecuperarcontComponent, data: {  active: false, icon: 'lock', text: 'Reestablecer Contraseña', section: ingreso }, canActivate: [LoginGuard] },
   { path: 'perfil', component: PerfilComponent, data: {  active: false, icon: 'person', text: 'Perfil', section: secciones },  canActivate: [AuthGuard] },
   { path: '**', redirectTo: '' },
 ];

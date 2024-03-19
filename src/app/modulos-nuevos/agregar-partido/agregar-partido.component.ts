@@ -24,6 +24,7 @@ export class AgregarPartidoComponent implements OnInit {
     'descripcion': '',
     'nombre': '',
     'cancha': '',
+    'categoria': '',
   }
   mensajeError = false;
   mensajesValidacion = {
@@ -35,10 +36,6 @@ export class AgregarPartidoComponent implements OnInit {
     'hora': {
       'required': 'Requerido',
     },
-    'descripcion': {
-      'required': 'Requerido',
-      'maxlength': 'Máximo 3000 caracteres.',
-    },
     'jugador1': {
       'required': 'Requerido',
       'maxlength': 'Máximo 100 caracteres.',
@@ -48,6 +45,9 @@ export class AgregarPartidoComponent implements OnInit {
       'maxlength': 'Máximo 100 caracteres.',
     },
     'cancha': {
+      'required': 'Requerido',
+    },
+    'categoria': {
       'required': 'Requerido',
     }
   }
@@ -68,8 +68,11 @@ export class AgregarPartidoComponent implements OnInit {
       'jugador2': ['', [Validators.required, Validators.maxLength(100)]],
       'fecha': ['', [this.dateValidator, Validators.required]],
       'hora': ['', Validators.required],
-      'cancha': ['', [Validators.maxLength(200)]],
+      'cancha': ['', Validators.required],
+      'categoria': ['', Validators.required],
     });
+    this.formulario.valueChanges.subscribe(data => this.detectarCambios(data));
+    this.detectarCambios();
   }
 
   dateValidator(control: FormControl): { [s: string]: boolean } {
@@ -103,29 +106,34 @@ export class AgregarPartidoComponent implements OnInit {
   }
   get fecha() { return this.formulario.get('fecha') }
   get hora() { return this.formulario.get('hora') }
-  get descripcion() { return this.formulario.get('descripcion') }
-  get nombre() { return this.formulario.get('nombre') }
-  get lugar() { return this.formulario.get('lugar') }
-  get tipo() { return this.formulario.get('tipo') }
+  get jugador1() { return this.formulario.get('jugador1') }
+  get jugador2() { return this.formulario.get('jugador2') }
+  get cancha() { return this.formulario.get('cancha') }
+  get categoria() { return this.formulario.get('categoria') }
 
   agregar() {
     this.cargando = true;
-    var descripcion_con_espacio = this.descripcion.value.replace(new RegExp('\n', 'g'), "<br>");
     this.partidosService.agregarPartido(
       {
         fecha: this.fecha.value,
         hora: this.hora.value,
-        descripcion: descripcion_con_espacio || null,
-        nombre: this.nombre.value,
-        lugar: this.lugar.value,
-        oculto: false,
-        archivos: [],
-        tipo: this.tipo.value,
+        jugador1: this.jugador1.value,
+        jugador2: this.jugador2.value,
+        cancha: Number(this.cancha.value),
+        categoria: Number(this.categoria.value),
+        sets_ganados_jugador1:0,
+        sets_ganados_jugador2:0,
+        sets_jugador1: [0,0,0],
+        sets_jugador2: [0,0,0],
+        ganador: ''
       }
     );
     this.snackBar.open('El partido ha sido agregado correctamente.', 'CERRAR', {
       duration: 4000
     });
+    setTimeout(() => {
+      this.cerrarModalSF();
+    }, 2000);
   }
 
   cerrarModalSF() {
