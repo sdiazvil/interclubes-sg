@@ -8,7 +8,7 @@ import { AuthService } from '../../core/auth.service';
   styleUrls: ['./tabla.component.css']
 })
 export class TablaComponent implements OnInit, AfterViewInit {
-  displayedColumns = ['id', 'nombre','pg','sg','gg'];
+  displayedColumns = ['id', 'nombre', 'pg', 'sg', 'gg'];
   dataSource: MatTableDataSource<UserData>;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -16,11 +16,11 @@ export class TablaComponent implements OnInit, AfterViewInit {
 
   usuarios: any;
   buscar = '';
-  constructor(private authService: AuthService,private pagina: MatPaginatorIntl,) {
+  constructor(private authService: AuthService, private pagina: MatPaginatorIntl,) {
     this.usuarios = this.authService.getUsuarios();
-    pagina.itemsPerPageLabel = 'Jugadores por página'; 
-    pagina.nextPageLabel = 'Siguiente'; 
-    pagina.previousPageLabel = 'Anterior'; 
+    pagina.itemsPerPageLabel = 'Jugadores por página';
+    pagina.nextPageLabel = 'Siguiente';
+    pagina.previousPageLabel = 'Anterior';
   }
 
   ngOnInit() {
@@ -32,9 +32,7 @@ export class TablaComponent implements OnInit, AfterViewInit {
 
     setTimeout(() => {
       // 
-      for (let i = 0; i < this.authService.usuariosArreglo.length; i++) {
-        users.push(createNewUser(i+1, 'Club de Tenis Serena Golf', 'cl'),createNewUser(i+2, 'Club de Tenis Illapel', 'cl'));
-      }
+      users.push(createNewUser(1, 'Club de Tenis Serena Golf', 'cl'), createNewUser(2, 'Club de Tenis Illapel', 'cl'));
       this.dataSource = new MatTableDataSource(users);
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
@@ -43,7 +41,7 @@ export class TablaComponent implements OnInit, AfterViewInit {
     // Assign the data to the data source for the table to render
 
   }
-  
+
 
   applyFilter(filterValue: string) {
     filterValue = filterValue.trim(); // Remove whitespace
@@ -54,7 +52,7 @@ export class TablaComponent implements OnInit, AfterViewInit {
 }
 
 
-function createNewUser(id: number, name: any, pais:any): UserData {
+function createNewUser(id: number, name: any, pais: any): UserData {
 
   return {
     id: id.toString(),

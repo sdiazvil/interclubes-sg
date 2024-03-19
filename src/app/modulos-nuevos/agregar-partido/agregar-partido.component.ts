@@ -16,6 +16,8 @@ export interface DialogData {
   styleUrls: ['./agregar-partido.component.css']
 })
 export class AgregarPartidoComponent implements OnInit {
+  time = {hour: 9, minute: 0};
+
   formulario: FormGroup;
 
   formErrores = {
@@ -25,6 +27,8 @@ export class AgregarPartidoComponent implements OnInit {
     'nombre': '',
     'cancha': '',
     'categoria': '',
+    'fecha': '',
+    'hora': '',
   }
   mensajeError = false;
   mensajesValidacion = {
