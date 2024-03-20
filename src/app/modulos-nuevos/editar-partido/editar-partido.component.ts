@@ -169,7 +169,7 @@ export class EditarPartidoComponent implements OnInit {
         ganador: result.ganador
       }
     );
-    this.snackBar.open('El partido ha sido agregado correctamente.', 'CERRAR', {
+    this.snackBar.open('El partido ha sido editado correctamente.', 'CERRAR', {
       duration: 4000
     });
     this.cerrarModalSF();
@@ -194,7 +194,7 @@ export class EditarPartidoComponent implements OnInit {
     if (sets_ganados_jugador1 > sets_ganados_jugador2) {
       ganador = 'jugador1'
     }
-    if (sets_ganados_jugador1 > sets_ganados_jugador2) {
+    if (sets_ganados_jugador1 < sets_ganados_jugador2) {
       ganador = 'jugador2'
     }
     if (sets_ganados_jugador1 == sets_ganados_jugador2) {
