@@ -1,12 +1,11 @@
-<div class="container-fluid">
-  <br>
-  <br>
-  <br>
-  <mat-toolbar color="primary"><mat-icon>lists</mat-icon> &nbsp;Tabla de Posiciones</mat-toolbar>
+<br>
+<br>
+<br>
+<mat-toolbar color="primary"><mat-icon>lists</mat-icon> &nbsp;Tabla de Posiciones</mat-toolbar>
 
-  <div class="row" *ngIf="usuarios | async as users">
-    <div class="col-12">
-      <!-- <div class="example-header">
+<div class="row" *ngIf="usuarios | async as users">
+  <div class="col-12">
+    <!-- <div class="example-header">
         <mat-form-field>
           <span matPrefix>
             <mat-icon>search</mat-icon>
@@ -19,45 +18,47 @@
           </button>
         </mat-form-field>
       </div> -->
-      <div class="example-container mat-elevation-z8">
-        <mat-table [dataSource]="dataSource" matSort>
-          <ng-container matColumnDef="id">
-            <mat-header-cell *matHeaderCellDef mat-sort-header> Posición </mat-header-cell>
-            <mat-cell *matCellDef="let row"> {{row.id}} </mat-cell>
-          </ng-container>
-          <ng-container matColumnDef="nombre">
-            <mat-header-cell *matHeaderCellDef mat-sort-header style="flex: 3;"> Nombre </mat-header-cell>
-            <mat-cell *matCellDef="let row" style="flex: 3; display: flex; align-items: center;">
-              <picture *ngIf="row.nombre == 'Club de Tenis Serena Golf'">
-                <source srcset="assets/logo.jpg" type="image/svg+xml">
-                <img width="30px" src="assets/logo.jpg" style="margin-right:5px;" class="img-fluid img-thumbnail" alt="...">
-              </picture>
-              <picture *ngIf="row.nombre == 'Club de Tenis Illapel'">
-                <source srcset="assets/cti.jpeg" type="image/svg+xml">
-                <img width="30px" src="assets/cti.jpeg" style="margin-right:5px;" class="img-fluid img-thumbnail" alt="...">
-              </picture>
-              {{row.nombre }} &nbsp;
-            </mat-cell>
-          </ng-container>
-          <!-- <ng-container matColumnDef="vecindarios">
+    <div class="example-container mat-elevation-z8">
+      <mat-table [dataSource]="dataSource" matSort>
+        <ng-container matColumnDef="id">
+          <mat-header-cell *matHeaderCellDef mat-sort-header> Pos </mat-header-cell>
+          <mat-cell *matCellDef="let row"> {{row.id}} </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="nombre">
+          <mat-header-cell *matHeaderCellDef mat-sort-header style="flex: 3;"> Club </mat-header-cell>
+          <mat-cell *matCellDef="let row" style="flex: 3; display: flex; align-items: center;">
+            <picture *ngIf="row.nombre == 'Club de Tenis Serena Golf'">
+              <source srcset="assets/logo.jpg" type="image/svg+xml">
+              <img width="30px" src="assets/logo.jpg" style="margin-right:5px;" class="img-fluid img-thumbnail"
+                alt="...">
+            </picture>
+            <picture *ngIf="row.nombre == 'Club de Tenis Illapel'">
+              <source srcset="assets/cti.jpeg" type="image/svg+xml">
+              <img width="30px" src="assets/cti.jpeg" style="margin-right:5px;" class="img-fluid img-thumbnail"
+                alt="...">
+            </picture>
+            {{row.nombre }} &nbsp;
+          </mat-cell>
+        </ng-container>
+        <!-- <ng-container matColumnDef="vecindarios">
             <mat-header-cell *matHeaderCellDef mat-sort-header> Vecindarios </mat-header-cell>
             <mat-cell *matCellDef="let row"> <span *ngIf="row.vecindarios"><span
                   *ngFor="let vecindario of row.vecindarios; let esUltimo=last">{{vecindario.nombre}}{{esUltimo ? '' :
                   ', '}} </span></span> </mat-cell>
           </ng-container> -->
-          <ng-container matColumnDef="pg">
-            <mat-header-cell *matHeaderCellDef mat-sort-header> Partidos Ganados </mat-header-cell>
-            <mat-cell *matCellDef="let row"> {{row.pg}} </mat-cell>
-          </ng-container>
-          <ng-container matColumnDef="sg">
-            <mat-header-cell *matHeaderCellDef mat-sort-header> Set Ganados </mat-header-cell>
-            <mat-cell *matCellDef="let row"> {{row.sg}} </mat-cell>
-          </ng-container>
-          <!-- <ng-container matColumnDef="gg">
+        <ng-container matColumnDef="pg">
+          <mat-header-cell *matHeaderCellDef mat-sort-header> PG </mat-header-cell>
+          <mat-cell *matCellDef="let row"> {{row.pg}} </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="sg">
+          <mat-header-cell *matHeaderCellDef mat-sort-header> SG </mat-header-cell>
+          <mat-cell *matCellDef="let row"> {{row.sg}} </mat-cell>
+        </ng-container>
+        <!-- <ng-container matColumnDef="gg">
             <mat-header-cell *matHeaderCellDef mat-sort-header> Games Ganados </mat-header-cell>
             <mat-cell *matCellDef="let row"> 0 </mat-cell>
           </ng-container> -->
-          <!-- <ng-container matColumnDef="gestion">
+        <!-- <ng-container matColumnDef="gestion">
             <mat-header-cell *matHeaderCellDef mat-sort-header> Gestionar </mat-header-cell>
             <mat-cell *matCellDef="let row"><button mat-icon-button [matMenuTriggerFor]="menu">
                 <mat-icon>more_vert</mat-icon>
@@ -74,12 +75,11 @@
               </mat-menu>
             </mat-cell>
           </ng-container> -->
-          <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-          <mat-row *matRowDef="let row; columns: displayedColumns;">
-          </mat-row>
-        </mat-table>
-        <!-- <mat-paginator [pageSizeOptions]="[10, 20, 50, 100]"></mat-paginator> -->
-      </div>
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;">
+        </mat-row>
+      </mat-table>
+      <!-- <mat-paginator [pageSizeOptions]="[10, 20, 50, 100]"></mat-paginator> -->
     </div>
   </div>
 </div>
