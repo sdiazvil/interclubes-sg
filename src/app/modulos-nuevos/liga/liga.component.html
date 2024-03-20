@@ -1,284 +1,312 @@
-<div class="container-fluid">
-  <br>
-  <br>
-  <br>
-  <button (click)="open()" mat-fab color="accent" matTooltip="Agregar Partido" class="fab-button"
-    *ngIf="(authService.user | async)"><mat-icon>add</mat-icon></button>
-  <mat-tab-group (selectChange)="tabSelectionChanged($event)">
-    <mat-tab label="Primera">
-      <br>
-      <div class="container-fluid" style="padding: 0!important;">
-        <div class="row">
-          <div class="col-md-9 mx-auto" *ngFor="let partido of this.partidos | async">
-            <div [ngClass]="isScreenSmall() ? 'scoreboard_date_small' : 'scoreboard_date'"
-              class="d-flex justify-content-between align-items-center">
-              <b> Cancha {{partido.cancha}}: {{partido.fecha | amDateFormat:'L'}} - {{partido.hora.hour}}:<span
+<br>
+<br>
+<br>
+<button (click)="open()" mat-fab color="accent" matTooltip="Agregar Partido" class="fab-button"
+  *ngIf="(authService.user | async)"><mat-icon>add</mat-icon></button>
+<mat-tab-group (selectChange)="tabSelectionChanged($event)">
+  <mat-tab label="Primera">
+    <br>
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-9 mx-auto" *ngFor="let partido of this.partidos | async">
+          <div [ngClass]="isScreenSmall() ? 'scoreboard_date_small' : 'scoreboard_date'"
+            class="d-flex justify-content-between align-items-center">
+            <b> Cancha {{partido.cancha}}: {{partido.fecha | amDateFormat:'L'}} - {{partido.hora.hour}}:<span
                 *ngIf="partido.hora.minute==0">00</span><span
                 *ngIf="partido.hora.minute==30">{{partido.hora.minute}}</span> hrs</b>
-              <button *ngIf="authService.user | async" matTooltip="Opciones" mat-icon-button
-                [matMenuTriggerFor]="menu"><mat-icon>more_vert</mat-icon></button>
-            </div>
-            <mat-menu #menu="matMenu">
-              <button mat-menu-item (click)="eliminar(partido)">Eliminar Partido</button>
-              <button mat-menu-item (click)="editar(partido)">Editar Partido</button>
-            </mat-menu>
-            <div class="scoreboard__player">
-              <div class="player">
-                <div class="player__rank"><img src="assets/logo.jpg" class="img-fluid" style="padding-right:5px" alt="">
-                </div>
-                <div [ngStyle]="{ 'font-weight': partido.ganador=='jugador1' ? 'bold' : 'normal' }" [ngClass]="isScreenSmall() ? 'player__name_small' : 'player__name'" >{{partido.jugador1}}<span *ngIf="partido.ganador=='jugador1'">*</span> </div>
-              </div>
-              <div class="set">
-                <div [ngClass]="isScreenSmall() ? 'set__score_small' : 'set__score'">{{partido.sets_jugador1[0]}}</div>
-                <div [ngClass]="isScreenSmall() ? 'set__score_small' : 'set__score'">{{partido.sets_jugador1[1]}}</div>
-                <div [ngClass]="isScreenSmall() ? 'set__score_small' : 'set__score'" *ngIf="partido.sets_jugador1[2]>0">{{partido.sets_jugador1[2]}}</div>
-              </div>
-              <div class="game">
-                <div [ngClass]="isScreenSmall() ? 'game__score_small' : 'game__score'">{{partido.sets_ganados_jugador1}}
-                </div>
-              </div>
-            </div>
-            <div class="scoreboard__player">
-              <div class="player">
-                <div class="player__rank"><img src="assets/cti.jpeg" class="img-fluid" style="padding-right:5px" alt="">
-                </div>
-                <div [ngStyle]="{ 'font-weight': partido.ganador=='jugador2' ? 'bold' : 'normal' }" [ngClass]="isScreenSmall() ? 'player__name_small' : 'player__name'">{{ partido.jugador2}}<span *ngIf="partido.ganador=='jugador2'">*</span> </div>
-              </div>
-              <div class="set">
-                <div [ngClass]="isScreenSmall() ? 'set__score_small' : 'set__score'">{{partido.sets_jugador2[0]}}</div>
-                <div [ngClass]="isScreenSmall() ? 'set__score_small' : 'set__score'">{{partido.sets_jugador2[1]}}</div>
-                <div [ngClass]="isScreenSmall() ? 'set__score_small' : 'set__score'" *ngIf="partido.sets_jugador2[2]>0">{{partido.sets_jugador2[2]}}</div>
-              </div>
-              <div class="game">
-                <div [ngClass]="isScreenSmall() ? 'game__score_small' : 'game__score'">{{partido.sets_ganados_jugador2}}
-                </div>
-              </div>
-            </div>
-            <br>
+            <button *ngIf="authService.user | async" matTooltip="Opciones" mat-icon-button
+              [matMenuTriggerFor]="menu"><mat-icon>more_vert</mat-icon></button>
           </div>
+          <mat-menu #menu="matMenu">
+            <button mat-menu-item (click)="eliminar(partido)">Eliminar Partido</button>
+            <button mat-menu-item (click)="editar(partido)">Editar Partido</button>
+          </mat-menu>
+          <div class="scoreboard__player">
+            <div class="player">
+              <div class="player__rank"><img src="assets/logo.jpg" class="img-fluid" style="padding-right:5px" alt="">
+              </div>
+              <div [ngStyle]="{ 'font-weight': partido.ganador=='jugador1' ? 'bold' : 'normal' }"
+                [ngClass]="isScreenSmall() ? 'player__name_small' : 'player__name'">{{partido.jugador1}}<span
+                  *ngIf="partido.ganador=='jugador1'">*</span> </div>
+            </div>
+            <div class="set">
+              <div [ngClass]="isScreenSmall() ? 'set__score_small' : 'set__score'">{{partido.sets_jugador1[0]}}</div>
+              <div [ngClass]="isScreenSmall() ? 'set__score_small' : 'set__score'">{{partido.sets_jugador1[1]}}</div>
+              <div [ngClass]="isScreenSmall() ? 'set__score_small' : 'set__score'" *ngIf="partido.sets_jugador1[2]>0">
+                {{partido.sets_jugador1[2]}}</div>
+            </div>
+            <div class="game">
+              <div [ngClass]="isScreenSmall() ? 'game__score_small' : 'game__score'">{{partido.sets_ganados_jugador1}}
+              </div>
+            </div>
+          </div>
+          <div class="scoreboard__player">
+            <div class="player">
+              <div class="player__rank"><img src="assets/cti.jpeg" class="img-fluid" style="padding-right:5px" alt="">
+              </div>
+              <div [ngStyle]="{ 'font-weight': partido.ganador=='jugador2' ? 'bold' : 'normal' }"
+                [ngClass]="isScreenSmall() ? 'player__name_small' : 'player__name'">{{ partido.jugador2}}<span
+                  *ngIf="partido.ganador=='jugador2'">*</span> </div>
+            </div>
+            <div class="set">
+              <div [ngClass]="isScreenSmall() ? 'set__score_small' : 'set__score'">{{partido.sets_jugador2[0]}}</div>
+              <div [ngClass]="isScreenSmall() ? 'set__score_small' : 'set__score'">{{partido.sets_jugador2[1]}}</div>
+              <div [ngClass]="isScreenSmall() ? 'set__score_small' : 'set__score'" *ngIf="partido.sets_jugador2[2]>0">
+                {{partido.sets_jugador2[2]}}</div>
+            </div>
+            <div class="game">
+              <div [ngClass]="isScreenSmall() ? 'game__score_small' : 'game__score'">{{partido.sets_ganados_jugador2}}
+              </div>
+            </div>
+          </div>
+          <br>
         </div>
       </div>
-      <br>
-    </mat-tab>
-    <mat-tab label="Segunda">
-      <br>
-      <div class="container-fluid" style="padding: 0!important;">
-        <div class="row">
-          <div class="col-md-9 mx-auto" *ngFor="let partido of this.partidos | async">
-            <div [ngClass]="isScreenSmall() ? 'scoreboard_date_small' : 'scoreboard_date'"
-              class="d-flex justify-content-between align-items-center">
-              <b> Cancha {{partido.cancha}}: {{partido.fecha | amDateFormat:'L'}} - {{partido.hora.hour}}:<span
+    </div>
+    <br>
+  </mat-tab>
+  <mat-tab label="Segunda">
+    <br>
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-9 mx-auto" *ngFor="let partido of this.partidos | async">
+          <div [ngClass]="isScreenSmall() ? 'scoreboard_date_small' : 'scoreboard_date'"
+            class="d-flex justify-content-between align-items-center">
+            <b> Cancha {{partido.cancha}}: {{partido.fecha | amDateFormat:'L'}} - {{partido.hora.hour}}:<span
                 *ngIf="partido.hora.minute==0">00</span><span
                 *ngIf="partido.hora.minute==30">{{partido.hora.minute}}</span> hrs</b>
-              <button *ngIf="authService.user | async" matTooltip="Opciones" mat-icon-button
-                [matMenuTriggerFor]="menu"><mat-icon>more_vert</mat-icon></button>
-            </div>
-            <mat-menu #menu="matMenu">
-              <button mat-menu-item (click)="eliminar(partido)">Eliminar Partido</button>
-              <button mat-menu-item (click)="editar(partido)">Editar Partido</button>
-            </mat-menu>
-            <div class="scoreboard__player">
-              <div class="player">
-                <div class="player__rank"><img src="assets/logo.jpg" class="img-fluid" style="padding-right:5px" alt="">
-                </div>
-                <div [ngStyle]="{ 'font-weight': partido.ganador=='jugador1' ? 'bold' : 'normal' }" [ngClass]="isScreenSmall() ? 'player__name_small' : 'player__name'" >{{partido.jugador1}}<span *ngIf="partido.ganador=='jugador1'">*</span> </div>
-              </div>
-              <div class="set">
-                <div [ngClass]="isScreenSmall() ? 'set__score_small' : 'set__score'">{{partido.sets_jugador1[0]}}</div>
-                <div [ngClass]="isScreenSmall() ? 'set__score_small' : 'set__score'">{{partido.sets_jugador1[1]}}</div>
-                <div [ngClass]="isScreenSmall() ? 'set__score_small' : 'set__score'" *ngIf="partido.sets_jugador1[2]>0">{{partido.sets_jugador1[2]}}</div>
-              </div>
-              <div class="game">
-                <div [ngClass]="isScreenSmall() ? 'game__score_small' : 'game__score'">{{partido.sets_ganados_jugador1}}
-                </div>
-              </div>
-            </div>
-            <div class="scoreboard__player">
-              <div class="player">
-                <div class="player__rank"><img src="assets/cti.jpeg" class="img-fluid" style="padding-right:5px" alt="">
-                </div>
-                <div [ngStyle]="{ 'font-weight': partido.ganador=='jugador2' ? 'bold' : 'normal' }" [ngClass]="isScreenSmall() ? 'player__name_small' : 'player__name'">{{ partido.jugador2}}<span *ngIf="partido.ganador=='jugador2'">*</span> </div>
-              </div>
-              <div class="set">
-                <div [ngClass]="isScreenSmall() ? 'set__score_small' : 'set__score'">{{partido.sets_jugador2[0]}}</div>
-                <div [ngClass]="isScreenSmall() ? 'set__score_small' : 'set__score'">{{partido.sets_jugador2[1]}}</div>
-                <div [ngClass]="isScreenSmall() ? 'set__score_small' : 'set__score'" *ngIf="partido.sets_jugador2[2]>0">{{partido.sets_jugador2[2]}}</div>
-              </div>
-              <div class="game">
-                <div [ngClass]="isScreenSmall() ? 'game__score_small' : 'game__score'">{{partido.sets_ganados_jugador2}}
-                </div>
-              </div>
-            </div>
-            <br>
+            <button *ngIf="authService.user | async" matTooltip="Opciones" mat-icon-button
+              [matMenuTriggerFor]="menu"><mat-icon>more_vert</mat-icon></button>
           </div>
+          <mat-menu #menu="matMenu">
+            <button mat-menu-item (click)="eliminar(partido)">Eliminar Partido</button>
+            <button mat-menu-item (click)="editar(partido)">Editar Partido</button>
+          </mat-menu>
+          <div class="scoreboard__player">
+            <div class="player">
+              <div class="player__rank"><img src="assets/logo.jpg" class="img-fluid" style="padding-right:5px" alt="">
+              </div>
+              <div [ngStyle]="{ 'font-weight': partido.ganador=='jugador1' ? 'bold' : 'normal' }"
+                [ngClass]="isScreenSmall() ? 'player__name_small' : 'player__name'">{{partido.jugador1}}<span
+                  *ngIf="partido.ganador=='jugador1'">*</span> </div>
+            </div>
+            <div class="set">
+              <div [ngClass]="isScreenSmall() ? 'set__score_small' : 'set__score'">{{partido.sets_jugador1[0]}}</div>
+              <div [ngClass]="isScreenSmall() ? 'set__score_small' : 'set__score'">{{partido.sets_jugador1[1]}}</div>
+              <div [ngClass]="isScreenSmall() ? 'set__score_small' : 'set__score'" *ngIf="partido.sets_jugador1[2]>0">
+                {{partido.sets_jugador1[2]}}</div>
+            </div>
+            <div class="game">
+              <div [ngClass]="isScreenSmall() ? 'game__score_small' : 'game__score'">{{partido.sets_ganados_jugador1}}
+              </div>
+            </div>
+          </div>
+          <div class="scoreboard__player">
+            <div class="player">
+              <div class="player__rank"><img src="assets/cti.jpeg" class="img-fluid" style="padding-right:5px" alt="">
+              </div>
+              <div [ngStyle]="{ 'font-weight': partido.ganador=='jugador2' ? 'bold' : 'normal' }"
+                [ngClass]="isScreenSmall() ? 'player__name_small' : 'player__name'">{{ partido.jugador2}}<span
+                  *ngIf="partido.ganador=='jugador2'">*</span> </div>
+            </div>
+            <div class="set">
+              <div [ngClass]="isScreenSmall() ? 'set__score_small' : 'set__score'">{{partido.sets_jugador2[0]}}</div>
+              <div [ngClass]="isScreenSmall() ? 'set__score_small' : 'set__score'">{{partido.sets_jugador2[1]}}</div>
+              <div [ngClass]="isScreenSmall() ? 'set__score_small' : 'set__score'" *ngIf="partido.sets_jugador2[2]>0">
+                {{partido.sets_jugador2[2]}}</div>
+            </div>
+            <div class="game">
+              <div [ngClass]="isScreenSmall() ? 'game__score_small' : 'game__score'">{{partido.sets_ganados_jugador2}}
+              </div>
+            </div>
+          </div>
+          <br>
         </div>
       </div>
-      <br>
-    </mat-tab>
-    <mat-tab label="Tercera">
-      <br>
-      <div class="container-fluid" style="padding: 0!important;">
-        <div class="row">
-          <div class="col-md-9 mx-auto" *ngFor="let partido of this.partidos | async">
-            <div [ngClass]="isScreenSmall() ? 'scoreboard_date_small' : 'scoreboard_date'"
-              class="d-flex justify-content-between align-items-center">
-              <b> Cancha {{partido.cancha}}: {{partido.fecha | amDateFormat:'L'}} - {{partido.hora.hour}}:<span
+    </div>
+    <br>
+  </mat-tab>
+  <mat-tab label="Tercera">
+    <br>
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-9 mx-auto" *ngFor="let partido of this.partidos | async">
+          <div [ngClass]="isScreenSmall() ? 'scoreboard_date_small' : 'scoreboard_date'"
+            class="d-flex justify-content-between align-items-center">
+            <b> Cancha {{partido.cancha}}: {{partido.fecha | amDateFormat:'L'}} - {{partido.hora.hour}}:<span
                 *ngIf="partido.hora.minute==0">00</span><span
                 *ngIf="partido.hora.minute==30">{{partido.hora.minute}}</span> hrs</b>
-              <button *ngIf="authService.user | async" matTooltip="Opciones" mat-icon-button
-                [matMenuTriggerFor]="menu"><mat-icon>more_vert</mat-icon></button>
-            </div>
-            <mat-menu #menu="matMenu">
-              <button mat-menu-item (click)="eliminar(partido)">Eliminar Partido</button>
-              <button mat-menu-item (click)="editar(partido)">Editar Partido</button>
-            </mat-menu>
-            <div class="scoreboard__player">
-              <div class="player">
-                <div class="player__rank"><img src="assets/logo.jpg" class="img-fluid" style="padding-right:5px" alt="">
-                </div>
-                <div [ngStyle]="{ 'font-weight': partido.ganador=='jugador1' ? 'bold' : 'normal' }" [ngClass]="isScreenSmall() ? 'player__name_small' : 'player__name'" >{{partido.jugador1}}<span *ngIf="partido.ganador=='jugador1'">*</span> </div>
-              </div>
-              <div class="set">
-                <div [ngClass]="isScreenSmall() ? 'set__score_small' : 'set__score'">{{partido.sets_jugador1[0]}}</div>
-                <div [ngClass]="isScreenSmall() ? 'set__score_small' : 'set__score'">{{partido.sets_jugador1[1]}}</div>
-                <div [ngClass]="isScreenSmall() ? 'set__score_small' : 'set__score'" *ngIf="partido.sets_jugador1[2]>0">{{partido.sets_jugador1[2]}}</div>
-              </div>
-              <div class="game">
-                <div [ngClass]="isScreenSmall() ? 'game__score_small' : 'game__score'">{{partido.sets_ganados_jugador1}}
-                </div>
-              </div>
-            </div>
-            <div class="scoreboard__player">
-              <div class="player">
-                <div class="player__rank"><img src="assets/cti.jpeg" class="img-fluid" style="padding-right:5px" alt="">
-                </div>
-                <div [ngStyle]="{ 'font-weight': partido.ganador=='jugador2' ? 'bold' : 'normal' }" [ngClass]="isScreenSmall() ? 'player__name_small' : 'player__name'">{{ partido.jugador2}}<span *ngIf="partido.ganador=='jugador2'">*</span> </div>
-              </div>
-              <div class="set">
-                <div [ngClass]="isScreenSmall() ? 'set__score_small' : 'set__score'">{{partido.sets_jugador2[0]}}</div>
-                <div [ngClass]="isScreenSmall() ? 'set__score_small' : 'set__score'">{{partido.sets_jugador2[1]}}</div>
-                <div [ngClass]="isScreenSmall() ? 'set__score_small' : 'set__score'" *ngIf="partido.sets_jugador2[2]>0">{{partido.sets_jugador2[2]}}</div>
-              </div>
-              <div class="game">
-                <div [ngClass]="isScreenSmall() ? 'game__score_small' : 'game__score'">{{partido.sets_ganados_jugador2}}
-                </div>
-              </div>
-            </div>
-            <br>
+            <button *ngIf="authService.user | async" matTooltip="Opciones" mat-icon-button
+              [matMenuTriggerFor]="menu"><mat-icon>more_vert</mat-icon></button>
           </div>
+          <mat-menu #menu="matMenu">
+            <button mat-menu-item (click)="eliminar(partido)">Eliminar Partido</button>
+            <button mat-menu-item (click)="editar(partido)">Editar Partido</button>
+          </mat-menu>
+          <div class="scoreboard__player">
+            <div class="player">
+              <div class="player__rank"><img src="assets/logo.jpg" class="img-fluid" style="padding-right:5px" alt="">
+              </div>
+              <div [ngStyle]="{ 'font-weight': partido.ganador=='jugador1' ? 'bold' : 'normal' }"
+                [ngClass]="isScreenSmall() ? 'player__name_small' : 'player__name'">{{partido.jugador1}}<span
+                  *ngIf="partido.ganador=='jugador1'">*</span> </div>
+            </div>
+            <div class="set">
+              <div [ngClass]="isScreenSmall() ? 'set__score_small' : 'set__score'">{{partido.sets_jugador1[0]}}</div>
+              <div [ngClass]="isScreenSmall() ? 'set__score_small' : 'set__score'">{{partido.sets_jugador1[1]}}</div>
+              <div [ngClass]="isScreenSmall() ? 'set__score_small' : 'set__score'" *ngIf="partido.sets_jugador1[2]>0">
+                {{partido.sets_jugador1[2]}}</div>
+            </div>
+            <div class="game">
+              <div [ngClass]="isScreenSmall() ? 'game__score_small' : 'game__score'">{{partido.sets_ganados_jugador1}}
+              </div>
+            </div>
+          </div>
+          <div class="scoreboard__player">
+            <div class="player">
+              <div class="player__rank"><img src="assets/cti.jpeg" class="img-fluid" style="padding-right:5px" alt="">
+              </div>
+              <div [ngStyle]="{ 'font-weight': partido.ganador=='jugador2' ? 'bold' : 'normal' }"
+                [ngClass]="isScreenSmall() ? 'player__name_small' : 'player__name'">{{ partido.jugador2}}<span
+                  *ngIf="partido.ganador=='jugador2'">*</span> </div>
+            </div>
+            <div class="set">
+              <div [ngClass]="isScreenSmall() ? 'set__score_small' : 'set__score'">{{partido.sets_jugador2[0]}}</div>
+              <div [ngClass]="isScreenSmall() ? 'set__score_small' : 'set__score'">{{partido.sets_jugador2[1]}}</div>
+              <div [ngClass]="isScreenSmall() ? 'set__score_small' : 'set__score'" *ngIf="partido.sets_jugador2[2]>0">
+                {{partido.sets_jugador2[2]}}</div>
+            </div>
+            <div class="game">
+              <div [ngClass]="isScreenSmall() ? 'game__score_small' : 'game__score'">{{partido.sets_ganados_jugador2}}
+              </div>
+            </div>
+          </div>
+          <br>
         </div>
       </div>
-      <br>
-    </mat-tab>
-    <mat-tab label="Cuarta">
-      <br>
-      <div class="container-fluid" style="padding: 0!important;">
-        <div class="row">
-          <div class="col-md-9 mx-auto" *ngFor="let partido of this.partidos | async">
-            <div [ngClass]="isScreenSmall() ? 'scoreboard_date_small' : 'scoreboard_date'"
-              class="d-flex justify-content-between align-items-center">
-              <b> Cancha {{partido.cancha}}: {{partido.fecha | amDateFormat:'L'}} - {{partido.hora.hour}}:<span
+    </div>
+    <br>
+  </mat-tab>
+  <mat-tab label="Cuarta">
+    <br>
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-9 mx-auto" *ngFor="let partido of this.partidos | async">
+          <div [ngClass]="isScreenSmall() ? 'scoreboard_date_small' : 'scoreboard_date'"
+            class="d-flex justify-content-between align-items-center">
+            <b> Cancha {{partido.cancha}}: {{partido.fecha | amDateFormat:'L'}} - {{partido.hora.hour}}:<span
                 *ngIf="partido.hora.minute==0">00</span><span
                 *ngIf="partido.hora.minute==30">{{partido.hora.minute}}</span> hrs</b>
-              <button *ngIf="authService.user | async" matTooltip="Opciones" mat-icon-button
-                [matMenuTriggerFor]="menu"><mat-icon>more_vert</mat-icon></button>
-            </div>
-            <mat-menu #menu="matMenu">
-              <button mat-menu-item (click)="eliminar(partido)">Eliminar Partido</button>
-              <button mat-menu-item (click)="editar(partido)">Editar Partido</button>
-            </mat-menu>
-            <div class="scoreboard__player">
-              <div class="player">
-                <div class="player__rank"><img src="assets/logo.jpg" class="img-fluid" style="padding-right:5px" alt="">
-                </div>
-                <div [ngStyle]="{ 'font-weight': partido.ganador=='jugador1' ? 'bold' : 'normal' }" [ngClass]="isScreenSmall() ? 'player__name_small' : 'player__name'" >{{partido.jugador1}}<span *ngIf="partido.ganador=='jugador1'">*</span> </div>
-              </div>
-              <div class="set">
-                <div [ngClass]="isScreenSmall() ? 'set__score_small' : 'set__score'">{{partido.sets_jugador1[0]}}</div>
-                <div [ngClass]="isScreenSmall() ? 'set__score_small' : 'set__score'">{{partido.sets_jugador1[1]}}</div>
-                <div [ngClass]="isScreenSmall() ? 'set__score_small' : 'set__score'" *ngIf="partido.sets_jugador1[2]>0">{{partido.sets_jugador1[2]}}</div>
-              </div>
-              <div class="game">
-                <div [ngClass]="isScreenSmall() ? 'game__score_small' : 'game__score'">{{partido.sets_ganados_jugador1}}
-                </div>
-              </div>
-            </div>
-            <div class="scoreboard__player">
-              <div class="player">
-                <div class="player__rank"><img src="assets/cti.jpeg" class="img-fluid" style="padding-right:5px" alt="">
-                </div>
-                <div [ngStyle]="{ 'font-weight': partido.ganador=='jugador2' ? 'bold' : 'normal' }" [ngClass]="isScreenSmall() ? 'player__name_small' : 'player__name'">{{ partido.jugador2}}<span *ngIf="partido.ganador=='jugador2'">*</span> </div>
-              </div>
-              <div class="set">
-                <div [ngClass]="isScreenSmall() ? 'set__score_small' : 'set__score'">{{partido.sets_jugador2[0]}}</div>
-                <div [ngClass]="isScreenSmall() ? 'set__score_small' : 'set__score'">{{partido.sets_jugador2[1]}}</div>
-                <div [ngClass]="isScreenSmall() ? 'set__score_small' : 'set__score'" *ngIf="partido.sets_jugador2[2]>0">{{partido.sets_jugador2[2]}}</div>
-              </div>
-              <div class="game">
-                <div [ngClass]="isScreenSmall() ? 'game__score_small' : 'game__score'">{{partido.sets_ganados_jugador2}}
-                </div>
-              </div>
-            </div>
-            <br>
+            <button *ngIf="authService.user | async" matTooltip="Opciones" mat-icon-button
+              [matMenuTriggerFor]="menu"><mat-icon>more_vert</mat-icon></button>
           </div>
+          <mat-menu #menu="matMenu">
+            <button mat-menu-item (click)="eliminar(partido)">Eliminar Partido</button>
+            <button mat-menu-item (click)="editar(partido)">Editar Partido</button>
+          </mat-menu>
+          <div class="scoreboard__player">
+            <div class="player">
+              <div class="player__rank"><img src="assets/logo.jpg" class="img-fluid" style="padding-right:5px" alt="">
+              </div>
+              <div [ngStyle]="{ 'font-weight': partido.ganador=='jugador1' ? 'bold' : 'normal' }"
+                [ngClass]="isScreenSmall() ? 'player__name_small' : 'player__name'">{{partido.jugador1}}<span
+                  *ngIf="partido.ganador=='jugador1'">*</span> </div>
+            </div>
+            <div class="set">
+              <div [ngClass]="isScreenSmall() ? 'set__score_small' : 'set__score'">{{partido.sets_jugador1[0]}}</div>
+              <div [ngClass]="isScreenSmall() ? 'set__score_small' : 'set__score'">{{partido.sets_jugador1[1]}}</div>
+              <div [ngClass]="isScreenSmall() ? 'set__score_small' : 'set__score'" *ngIf="partido.sets_jugador1[2]>0">
+                {{partido.sets_jugador1[2]}}</div>
+            </div>
+            <div class="game">
+              <div [ngClass]="isScreenSmall() ? 'game__score_small' : 'game__score'">{{partido.sets_ganados_jugador1}}
+              </div>
+            </div>
+          </div>
+          <div class="scoreboard__player">
+            <div class="player">
+              <div class="player__rank"><img src="assets/cti.jpeg" class="img-fluid" style="padding-right:5px" alt="">
+              </div>
+              <div [ngStyle]="{ 'font-weight': partido.ganador=='jugador2' ? 'bold' : 'normal' }"
+                [ngClass]="isScreenSmall() ? 'player__name_small' : 'player__name'">{{ partido.jugador2}}<span
+                  *ngIf="partido.ganador=='jugador2'">*</span> </div>
+            </div>
+            <div class="set">
+              <div [ngClass]="isScreenSmall() ? 'set__score_small' : 'set__score'">{{partido.sets_jugador2[0]}}</div>
+              <div [ngClass]="isScreenSmall() ? 'set__score_small' : 'set__score'">{{partido.sets_jugador2[1]}}</div>
+              <div [ngClass]="isScreenSmall() ? 'set__score_small' : 'set__score'" *ngIf="partido.sets_jugador2[2]>0">
+                {{partido.sets_jugador2[2]}}</div>
+            </div>
+            <div class="game">
+              <div [ngClass]="isScreenSmall() ? 'game__score_small' : 'game__score'">{{partido.sets_ganados_jugador2}}
+              </div>
+            </div>
+          </div>
+          <br>
         </div>
       </div>
-      <br>
-    </mat-tab>
-    <mat-tab label="Dobles">
-      <br>
-      <div class="container-fluid" style="padding: 0!important;">
-        <div class="row">
-          <div class="col-md-9 mx-auto" *ngFor="let partido of this.partidos | async">
-            <div [ngClass]="isScreenSmall() ? 'scoreboard_date_small' : 'scoreboard_date'"
-              class="d-flex justify-content-between align-items-center">
-              <b> Cancha {{partido.cancha}}: {{partido.fecha | amDateFormat:'L'}} - {{partido.hora.hour}}:<span
+    </div>
+    <br>
+  </mat-tab>
+  <mat-tab label="Dobles">
+    <br>
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-9 mx-auto" *ngFor="let partido of this.partidos | async">
+          <div [ngClass]="isScreenSmall() ? 'scoreboard_date_small' : 'scoreboard_date'"
+            class="d-flex justify-content-between align-items-center">
+            <b> Cancha {{partido.cancha}}: {{partido.fecha | amDateFormat:'L'}} - {{partido.hora.hour}}:<span
                 *ngIf="partido.hora.minute==0">00</span><span
                 *ngIf="partido.hora.minute==30">{{partido.hora.minute}}</span> hrs</b>
-              <button *ngIf="authService.user | async" matTooltip="Opciones" mat-icon-button
-                [matMenuTriggerFor]="menu"><mat-icon>more_vert</mat-icon></button>
-            </div>
-            <mat-menu #menu="matMenu">
-              <button mat-menu-item (click)="eliminar(partido)">Eliminar Partido</button>
-              <button mat-menu-item (click)="editar(partido)">Editar Partido</button>
-            </mat-menu>
-            <div class="scoreboard__player">
-              <div class="player">
-                <div class="player__rank"><img src="assets/logo.jpg" class="img-fluid" style="padding-right:5px" alt="">
-                </div>
-                <div [ngStyle]="{ 'font-weight': partido.ganador=='jugador1' ? 'bold' : 'normal' }" [ngClass]="isScreenSmall() ? 'player__name_small' : 'player__name'" >{{partido.jugador1}}<span *ngIf="partido.ganador=='jugador1'">*</span> </div>
-              </div>
-              <div class="set">
-                <div [ngClass]="isScreenSmall() ? 'set__score_small' : 'set__score'">{{partido.sets_jugador1[0]}}</div>
-                <div [ngClass]="isScreenSmall() ? 'set__score_small' : 'set__score'">{{partido.sets_jugador1[1]}}</div>
-                <div [ngClass]="isScreenSmall() ? 'set__score_small' : 'set__score'" *ngIf="partido.sets_jugador1[2]>0">{{partido.sets_jugador1[2]}}</div>
-              </div>
-              <div class="game">
-                <div [ngClass]="isScreenSmall() ? 'game__score_small' : 'game__score'">{{partido.sets_ganados_jugador1}}
-                </div>
-              </div>
-            </div>
-            <div class="scoreboard__player">
-              <div class="player">
-                <div class="player__rank"><img src="assets/cti.jpeg" class="img-fluid" style="padding-right:5px" alt="">
-                </div>
-                <div [ngStyle]="{ 'font-weight': partido.ganador=='jugador2' ? 'bold' : 'normal' }" [ngClass]="isScreenSmall() ? 'player__name_small' : 'player__name'">{{ partido.jugador2}}<span *ngIf="partido.ganador=='jugador2'">*</span> </div>
-              </div>
-              <div class="set">
-                <div [ngClass]="isScreenSmall() ? 'set__score_small' : 'set__score'">{{partido.sets_jugador2[0]}}</div>
-                <div [ngClass]="isScreenSmall() ? 'set__score_small' : 'set__score'">{{partido.sets_jugador2[1]}}</div>
-                <div [ngClass]="isScreenSmall() ? 'set__score_small' : 'set__score'" *ngIf="partido.sets_jugador2[2]>0">{{partido.sets_jugador2[2]}}</div>
-              </div>
-              <div class="game">
-                <div [ngClass]="isScreenSmall() ? 'game__score_small' : 'game__score'">{{partido.sets_ganados_jugador2}}
-                </div>
-              </div>
-            </div>
-            <br>
+            <button *ngIf="authService.user | async" matTooltip="Opciones" mat-icon-button
+              [matMenuTriggerFor]="menu"><mat-icon>more_vert</mat-icon></button>
           </div>
+          <mat-menu #menu="matMenu">
+            <button mat-menu-item (click)="eliminar(partido)">Eliminar Partido</button>
+            <button mat-menu-item (click)="editar(partido)">Editar Partido</button>
+          </mat-menu>
+          <div class="scoreboard__player">
+            <div class="player">
+              <div class="player__rank"><img src="assets/logo.jpg" class="img-fluid" style="padding-right:5px" alt="">
+              </div>
+              <div [ngStyle]="{ 'font-weight': partido.ganador=='jugador1' ? 'bold' : 'normal' }"
+                [ngClass]="isScreenSmall() ? 'player__name_small' : 'player__name'">{{partido.jugador1}}<span
+                  *ngIf="partido.ganador=='jugador1'">*</span> </div>
+            </div>
+            <div class="set">
+              <div [ngClass]="isScreenSmall() ? 'set__score_small' : 'set__score'">{{partido.sets_jugador1[0]}}</div>
+              <div [ngClass]="isScreenSmall() ? 'set__score_small' : 'set__score'">{{partido.sets_jugador1[1]}}</div>
+              <div [ngClass]="isScreenSmall() ? 'set__score_small' : 'set__score'" *ngIf="partido.sets_jugador1[2]>0">
+                {{partido.sets_jugador1[2]}}</div>
+            </div>
+            <div class="game">
+              <div [ngClass]="isScreenSmall() ? 'game__score_small' : 'game__score'">{{partido.sets_ganados_jugador1}}
+              </div>
+            </div>
+          </div>
+          <div class="scoreboard__player">
+            <div class="player">
+              <div class="player__rank"><img src="assets/cti.jpeg" class="img-fluid" style="padding-right:5px" alt="">
+              </div>
+              <div [ngStyle]="{ 'font-weight': partido.ganador=='jugador2' ? 'bold' : 'normal' }"
+                [ngClass]="isScreenSmall() ? 'player__name_small' : 'player__name'">{{ partido.jugador2}}<span
+                  *ngIf="partido.ganador=='jugador2'">*</span> </div>
+            </div>
+            <div class="set">
+              <div [ngClass]="isScreenSmall() ? 'set__score_small' : 'set__score'">{{partido.sets_jugador2[0]}}</div>
+              <div [ngClass]="isScreenSmall() ? 'set__score_small' : 'set__score'">{{partido.sets_jugador2[1]}}</div>
+              <div [ngClass]="isScreenSmall() ? 'set__score_small' : 'set__score'" *ngIf="partido.sets_jugador2[2]>0">
+                {{partido.sets_jugador2[2]}}</div>
+            </div>
+            <div class="game">
+              <div [ngClass]="isScreenSmall() ? 'game__score_small' : 'game__score'">{{partido.sets_ganados_jugador2}}
+              </div>
+            </div>
+          </div>
+          <br>
         </div>
       </div>
-      <br>
-    </mat-tab>
-  </mat-tab-group>
-</div>
+    </div>
+    <br>
+  </mat-tab>
+</mat-tab-group>

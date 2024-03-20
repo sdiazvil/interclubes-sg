@@ -179,4 +179,5 @@
     position: fixed;
     bottom: 30px;
     right: 50px;
+    z-index: 999;
     }

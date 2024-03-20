@@ -56,7 +56,7 @@
   <div class="loading-overlay" *ngIf="loading">
     <mat-spinner [diameter]="48" [strokeWidth]="4.8"></mat-spinner>
   </div>
-  <div class="container-fluid" *ngIf="!loading" style="padding-left:0px!important;padding-right:0px;">
+  <div class="container-fluid" *ngIf="!loading">
     <router-outlet></router-outlet>
   </div>
   <!-- <app-footer class="footer"></app-footer> -->
