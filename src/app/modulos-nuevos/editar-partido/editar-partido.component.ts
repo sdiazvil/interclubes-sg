@@ -35,6 +35,8 @@ export class EditarPartidoComponent implements OnInit {
     'set_2_jugador1': '',
     'set_1_jugador2': '',
     'set_2_jugador2': '',
+    'set_3_jugador1': '',
+    'set_3_jugador2': '',
   }
   mensajeError = false;
   mensajesValidacion = {
@@ -75,6 +77,12 @@ export class EditarPartidoComponent implements OnInit {
     'set_2_jugador2': {
       'required': 'Requerido',
       'max': 'el número máximo es 7',
+    },
+    'set_3_jugador1': {
+      'required': 'Requerido',
+    },
+    'set_3_jugador2': {
+      'required': 'Requerido',
     }
   }
 
@@ -98,10 +106,10 @@ export class EditarPartidoComponent implements OnInit {
       'categoria': [this.partido.categoria.toString(), Validators.required],
       'set_1_jugador1': [this.partido.sets_jugador1[0], [Validators.required, Validators.max(7)]],
       'set_2_jugador1': [this.partido.sets_jugador1[1], [Validators.required, Validators.max(7)]],
-      'set_3_jugador1': [this.partido.sets_jugador1[2]],
+      'set_3_jugador1': [this.partido.sets_jugador1[2],Validators.required],
       'set_1_jugador2': [this.partido.sets_jugador2[0], [Validators.required, Validators.max(7)]],
       'set_2_jugador2': [this.partido.sets_jugador2[1], [Validators.required, Validators.max(7)]],
-      'set_3_jugador2': [this.partido.sets_jugador2[2]],
+      'set_3_jugador2': [this.partido.sets_jugador2[2], Validators.required],
     });
     this.formulario.valueChanges.subscribe(data => this.detectarCambios(data));
     this.detectarCambios();

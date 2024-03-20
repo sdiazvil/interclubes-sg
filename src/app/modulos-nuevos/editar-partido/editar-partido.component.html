@@ -54,7 +54,8 @@
               </div>
               <div class="col-sm-1">
                 <mat-form-field>
-                  <input matInput placeholder="Set 3" type="number" formControlName="set_3_jugador1">
+                  <input matInput placeholder="Set 3" type="number" formControlName="set_3_jugador1" required>
+                  <mat-error *ngIf="formErrores.set_3_jugador1">{{formErrores.set_3_jugador1}}</mat-error>
                 </mat-form-field>
               </div>
             </div>
@@ -81,7 +82,8 @@
               </div>
               <div class="col-sm-1">
                 <mat-form-field>
-                  <input matInput placeholder="Set 3" type="number" formControlName="set_3_jugador2">
+                  <input matInput placeholder="Set 3" type="number" formControlName="set_3_jugador2" required>
+                  <mat-error *ngIf="formErrores.set_3_jugador2">{{formErrores.set_3_jugador2}}</mat-error>
                 </mat-form-field>
               </div>
             </div>
