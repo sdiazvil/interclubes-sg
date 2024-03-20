@@ -113,7 +113,6 @@ export class EditarPartidoComponent implements OnInit {
     });
     this.formulario.valueChanges.subscribe(data => this.detectarCambios(data));
     this.detectarCambios();
-    console.log(this.partido);
   }
 
   dateValidator(control: FormControl): { [s: string]: boolean } {
@@ -191,7 +190,7 @@ export class EditarPartidoComponent implements OnInit {
     let sets_ganados_jugador1 = 0;
     let sets_ganados_jugador2 = 0;
     let ganador = '';
-    for (let i = 0; i < sets_jugador1.length; i++) {
+    for (let i = 0; i <= 2; i++) {
       if (sets_jugador1[i] > sets_jugador2[i]) {
         sets_ganados_jugador1++;
       }

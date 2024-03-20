@@ -39,17 +39,17 @@
               </div>
               <div class="col-2 mb-3">
                 <label for="validationDefault01">Set 1</label>
-                <input type="number" class="form-control" id="validationDefault01" formControlName="set_1_jugador1"
+                <input type="number" min=0 class="form-control" id="validationDefault01" formControlName="set_1_jugador1"
                   required>
               </div>
               <div class="col-2 mb-3">
                 <label for="validationDefault02">Set 2</label>
-                <input type="number" class="form-control" id="validationDefault02" formControlName="set_2_jugador1"
+                <input type="number" min=0 class="form-control" id="validationDefault02" formControlName="set_2_jugador1"
                   required>
               </div>
               <div class="col-2 mb-3">
                 <label for="validationDefault03">Set 3</label>
-                <input type="number" class="form-control" id="validationDefault03" formControlName="set_3_jugador1"
+                <input type="number" min=0 class="form-control" id="validationDefault03" formControlName="set_3_jugador1"
                   required>
               </div>
               <mat-error *ngIf="formErrores.set_2_jugador1">{{formErrores.set_2_jugador1}}</mat-error>
@@ -65,17 +65,17 @@
               </div>
               <div class="col-2 mb-3">
                 <label for="validationDefault01">Set 1</label>
-                <input type="number" class="form-control" id="validationDefault01" formControlName="set_1_jugador2"
+                <input type="number" min=0 class="form-control" id="validationDefault01" formControlName="set_1_jugador2"
                   required>
               </div>
               <div class="col-2 mb-3">
                 <label for="validationDefault02">Set 2</label>
-                <input type="number" class="form-control" id="validationDefault02" formControlName="set_2_jugador2"
+                <input type="number" min=0 class="form-control" id="validationDefault02" formControlName="set_2_jugador2"
                   required>
               </div>
               <div class="col-2 mb-3">
                 <label for="validationDefault03">Set 3</label>
-                <input type="number" class="form-control" id="validationDefault03" formControlName="set_3_jugador2"
+                <input type="number" min=0 class="form-control" id="validationDefault03" formControlName="set_3_jugador2"
                   required>
               </div>
               <mat-error *ngIf="formErrores.jugador2">{{formErrores.jugador2}}</mat-error>

@@ -36,32 +36,26 @@ export class LigaComponent implements OnInit {
   tabSelectionChanged(event) {
     // Get the selected tab
     let selectedTab = event.tab;
-    console.log(selectedTab);
 
     if (selectedTab.textLabel == 'Primera') {
-      console.log('Primera');
       this.partidos = this.partidosService.getPartidosByCategoria(1);
     }
 
     if (selectedTab.textLabel == 'Segunda') {
       this.partidos = this.partidosService.getPartidosByCategoria(2);
       console.log(this.partidos)
-      console.log('Segunda');
     }
 
     if (selectedTab.textLabel == 'Tercera') {
       this.partidos = this.partidosService.getPartidosByCategoria(3);
-      console.log('Tercera');
     }
 
     if (selectedTab.textLabel == 'Cuarta') {
       this.partidos = this.partidosService.getPartidosByCategoria(4);
-      console.log('Cuarta');
     }
 
     if (selectedTab.textLabel == 'Dobles') {
       this.partidos = this.partidosService.getPartidosByCategoria(22);
-      console.log('Dobles');
     }
 
     // Call some method that you want 
