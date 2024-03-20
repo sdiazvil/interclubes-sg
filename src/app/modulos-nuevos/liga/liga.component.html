@@ -7,12 +7,12 @@
   <mat-tab-group (selectChange)="tabSelectionChanged($event)">
     <mat-tab label="Primera">
       <br>
-      <div class="container-fluid">
+      <div class="container-fluid" style="padding: 0!important;">
         <div class="row">
           <div class="col-md-9 mx-auto" *ngFor="let partido of this.partidos | async">
             <div [ngClass]="isScreenSmall() ? 'scoreboard_date_small' : 'scoreboard_date'"
               class="d-flex justify-content-between align-items-center">
-              <b> Cancha {{partido.cancha}}: {{partido.fecha | amDateFormat:'LL'}} - {{partido.hora.hour}}:<span
+              <b> Cancha {{partido.cancha}}: {{partido.fecha | amDateFormat:'L'}} - {{partido.hora.hour}}:<span
                 *ngIf="partido.hora.minute==0">00</span><span
                 *ngIf="partido.hora.minute==30">{{partido.hora.minute}}</span> hrs</b>
               <button *ngIf="authService.user | async" matTooltip="Opciones" mat-icon-button
@@ -62,12 +62,12 @@
     </mat-tab>
     <mat-tab label="Segunda">
       <br>
-      <div class="container-fluid">
+      <div class="container-fluid" style="padding: 0!important;">
         <div class="row">
           <div class="col-md-9 mx-auto" *ngFor="let partido of this.partidos | async">
             <div [ngClass]="isScreenSmall() ? 'scoreboard_date_small' : 'scoreboard_date'"
               class="d-flex justify-content-between align-items-center">
-              <b> Cancha {{partido.cancha}}: {{partido.fecha | amDateFormat:'LL'}} - {{partido.hora.hour}}:<span
+              <b> Cancha {{partido.cancha}}: {{partido.fecha | amDateFormat:'L'}} - {{partido.hora.hour}}:<span
                 *ngIf="partido.hora.minute==0">00</span><span
                 *ngIf="partido.hora.minute==30">{{partido.hora.minute}}</span> hrs</b>
               <button *ngIf="authService.user | async" matTooltip="Opciones" mat-icon-button
@@ -117,12 +117,12 @@
     </mat-tab>
     <mat-tab label="Tercera">
       <br>
-      <div class="container-fluid">
+      <div class="container-fluid" style="padding: 0!important;">
         <div class="row">
           <div class="col-md-9 mx-auto" *ngFor="let partido of this.partidos | async">
             <div [ngClass]="isScreenSmall() ? 'scoreboard_date_small' : 'scoreboard_date'"
               class="d-flex justify-content-between align-items-center">
-              <b> Cancha {{partido.cancha}}: {{partido.fecha | amDateFormat:'LL'}} - {{partido.hora.hour}}:<span
+              <b> Cancha {{partido.cancha}}: {{partido.fecha | amDateFormat:'L'}} - {{partido.hora.hour}}:<span
                 *ngIf="partido.hora.minute==0">00</span><span
                 *ngIf="partido.hora.minute==30">{{partido.hora.minute}}</span> hrs</b>
               <button *ngIf="authService.user | async" matTooltip="Opciones" mat-icon-button
@@ -172,12 +172,12 @@
     </mat-tab>
     <mat-tab label="Cuarta">
       <br>
-      <div class="container-fluid">
+      <div class="container-fluid" style="padding: 0!important;">
         <div class="row">
           <div class="col-md-9 mx-auto" *ngFor="let partido of this.partidos | async">
             <div [ngClass]="isScreenSmall() ? 'scoreboard_date_small' : 'scoreboard_date'"
               class="d-flex justify-content-between align-items-center">
-              <b> Cancha {{partido.cancha}}: {{partido.fecha | amDateFormat:'LL'}} - {{partido.hora.hour}}:<span
+              <b> Cancha {{partido.cancha}}: {{partido.fecha | amDateFormat:'L'}} - {{partido.hora.hour}}:<span
                 *ngIf="partido.hora.minute==0">00</span><span
                 *ngIf="partido.hora.minute==30">{{partido.hora.minute}}</span> hrs</b>
               <button *ngIf="authService.user | async" matTooltip="Opciones" mat-icon-button
@@ -227,12 +227,12 @@
     </mat-tab>
     <mat-tab label="Dobles">
       <br>
-      <div class="container-fluid">
+      <div class="container-fluid" style="padding: 0!important;">
         <div class="row">
           <div class="col-md-9 mx-auto" *ngFor="let partido of this.partidos | async">
             <div [ngClass]="isScreenSmall() ? 'scoreboard_date_small' : 'scoreboard_date'"
               class="d-flex justify-content-between align-items-center">
-              <b> Cancha {{partido.cancha}}: {{partido.fecha | amDateFormat:'LL'}} - {{partido.hora.hour}}:<span
+              <b> Cancha {{partido.cancha}}: {{partido.fecha | amDateFormat:'L'}} - {{partido.hora.hour}}:<span
                 *ngIf="partido.hora.minute==0">00</span><span
                 *ngIf="partido.hora.minute==30">{{partido.hora.minute}}</span> hrs</b>
               <button *ngIf="authService.user | async" matTooltip="Opciones" mat-icon-button
