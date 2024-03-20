@@ -50,13 +50,26 @@ export class TablaComponent implements OnInit, AfterViewInit {
           this.dataSource = new MatTableDataSource(users);
           this.dataSource.paginator = this.paginator;
           this.dataSource.sort = this.sort;
-        } else {
+        } 
+        if (this.ganados_jugador1 < this.ganados_jugador2) {
           users.push(createNewUser(1, 'Club de Tenis Illapel', this.ganados_jugador2, this.sets_ganados_jugador2), createNewUser(2, 'Club de Tenis Serena Golf', this.ganados_jugador1, this.sets_ganados_jugador1));
           this.dataSource = new MatTableDataSource(users);
           this.dataSource.paginator = this.paginator;
           this.dataSource.sort = this.sort;
         }
-
+        if (this.ganados_jugador1 == this.ganados_jugador2) {
+          if(this.sets_ganados_jugador1 > this.sets_ganados_jugador2){
+            users.push(createNewUser(1, 'Club de Tenis Serena Golf', this.ganados_jugador1, this.sets_ganados_jugador1), createNewUser(2, 'Club de Tenis Illapel', this.ganados_jugador2, this.sets_ganados_jugador2));
+            this.dataSource = new MatTableDataSource(users);
+            this.dataSource.paginator = this.paginator;
+            this.dataSource.sort = this.sort;
+          }else{
+            users.push(createNewUser(1, 'Club de Tenis Illapel', this.ganados_jugador2, this.sets_ganados_jugador2), createNewUser(2, 'Club de Tenis Serena Golf', this.ganados_jugador1, this.sets_ganados_jugador1));
+            this.dataSource = new MatTableDataSource(users);
+            this.dataSource.paginator = this.paginator;
+            this.dataSource.sort = this.sort;
+          }
+        }
       });
     });
 
