@@ -22,25 +22,16 @@
               <button mat-menu-item (click)="eliminar(partido)">Eliminar Partido</button>
               <button mat-menu-item (click)="editar(partido)">Editar Partido</button>
             </mat-menu>
-
-            <!-- <div [ngClass]="isScreenSmall() ? 'game__score_small' : 'game__score'">1</div> -->
             <div class="scoreboard__player">
               <div class="player">
                 <div class="player__rank"><img src="assets/logo.jpg" class="img-fluid" style="padding-right:5px" alt="">
                 </div>
-                <!-- <div class="player__name" *ngIf="!this.isScreenSmall()">Cesar</div> -->
-                <div [ngClass]="isScreenSmall() ? 'player__name_small' : 'player__name'">{{partido.jugador1}}</div>
+                <div [ngStyle]="{ 'font-weight': partido.ganador=='jugador1' ? 'bold' : 'normal' }" [ngClass]="isScreenSmall() ? 'player__name_small' : 'player__name'" >{{partido.jugador1}}<span *ngIf="partido.ganador=='jugador1'">*</span> </div>
               </div>
-              <!-- <div [ngClass]="isScreenSmall() ? 'player__name_small' : 'player__name'">{{ (partido.jugador1Ref
-                | doc | async)?.displayName }} <span class="flag-icon flag-icon-pe"></span></div>
-            </div> -->
               <div class="set">
                 <div [ngClass]="isScreenSmall() ? 'set__score_small' : 'set__score'">{{partido.sets_jugador1[0]}}</div>
                 <div [ngClass]="isScreenSmall() ? 'set__score_small' : 'set__score'">{{partido.sets_jugador1[1]}}</div>
-                <div [ngClass]="isScreenSmall() ? 'set__score_small' : 'set__score'">{{partido.sets_jugador1[2]}}</div>
-                <div *ngIf="partido.sets_jugador1[2]" [ngClass]="isScreenSmall() ? 'set__score_small' : 'set__score'">
-                  {{partido.sets_jugador1[2]}}</div>
-                <!-- <div class="set__score set__score--actual">4</div> -->
+                <div [ngClass]="isScreenSmall() ? 'set__score_small' : 'set__score'" *ngIf="partido.sets_jugador1[2]>0">{{partido.sets_jugador1[2]}}</div>
               </div>
               <div class="game">
                 <div [ngClass]="isScreenSmall() ? 'game__score_small' : 'game__score'">{{partido.sets_ganados_jugador1}}
@@ -48,20 +39,15 @@
               </div>
             </div>
             <div class="scoreboard__player">
-              <!-- <div class="player player--serve"> -->
               <div class="player">
                 <div class="player__rank"><img src="assets/cti.jpeg" class="img-fluid" style="padding-right:5px" alt="">
                 </div>
-                <!-- <div class="player__name" *ngIf="!this.isScreenSmall()">Pedro</div> -->
-                <div [ngClass]="isScreenSmall() ? 'player__name_small' : 'player__name'">{{ partido.jugador2}} </div>
+                <div [ngStyle]="{ 'font-weight': partido.ganador=='jugador2' ? 'bold' : 'normal' }" [ngClass]="isScreenSmall() ? 'player__name_small' : 'player__name'">{{ partido.jugador2}}<span *ngIf="partido.ganador=='jugador2'">*</span> </div>
               </div>
               <div class="set">
                 <div [ngClass]="isScreenSmall() ? 'set__score_small' : 'set__score'">{{partido.sets_jugador2[0]}}</div>
                 <div [ngClass]="isScreenSmall() ? 'set__score_small' : 'set__score'">{{partido.sets_jugador2[1]}}</div>
-                <div [ngClass]="isScreenSmall() ? 'set__score_small' : 'set__score'">{{partido.sets_jugador2[2]}}</div>
-                <div *ngIf="partido.sets_jugador2[2]" [ngClass]="isScreenSmall() ? 'set__score_small' : 'set__score'">
-                  {{partido.sets_jugador2[2]}}</div>
-                <!-- <div class="set__score set__score--actual">3</div> -->
+                <div [ngClass]="isScreenSmall() ? 'set__score_small' : 'set__score'" *ngIf="partido.sets_jugador2[2]>0">{{partido.sets_jugador2[2]}}</div>
               </div>
               <div class="game">
                 <div [ngClass]="isScreenSmall() ? 'game__score_small' : 'game__score'">{{partido.sets_ganados_jugador2}}
@@ -91,25 +77,16 @@
               <button mat-menu-item (click)="eliminar(partido)">Eliminar Partido</button>
               <button mat-menu-item (click)="editar(partido)">Editar Partido</button>
             </mat-menu>
-
-            <!-- <div [ngClass]="isScreenSmall() ? 'game__score_small' : 'game__score'">1</div> -->
             <div class="scoreboard__player">
               <div class="player">
                 <div class="player__rank"><img src="assets/logo.jpg" class="img-fluid" style="padding-right:5px" alt="">
                 </div>
-                <!-- <div class="player__name" *ngIf="!this.isScreenSmall()">Cesar</div> -->
-                <div [ngClass]="isScreenSmall() ? 'player__name_small' : 'player__name'">{{partido.jugador1}}</div>
+                <div [ngStyle]="{ 'font-weight': partido.ganador=='jugador1' ? 'bold' : 'normal' }" [ngClass]="isScreenSmall() ? 'player__name_small' : 'player__name'" >{{partido.jugador1}}<span *ngIf="partido.ganador=='jugador1'">*</span> </div>
               </div>
-              <!-- <div [ngClass]="isScreenSmall() ? 'player__name_small' : 'player__name'">{{ (partido.jugador1Ref
-                | doc | async)?.displayName }} <span class="flag-icon flag-icon-pe"></span></div>
-            </div> -->
               <div class="set">
                 <div [ngClass]="isScreenSmall() ? 'set__score_small' : 'set__score'">{{partido.sets_jugador1[0]}}</div>
                 <div [ngClass]="isScreenSmall() ? 'set__score_small' : 'set__score'">{{partido.sets_jugador1[1]}}</div>
-                <div [ngClass]="isScreenSmall() ? 'set__score_small' : 'set__score'">{{partido.sets_jugador1[2]}}</div>
-                <div *ngIf="partido.sets_jugador1[2]" [ngClass]="isScreenSmall() ? 'set__score_small' : 'set__score'">
-                  {{partido.sets_jugador1[2]}}</div>
-                <!-- <div class="set__score set__score--actual">4</div> -->
+                <div [ngClass]="isScreenSmall() ? 'set__score_small' : 'set__score'" *ngIf="partido.sets_jugador1[2]>0">{{partido.sets_jugador1[2]}}</div>
               </div>
               <div class="game">
                 <div [ngClass]="isScreenSmall() ? 'game__score_small' : 'game__score'">{{partido.sets_ganados_jugador1}}
@@ -117,20 +94,15 @@
               </div>
             </div>
             <div class="scoreboard__player">
-              <!-- <div class="player player--serve"> -->
               <div class="player">
                 <div class="player__rank"><img src="assets/cti.jpeg" class="img-fluid" style="padding-right:5px" alt="">
                 </div>
-                <!-- <div class="player__name" *ngIf="!this.isScreenSmall()">Pedro</div> -->
-                <div [ngClass]="isScreenSmall() ? 'player__name_small' : 'player__name'">{{ partido.jugador2}} </div>
+                <div [ngStyle]="{ 'font-weight': partido.ganador=='jugador2' ? 'bold' : 'normal' }" [ngClass]="isScreenSmall() ? 'player__name_small' : 'player__name'">{{ partido.jugador2}}<span *ngIf="partido.ganador=='jugador2'">*</span> </div>
               </div>
               <div class="set">
                 <div [ngClass]="isScreenSmall() ? 'set__score_small' : 'set__score'">{{partido.sets_jugador2[0]}}</div>
                 <div [ngClass]="isScreenSmall() ? 'set__score_small' : 'set__score'">{{partido.sets_jugador2[1]}}</div>
-                <div [ngClass]="isScreenSmall() ? 'set__score_small' : 'set__score'">{{partido.sets_jugador2[2]}}</div>
-                <div *ngIf="partido.sets_jugador2[2]" [ngClass]="isScreenSmall() ? 'set__score_small' : 'set__score'">
-                  {{partido.sets_jugador2[2]}}</div>
-                <!-- <div class="set__score set__score--actual">3</div> -->
+                <div [ngClass]="isScreenSmall() ? 'set__score_small' : 'set__score'" *ngIf="partido.sets_jugador2[2]>0">{{partido.sets_jugador2[2]}}</div>
               </div>
               <div class="game">
                 <div [ngClass]="isScreenSmall() ? 'game__score_small' : 'game__score'">{{partido.sets_ganados_jugador2}}
@@ -160,25 +132,16 @@
               <button mat-menu-item (click)="eliminar(partido)">Eliminar Partido</button>
               <button mat-menu-item (click)="editar(partido)">Editar Partido</button>
             </mat-menu>
-
-            <!-- <div [ngClass]="isScreenSmall() ? 'game__score_small' : 'game__score'">1</div> -->
             <div class="scoreboard__player">
               <div class="player">
                 <div class="player__rank"><img src="assets/logo.jpg" class="img-fluid" style="padding-right:5px" alt="">
                 </div>
-                <!-- <div class="player__name" *ngIf="!this.isScreenSmall()">Cesar</div> -->
-                <div [ngClass]="isScreenSmall() ? 'player__name_small' : 'player__name'">{{partido.jugador1}}</div>
+                <div [ngStyle]="{ 'font-weight': partido.ganador=='jugador1' ? 'bold' : 'normal' }" [ngClass]="isScreenSmall() ? 'player__name_small' : 'player__name'" >{{partido.jugador1}}<span *ngIf="partido.ganador=='jugador1'">*</span> </div>
               </div>
-              <!-- <div [ngClass]="isScreenSmall() ? 'player__name_small' : 'player__name'">{{ (partido.jugador1Ref
-                | doc | async)?.displayName }} <span class="flag-icon flag-icon-pe"></span></div>
-            </div> -->
               <div class="set">
                 <div [ngClass]="isScreenSmall() ? 'set__score_small' : 'set__score'">{{partido.sets_jugador1[0]}}</div>
                 <div [ngClass]="isScreenSmall() ? 'set__score_small' : 'set__score'">{{partido.sets_jugador1[1]}}</div>
-                <div [ngClass]="isScreenSmall() ? 'set__score_small' : 'set__score'">{{partido.sets_jugador1[2]}}</div>
-                <div *ngIf="partido.sets_jugador1[2]" [ngClass]="isScreenSmall() ? 'set__score_small' : 'set__score'">
-                  {{partido.sets_jugador1[2]}}</div>
-                <!-- <div class="set__score set__score--actual">4</div> -->
+                <div [ngClass]="isScreenSmall() ? 'set__score_small' : 'set__score'" *ngIf="partido.sets_jugador1[2]>0">{{partido.sets_jugador1[2]}}</div>
               </div>
               <div class="game">
                 <div [ngClass]="isScreenSmall() ? 'game__score_small' : 'game__score'">{{partido.sets_ganados_jugador1}}
@@ -186,20 +149,15 @@
               </div>
             </div>
             <div class="scoreboard__player">
-              <!-- <div class="player player--serve"> -->
               <div class="player">
                 <div class="player__rank"><img src="assets/cti.jpeg" class="img-fluid" style="padding-right:5px" alt="">
                 </div>
-                <!-- <div class="player__name" *ngIf="!this.isScreenSmall()">Pedro</div> -->
-                <div [ngClass]="isScreenSmall() ? 'player__name_small' : 'player__name'">{{ partido.jugador2}} </div>
+                <div [ngStyle]="{ 'font-weight': partido.ganador=='jugador2' ? 'bold' : 'normal' }" [ngClass]="isScreenSmall() ? 'player__name_small' : 'player__name'">{{ partido.jugador2}}<span *ngIf="partido.ganador=='jugador2'">*</span> </div>
               </div>
               <div class="set">
                 <div [ngClass]="isScreenSmall() ? 'set__score_small' : 'set__score'">{{partido.sets_jugador2[0]}}</div>
                 <div [ngClass]="isScreenSmall() ? 'set__score_small' : 'set__score'">{{partido.sets_jugador2[1]}}</div>
-                <div [ngClass]="isScreenSmall() ? 'set__score_small' : 'set__score'">{{partido.sets_jugador2[2]}}</div>
-                <div *ngIf="partido.sets_jugador2[2]" [ngClass]="isScreenSmall() ? 'set__score_small' : 'set__score'">
-                  {{partido.sets_jugador2[2]}}</div>
-                <!-- <div class="set__score set__score--actual">3</div> -->
+                <div [ngClass]="isScreenSmall() ? 'set__score_small' : 'set__score'" *ngIf="partido.sets_jugador2[2]>0">{{partido.sets_jugador2[2]}}</div>
               </div>
               <div class="game">
                 <div [ngClass]="isScreenSmall() ? 'game__score_small' : 'game__score'">{{partido.sets_ganados_jugador2}}
@@ -229,25 +187,16 @@
               <button mat-menu-item (click)="eliminar(partido)">Eliminar Partido</button>
               <button mat-menu-item (click)="editar(partido)">Editar Partido</button>
             </mat-menu>
-
-            <!-- <div [ngClass]="isScreenSmall() ? 'game__score_small' : 'game__score'">1</div> -->
             <div class="scoreboard__player">
               <div class="player">
                 <div class="player__rank"><img src="assets/logo.jpg" class="img-fluid" style="padding-right:5px" alt="">
                 </div>
-                <!-- <div class="player__name" *ngIf="!this.isScreenSmall()">Cesar</div> -->
-                <div [ngClass]="isScreenSmall() ? 'player__name_small' : 'player__name'">{{partido.jugador1}}</div>
+                <div [ngStyle]="{ 'font-weight': partido.ganador=='jugador1' ? 'bold' : 'normal' }" [ngClass]="isScreenSmall() ? 'player__name_small' : 'player__name'" >{{partido.jugador1}}<span *ngIf="partido.ganador=='jugador1'">*</span> </div>
               </div>
-              <!-- <div [ngClass]="isScreenSmall() ? 'player__name_small' : 'player__name'">{{ (partido.jugador1Ref
-                | doc | async)?.displayName }} <span class="flag-icon flag-icon-pe"></span></div>
-            </div> -->
               <div class="set">
                 <div [ngClass]="isScreenSmall() ? 'set__score_small' : 'set__score'">{{partido.sets_jugador1[0]}}</div>
                 <div [ngClass]="isScreenSmall() ? 'set__score_small' : 'set__score'">{{partido.sets_jugador1[1]}}</div>
-                <div [ngClass]="isScreenSmall() ? 'set__score_small' : 'set__score'">{{partido.sets_jugador1[2]}}</div>
-                <div *ngIf="partido.sets_jugador1[2]" [ngClass]="isScreenSmall() ? 'set__score_small' : 'set__score'">
-                  {{partido.sets_jugador1[2]}}</div>
-                <!-- <div class="set__score set__score--actual">4</div> -->
+                <div [ngClass]="isScreenSmall() ? 'set__score_small' : 'set__score'" *ngIf="partido.sets_jugador1[2]>0">{{partido.sets_jugador1[2]}}</div>
               </div>
               <div class="game">
                 <div [ngClass]="isScreenSmall() ? 'game__score_small' : 'game__score'">{{partido.sets_ganados_jugador1}}
@@ -255,20 +204,15 @@
               </div>
             </div>
             <div class="scoreboard__player">
-              <!-- <div class="player player--serve"> -->
               <div class="player">
                 <div class="player__rank"><img src="assets/cti.jpeg" class="img-fluid" style="padding-right:5px" alt="">
                 </div>
-                <!-- <div class="player__name" *ngIf="!this.isScreenSmall()">Pedro</div> -->
-                <div [ngClass]="isScreenSmall() ? 'player__name_small' : 'player__name'">{{ partido.jugador2}} </div>
+                <div [ngStyle]="{ 'font-weight': partido.ganador=='jugador2' ? 'bold' : 'normal' }" [ngClass]="isScreenSmall() ? 'player__name_small' : 'player__name'">{{ partido.jugador2}}<span *ngIf="partido.ganador=='jugador2'">*</span> </div>
               </div>
               <div class="set">
                 <div [ngClass]="isScreenSmall() ? 'set__score_small' : 'set__score'">{{partido.sets_jugador2[0]}}</div>
                 <div [ngClass]="isScreenSmall() ? 'set__score_small' : 'set__score'">{{partido.sets_jugador2[1]}}</div>
-                <div [ngClass]="isScreenSmall() ? 'set__score_small' : 'set__score'">{{partido.sets_jugador2[2]}}</div>
-                <div *ngIf="partido.sets_jugador2[2]" [ngClass]="isScreenSmall() ? 'set__score_small' : 'set__score'">
-                  {{partido.sets_jugador2[2]}}</div>
-                <!-- <div class="set__score set__score--actual">3</div> -->
+                <div [ngClass]="isScreenSmall() ? 'set__score_small' : 'set__score'" *ngIf="partido.sets_jugador2[2]>0">{{partido.sets_jugador2[2]}}</div>
               </div>
               <div class="game">
                 <div [ngClass]="isScreenSmall() ? 'game__score_small' : 'game__score'">{{partido.sets_ganados_jugador2}}
@@ -298,25 +242,16 @@
               <button mat-menu-item (click)="eliminar(partido)">Eliminar Partido</button>
               <button mat-menu-item (click)="editar(partido)">Editar Partido</button>
             </mat-menu>
-
-            <!-- <div [ngClass]="isScreenSmall() ? 'game__score_small' : 'game__score'">1</div> -->
             <div class="scoreboard__player">
               <div class="player">
                 <div class="player__rank"><img src="assets/logo.jpg" class="img-fluid" style="padding-right:5px" alt="">
                 </div>
-                <!-- <div class="player__name" *ngIf="!this.isScreenSmall()">Cesar</div> -->
-                <div [ngClass]="isScreenSmall() ? 'player__name_small' : 'player__name'">{{partido.jugador1}}</div>
+                <div [ngStyle]="{ 'font-weight': partido.ganador=='jugador1' ? 'bold' : 'normal' }" [ngClass]="isScreenSmall() ? 'player__name_small' : 'player__name'" >{{partido.jugador1}}<span *ngIf="partido.ganador=='jugador1'">*</span> </div>
               </div>
-              <!-- <div [ngClass]="isScreenSmall() ? 'player__name_small' : 'player__name'">{{ (partido.jugador1Ref
-                | doc | async)?.displayName }} <span class="flag-icon flag-icon-pe"></span></div>
-            </div> -->
               <div class="set">
                 <div [ngClass]="isScreenSmall() ? 'set__score_small' : 'set__score'">{{partido.sets_jugador1[0]}}</div>
                 <div [ngClass]="isScreenSmall() ? 'set__score_small' : 'set__score'">{{partido.sets_jugador1[1]}}</div>
-                <div [ngClass]="isScreenSmall() ? 'set__score_small' : 'set__score'">{{partido.sets_jugador1[2]}}</div>
-                <div *ngIf="partido.sets_jugador1[2]" [ngClass]="isScreenSmall() ? 'set__score_small' : 'set__score'">
-                  {{partido.sets_jugador1[2]}}</div>
-                <!-- <div class="set__score set__score--actual">4</div> -->
+                <div [ngClass]="isScreenSmall() ? 'set__score_small' : 'set__score'" *ngIf="partido.sets_jugador1[2]>0">{{partido.sets_jugador1[2]}}</div>
               </div>
               <div class="game">
                 <div [ngClass]="isScreenSmall() ? 'game__score_small' : 'game__score'">{{partido.sets_ganados_jugador1}}
@@ -324,20 +259,15 @@
               </div>
             </div>
             <div class="scoreboard__player">
-              <!-- <div class="player player--serve"> -->
               <div class="player">
                 <div class="player__rank"><img src="assets/cti.jpeg" class="img-fluid" style="padding-right:5px" alt="">
                 </div>
-                <!-- <div class="player__name" *ngIf="!this.isScreenSmall()">Pedro</div> -->
-                <div [ngClass]="isScreenSmall() ? 'player__name_small' : 'player__name'">{{ partido.jugador2}} </div>
+                <div [ngStyle]="{ 'font-weight': partido.ganador=='jugador2' ? 'bold' : 'normal' }" [ngClass]="isScreenSmall() ? 'player__name_small' : 'player__name'">{{ partido.jugador2}}<span *ngIf="partido.ganador=='jugador2'">*</span> </div>
               </div>
               <div class="set">
                 <div [ngClass]="isScreenSmall() ? 'set__score_small' : 'set__score'">{{partido.sets_jugador2[0]}}</div>
                 <div [ngClass]="isScreenSmall() ? 'set__score_small' : 'set__score'">{{partido.sets_jugador2[1]}}</div>
-                <div [ngClass]="isScreenSmall() ? 'set__score_small' : 'set__score'">{{partido.sets_jugador2[2]}}</div>
-                <div *ngIf="partido.sets_jugador2[2]" [ngClass]="isScreenSmall() ? 'set__score_small' : 'set__score'">
-                  {{partido.sets_jugador2[2]}}</div>
-                <!-- <div class="set__score set__score--actual">3</div> -->
+                <div [ngClass]="isScreenSmall() ? 'set__score_small' : 'set__score'" *ngIf="partido.sets_jugador2[2]>0">{{partido.sets_jugador2[2]}}</div>
               </div>
               <div class="game">
                 <div [ngClass]="isScreenSmall() ? 'game__score_small' : 'game__score'">{{partido.sets_ganados_jugador2}}
@@ -351,5 +281,4 @@
       <br>
     </mat-tab>
   </mat-tab-group>
-
 </div>

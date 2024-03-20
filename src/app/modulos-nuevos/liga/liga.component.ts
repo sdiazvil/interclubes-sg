@@ -5,6 +5,8 @@ const SMALL_WIDTH_BREAKPOINT = 1100;
 import { NgbModal, NgbModalOptions } from '@ng-bootstrap/ng-bootstrap';
 import { AgregarPartidoComponent } from '../agregar-partido/agregar-partido.component';
 import { MatSnackBar } from '@angular/material';
+import { EditarPartidoComponent } from '../editar-partido/editar-partido.component';
+import { EliminarPartidoComponent } from '../eliminar-partido/eliminar-partido.component';
 
 @Component({
   selector: 'app-liga',
@@ -18,8 +20,8 @@ export class LigaComponent implements OnInit {
   name: string;
   modalOption: NgbModalOptions = {};
 
-  constructor(private modalService: NgbModal,public partidosService: PartidosService, public authService: AuthService,public snackBar: MatSnackBar,
-    ) { }
+  constructor(private modalService: NgbModal, public partidosService: PartidosService, public authService: AuthService, public snackBar: MatSnackBar,
+  ) { }
 
   ngOnInit() {
     this.partidos = this.partidosService.getPartidosByCategoria(1);
@@ -72,17 +74,32 @@ export class LigaComponent implements OnInit {
     const modalRef = this.modalService.open(AgregarPartidoComponent, this.modalOption);
   }
 
-  eliminar(partido){
-    this.partidosService.eliminar(partido.id);
-    this.snackBar.open('El partido ha sido eliminado correctamente.', 'CERRAR', {
-      duration: 4000
+  eliminar(partido) {
+    this.modalOption.backdrop = 'static';
+    this.modalOption.keyboard = false;
+    const modalRef = this.modalService.open(EliminarPartidoComponent, this.modalOption);
+    modalRef.result.then((data) => {
+      console.log(data)
+      if(data == 'success'){
+        this.partidosService.eliminar(partido.id);
+        this.snackBar.open('El partido ha sido eliminado correctamente.', 'CERRAR', {
+          duration: 4000
+        });
+      }
+      // on close
+    }, (reason) => {
+      console.log(reason)
+      // on dismiss
     });
-  } 
+
+  }
 
   editar(partido) {
     this.modalOption.backdrop = 'static';
     this.modalOption.keyboard = false;
-    const modalRef = this.modalService.open(AgregarPartidoComponent, this.modalOption);
+    const modalRef = this.modalService.open(EditarPartidoComponent, this.modalOption);
+    modalRef.componentInstance.partido = partido;
+
   }
 
 }

@@ -1,0 +1,18 @@
+<div class="modal-header" style="background:red;color:#fff;">
+  <span class="modal-title">
+    Eliminar Partido</span>
+  <button type="button" class="close" aria-label="Close" (click)="cerrarModalSF()">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  <p>
+    Estás seguro de que deseas eliminar el partido?
+  </p>
+</div>
+<div class="modal-footer">
+  <button mat-raised-button *ngIf="!cargando" color="warn" (click)="eliminar()">
+    <i class='material-icons icono-boton'>group</i> Eliminar</button>
+  <button mat-raised-button disabled color="warn" *ngIf="cargando" type="submit" disabled>
+    <i class='fa fa-circle-o-notch fa-spin'></i> Eliminando...</button>
+</div>

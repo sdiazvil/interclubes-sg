@@ -1,0 +1,132 @@
+<form [formGroup]="formulario" (ngSubmit)="editar()" novalidate>
+  <div class="modal-header" style="background:green;color:#fff;">
+    <span class="modal-title">
+      Editar Partido</span>
+    <button type="button" class="close" aria-label="Close" (click)="cerrarModalSF()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-12">
+          <div class="example-container">
+            <mat-form-field>
+              <mat-select placeholder="Categoría" formControlName="categoria" required>
+                <mat-option value="1">
+                  1
+                </mat-option>
+                <mat-option value="2">
+                  2
+                </mat-option>
+                <mat-option value="3">
+                  3
+                </mat-option>
+                <mat-option value="4">
+                  4
+                </mat-option>
+                <mat-option value="22">
+                  Dobles
+                </mat-option>
+              </mat-select>
+              <mat-error *ngIf="formErrores.categoria">{{formErrores.categoria}}</mat-error>
+            </mat-form-field>
+            <div class="row">
+              <div class="col-sm-6">
+                <mat-form-field>
+                  <span matPrefix><img width="30px" src="assets/logo.jpg" class="img-fluid img-thumbnail" alt="">
+                    &nbsp;</span>
+                  <input matInput placeholder="Jugador 1" type="text" formControlName="jugador1" required>
+                  <mat-error *ngIf="formErrores.jugador1">{{formErrores.jugador1}}</mat-error>
+                </mat-form-field>
+              </div>
+              <div class="col-sm-1">
+                <mat-form-field>
+                  <input matInput placeholder="Set 1" type="number" formControlName="set_1_jugador1" required>
+                  <mat-error *ngIf="formErrores.set_1_jugador1">{{formErrores.set_1_jugador1}}</mat-error>
+                </mat-form-field>
+              </div>
+              <div class="col-sm-1">
+                <mat-form-field>
+                  <input matInput placeholder="Set 2" type="number" formControlName="set_2_jugador1" required>
+                  <mat-error *ngIf="formErrores.set_2_jugador1">{{formErrores.set_2_jugador1}}</mat-error>
+                </mat-form-field>
+              </div>
+              <div class="col-sm-1">
+                <mat-form-field>
+                  <input matInput placeholder="Set 3" type="number" formControlName="set_3_jugador1">
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-sm-6">
+                <mat-form-field>
+                  <span matPrefix><img width="30px" src="assets/cti.jpeg" class="img-fluid img-thumbnail" alt="">
+                    &nbsp;</span>
+                  <input matInput placeholder="Jugador 2" type="text" formControlName="jugador2" required>
+                  <mat-error *ngIf="formErrores.jugador2">{{formErrores.jugador2}}</mat-error>
+                </mat-form-field>
+              </div>
+              <div class="col-sm-1">
+                <mat-form-field>
+                  <input matInput placeholder="Set 1" type="number" formControlName="set_1_jugador2" required>
+                  <mat-error *ngIf="formErrores.set_1_jugador2">{{formErrores.set_1_jugador2}}</mat-error>
+                </mat-form-field>
+              </div>
+              <div class="col-sm-1">
+                <mat-form-field>
+                  <input matInput placeholder="Set 2" type="number" formControlName="set_2_jugador2" required>
+                  <mat-error *ngIf="formErrores.set_2_jugador2">{{formErrores.set_2_jugador2}}</mat-error>
+                </mat-form-field>
+              </div>
+              <div class="col-sm-1">
+                <mat-form-field>
+                  <input matInput placeholder="Set 3" type="number" formControlName="set_3_jugador2">
+                </mat-form-field>
+              </div>
+            </div>
+            <mat-form-field>
+              <mat-select placeholder="Cancha" formControlName="cancha" required>
+                <mat-option value="1">
+                  1
+                </mat-option>
+                <mat-option value="2">
+                  2
+                </mat-option>
+                <mat-option value="3">
+                  3
+                </mat-option>
+                <mat-option value="4">
+                  4
+                </mat-option>
+              </mat-select>
+              <mat-error *ngIf="formErrores.cancha">{{formErrores.cancha}}</mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="col-12 col-md-8">
+          <div style="padding-top:30px;">
+            <mat-form-field>
+              <input matInput required [matDatepicker]="picker" placeholder="Fecha y hora" formControlName="fecha">
+              <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+              <mat-datepicker #picker style="z-index: 999;"></mat-datepicker>
+              <mat-error *ngIf="formErrores.fecha">{{formErrores.fecha}}</mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="col-12 col-md-4 form-group">
+          <ngb-timepicker required formControlName="hora"></ngb-timepicker>
+          <p class="alert alert-danger" *ngIf="formErrores.hora" role="alert">
+            {{ formErrores.hora }}
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button mat-raised-button *ngIf="!cargando" color="accent" type="submit" [disabled]="!formulario.valid">
+      <i class='material-icons icono-boton'>group</i> Editar</button>
+    <button mat-raised-button disabled *ngIf="cargando" type="submit" disabled>
+      <i class='fa fa-circle-o-notch fa-spin'></i> Editar...</button>
+  </div>
+</form>

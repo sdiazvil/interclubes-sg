@@ -135,9 +135,7 @@ export class AgregarPartidoComponent implements OnInit {
     this.snackBar.open('El partido ha sido agregado correctamente.', 'CERRAR', {
       duration: 4000
     });
-    setTimeout(() => {
-      this.cerrarModalSF();
-    }, 2000);
+    this.cerrarModalSF();
   }
 
   cerrarModalSF() {
