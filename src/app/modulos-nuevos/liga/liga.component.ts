@@ -43,7 +43,6 @@ export class LigaComponent implements OnInit {
 
     if (selectedTab.textLabel == 'Segunda') {
       this.partidos = this.partidosService.getPartidosByCategoria(2);
-      console.log(this.partidos)
     }
 
     if (selectedTab.textLabel == 'Tercera') {
