@@ -123,9 +123,9 @@ export class EditarPartidoComponent implements OnInit {
       if (!fecha.isValid()) {
         return { 'formatoInvalido': true }
       }
-      if (date.isBefore(today)) {
-        return { 'fechaAnterior': true }
-      }
+      // if (date.isBefore(today)) {
+      //   return { 'fechaAnterior': true }
+      // }
     }
     return null;
   }
